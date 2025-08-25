@@ -39,6 +39,6 @@ class User extends Authenticatable
         return $this->avatar_path
             ? Storage::url($this->avatar_path)
             : 'https://ui-avatars.com/api/?name=' .
-                md5(strtolower(trim($this->name)));
+                strtolower(trim($this->name));
     }
 }
