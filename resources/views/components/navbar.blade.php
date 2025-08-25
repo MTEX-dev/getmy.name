@@ -20,6 +20,11 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <div class="flex items-center space-x-4 mr-4">
+                    <x-theme-toggle />
+                    <x-lang-switch />
+                </div>
+
                 @auth
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -123,6 +128,11 @@
                     @endif
                 </div>
             @endauth
+
+            <div class="px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-600">
+                <x-theme-toggle />
+                <x-lang-switch />
+            </div>
         </div>
     </div>
 </nav>
