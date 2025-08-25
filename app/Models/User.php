@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function avatar()
+    {
+        return $this->avatar_path ? asset('storage/' . $this->avatar_path) : 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email)));
+    }
 }
