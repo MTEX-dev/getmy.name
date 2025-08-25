@@ -16,7 +16,7 @@
         @method('patch')
 
         <div>
-            <x-input-label for="avatar" :value="__('Upload Avatar')" />
+            <x-input-label for="avatar" :value="__('Upload Avatar (Max 1MB)')" />
             <input
                 id="avatar"
                 name="avatar"
@@ -36,4 +36,12 @@
             @endif
         </div>
     </form>
+
+    @if (auth()->user()->avatar_path)
+        <form method="post" action="{{ route('profile.avatar.destroy') }}" class="mt-6">
+            @csrf
+            @method('delete')
+            <x-danger-button>{{ __('Remove Avatar') }}</x-danger-button>
+        </form>
+    @endif
 </section>

@@ -49,6 +49,18 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'avatar-updated');
     }
 
+    public function destroyAvatar(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        if ($user->avatar_path) {
+            Storage::disk('public')->delete($user->avatar_path);
+            $user->update(['avatar_path' => null]);
+        }
+
+        return Redirect::route('profile.edit')->with('status', 'avatar-removed');
+    }
+
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
