@@ -1,6 +1,6 @@
-<section class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 pt-14 dark:from-indigo-900/20">
+<section class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 pt-28 dark:from-indigo-900/20 sm:pt-36 lg:pt-44">
     <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 dark:bg-gray-800 dark:shadow-indigo-900/10 dark:ring-indigo-900 sm:-mr-80 lg:-mr-96" aria-hidden="true"></div>
-    <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+    <div class="mx-auto max-w-7xl px-6 pt-12 pb-36 sm:pt-20 sm:pb-44 lg:px-8">
         <div class="mx-auto max-w-2xl lg:mx-0">
             <h2 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-6xl">getmy.name</h2>
             <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
