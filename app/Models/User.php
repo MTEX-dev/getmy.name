@@ -2,42 +2,30 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
+    use HasUuids;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'avatar_path',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -46,8 +34,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function avatar()
+    public function avatar(): string
     {
-        return $this->avatar_path ? asset('storage/' . $this->avatar_path) : 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email)));
+        return $this->avatar_path
+            ? Storage::url($this->avatar_path)
+            : 'https://ui-avatars.com/api/?name=' .
+                md5(strtolower(trim($this->name)));
     }
 }

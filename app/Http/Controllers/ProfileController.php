@@ -12,9 +12,6 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -22,9 +19,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -38,9 +32,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Update the user's avatar.
-     */
     public function updateAvatar(Request $request): RedirectResponse
     {
         $request->validate([
@@ -52,15 +43,12 @@ class ProfileController extends Controller
         if ($oldAvatar = $request->user()->avatar_path) {
             Storage::disk('public')->delete($oldAvatar);
         }
-        
-        auth()->user()->update(['avatar_path' => $path]);
+
+        $request->user()->update(['avatar_path' => $path]);
 
         return Redirect::route('profile.edit')->with('status', 'avatar-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
@@ -70,6 +58,10 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
+
+        if ($user->avatar_path) {
+            Storage::disk('public')->delete($user->avatar_path);
+        }
 
         $user->delete();
 
