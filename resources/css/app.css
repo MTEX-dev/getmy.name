@@ -3,3 +3,5 @@
 @tailwind utilities;
 
 /* @import 'bootstrap-icons/font/bootstrap-icons.css'; */
+
+[x-cloak] { display: none; }

@@ -27,7 +27,7 @@
             if (this.theme === 'system') this.setTheme('system');
         });
     }
-}" x-init="init" class="inline-flex">
+}" x-init="init" class="inline-flex" x-cloak>
     <button
         @click="nextTheme"
         type="button"
