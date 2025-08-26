@@ -18,6 +18,11 @@
                 <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">Resources</h3>
                 <ul class="mt-4 space-y-2">
                     <li>
+                        <a href="{{ route('lander') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                            Lander / Homepage
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('dashboard') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
                             Dashboard
                         </a>

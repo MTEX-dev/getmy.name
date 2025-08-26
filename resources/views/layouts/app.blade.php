@@ -20,7 +20,7 @@
 
         <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-200 to-transparent dark:from-gray-700 dark:to-transparent -z-10"></div>
 
-        <div class="pt-16">
+        <div class="@if (isset($startAtFooter) && $startAtFooter === true) @else pt-16 @endif">
             @hasSection('header')
                 <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
