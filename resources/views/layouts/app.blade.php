@@ -34,7 +34,10 @@
             </main>
         </div>
 
-        @include('components.footer')
+        @if (isset($hideFooter) && $hideFooter === true)
+        @else
+            @include('components.footer')
+        @endif
     </div>
 </body>
 </html>
