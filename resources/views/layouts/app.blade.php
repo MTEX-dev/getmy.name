@@ -14,30 +14,27 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @include('components.navbar')
+<body class="font-sans antialiased flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+    @include('components.navbar')
 
-        <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-200 to-transparent dark:from-gray-700 dark:to-transparent -z-10"></div>
+    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-200 to-transparent dark:from-gray-700 dark:to-transparent -z-10"></div>
 
-        <div class="@if (isset($startAtFooter) && $startAtFooter === true) @else pt-16 @endif">
-            @hasSection('header')
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        @yield('header')
-                    </div>
-                </header>
-            @endif
-
-            <main>
-                @yield('content')
-            </main>
-        </div>
-
-        @if (isset($hideFooter) && $hideFooter === true)
-        @else
-            @include('components.footer')
+    <div class="flex-1 @if (!isset($startAtFooter) || $startAtFooter !== true) pt-16 @endif">
+        @hasSection('header')
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @yield('header')
+                </div>
+            </header>
         @endif
+
+        <main>
+            @yield('content')
+        </main>
     </div>
+
+    @if (!isset($hideFooter) || $hideFooter !== true)
+        @include('components.footer')
+    @endif
 </body>
 </html>
