@@ -10,5 +10,10 @@ class Experience extends Model
     use HasUuids;
 
     protected $fillable = [
-    ];     
+    ];  
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }   
 }
