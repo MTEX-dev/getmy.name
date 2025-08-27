@@ -46,8 +46,28 @@ class User extends Authenticatable
                 strtolower(trim($this->name));
     }
     
-    public function profile()
+    public function projects()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasMany(Project::class);
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(Skill::class);
+    }
+
+    public function socials()
+    {
+        return $this->hasOne(Skill::class);
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    public function education()
+    {
+        return $this->hasMany(Education::class);
     }
 }
