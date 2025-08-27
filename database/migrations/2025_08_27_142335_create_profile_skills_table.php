@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('profile_skills', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('profile_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->timestamps();
         });
