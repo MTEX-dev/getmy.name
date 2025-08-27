@@ -52,7 +52,7 @@ class ProfileController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect()->route('profiles.show')->with('status', 'Profile created successfully.');
+        return redirect()->route('profiles.index')->with('status', 'Profile created successfully.');
     }
 
     public function show(Request $request): View
@@ -89,7 +89,7 @@ class ProfileController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect()->route('profiles.show')->with('status', 'Profile information updated successfully.');
+        return redirect()->route('profiles.index')->with('status', 'Profile information updated successfully.');
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -156,7 +156,7 @@ class ProfileController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('profiles.show')->with('status', 'Project added successfully.');
+        return redirect()->route('profiles.index')->with('status', 'Project added successfully.');
     }
 
     public function editProfileProject(ProfileProject $profileProject): View|RedirectResponse
@@ -194,7 +194,7 @@ class ProfileController extends Controller
             'url' => $request->url,
         ]);
 
-        return redirect()->route('profiles.show')->with('status', 'Project updated successfully.');
+        return redirect()->route('profiles.index')->with('status', 'Project updated successfully.');
     }
 
     public function destroyProfileProject(ProfileProject $profileProject): RedirectResponse
@@ -238,6 +238,6 @@ class ProfileController extends Controller
             $profileSocialData
         );
 
-        return redirect()->route('profiles.show')->with('status', 'Social links updated.');
+        return redirect()->route('profiles.index')->with('status', 'Social links updated.');
     }
 }
