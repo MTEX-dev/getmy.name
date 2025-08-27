@@ -40,13 +40,16 @@
                focus:ring-indigo-500 focus:ring-offset-gray-50 dark:focus:ring-offset-gray-800
                transition-colors duration-300 ease-in-out shadow-md"
         aria-label="Toggle theme"
+        x-cloak
     >
         <i :class="currentIcon()" 
            class="text-xl transform transition-all duration-500 ease-in-out"
            x-transition:enter="opacity-0 scale-75 rotate-90"
            x-transition:enter-end="opacity-100 scale-100 rotate-0"
            x-transition:leave="opacity-100 scale-100 rotate-0"
-           x-transition:leave-end="opacity-0 scale-75 -rotate-90">
+           x-transition:leave-end="opacity-0 scale-75 -rotate-90"
+           x-cloak
+           >
         </i>
     </button>
 </div>
