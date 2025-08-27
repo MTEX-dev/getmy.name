@@ -41,4 +41,9 @@ class User extends Authenticatable
             : 'https://ui-avatars.com/api/?name=' .
                 strtolower(trim($this->name));
     }
+    
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }
