@@ -1,14 +1,10 @@
 <?php
 
-use App\Http\Controllers\User\ProfileController as UserProfileController;
+use App\Http\Controllers\User\ProfileController as UserAccountProfileController;
+use App\Http\Controllers\Profiles\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
 Route::get('/', [PageController::class,'lander'])->name('lander');
 
 Route::get('/dashboard', function () {
@@ -16,11 +12,39 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-    Route::patch('/profile/avatar', [UserProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
-    Route::delete('/profile/avatar', [UserProfileController::class, 'destroyAvatar'])->name('profile.avatar.destroy');
-    Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
+    // User Account Profile Management (from Laravel Breeze/Jetstream)
+    Route::prefix('account-settings')->name('profile.')->group(function () {
+        Route::get('/', [UserAccountProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [UserAccountProfileController::class, 'update'])->name('update');
+        Route::patch('/avatar', [UserAccountProfileController::class, 'updateAvatar'])->name('avatar.update');
+        Route::delete('/avatar', [UserAccountProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
+        Route::delete('/', [UserAccountProfileController::class, 'destroy'])->name('destroy');
+    });
+
+    // Portfolio Profile Management
+    Route::prefix('my-profile')->name('profiles.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/create', [ProfileController::class, 'create'])->name('create');
+        Route::post('/', [ProfileController::class, 'store'])->name('store');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+
+        // Skills
+        Route::post('/skills', [ProfileController::class, 'addSkill'])->name('skills.store');
+        Route::delete('/skills/{skill}', [ProfileController::class, 'destroySkill'])->name('skills.destroy');
+
+        // Projects
+        Route::get('/projects/create', [ProfileController::class, 'createProject'])->name('projects.create');
+        Route::post('/projects', [ProfileController::class, 'storeProject'])->name('projects.store');
+        Route::get('/projects/{project}/edit', [ProfileController::class, 'editProject'])->name('projects.edit');
+        Route::patch('/projects/{project}', [ProfileController::class, 'updateProject'])->name('projects.update');
+        Route::delete('/projects/{project}', [ProfileController::class, 'destroyProject'])->name('projects.destroy');
+
+        // Socials
+        Route::get('/socials/edit', [ProfileController::class, 'editSocials'])->name('socials.edit');
+        Route::patch('/socials', [ProfileController::class, 'updateSocials'])->name('socials.update');
+    });
 });
 
 require __DIR__.'/auth.php';
