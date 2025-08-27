@@ -10,5 +10,5 @@ class Social extends Model
     use HasUuids;
 
     protected $fillable = [
-    |;
+    ];
 }
