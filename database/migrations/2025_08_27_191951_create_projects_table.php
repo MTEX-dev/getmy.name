@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        /*
-        Schema::create('profile_projects', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('profile_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
             $table->string('url')->nullable();
-            $table->string('image_path')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
-        */
     }
 
     /**
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_projects');
+        Schema::dropIfExists('projects');
     }
 };
