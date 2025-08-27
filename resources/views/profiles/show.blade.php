@@ -14,6 +14,11 @@
                     {{ session('status') }}
                 </div>
             @endif
+            @if (session('warning'))
+                <div class="bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 p-4 rounded-md mb-4" role="alert">
+                    {{ session('warning') }}
+                </div>
+            @endif
 
             {{-- Profile Details --}}
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
@@ -27,7 +32,7 @@
                         Public API Endpoint: <code class="text-indigo-600 dark:text-indigo-400">https://getmy.name/api/{{ $profile->username }}</code>
                     </p>
                     <div class="mt-6 flex items-center gap-4">
-                        <x-primary-button href="{{ route('profiles.edit') }}">{{ __('Edit Profile Info') }}</x-primary-button>
+                        <x-primary-button-redirect :href="route('profiles.edit')">{{ __('Edit Core Info') }}</x-primary-button-redirect>
                     </div>
                 </div>
             </div>
@@ -74,7 +79,7 @@
                                 <img src="{{ $project->imageUrl() }}" alt="{{ $project->name }}" class="mt-3 w-32 h-20 object-cover rounded-md" />
                             @endif
                             <div class="mt-3 flex gap-2">
-                                <x-primary-button href="{{ route('profiles.projects.edit', $project) }}" class="p-1 px-2 text-xs">{{ __('Edit') }}</x-primary-button>
+                                <x-primary-button-redirect href="{{ route('profiles.projects.edit', $project) }}" class="p-1 px-2 text-xs">{{ __('Edit') }}</x-primary-button-redirect>
                                 <form method="post" action="{{ route('profiles.projects.destroy', $project) }}" class="inline">
                                     @csrf
                                     @method('delete')
@@ -86,7 +91,7 @@
                         <p class="text-gray-500 dark:text-gray-400">{{ __('No projects added yet.') }}</p>
                     @endforelse
                     <div class="mt-6">
-                        <x-primary-button href="{{ route('profiles.projects.create') }}">{{ __('Add New Project') }}</x-primary-button>
+                        <x-primary-button-redirect href="{{ route('profiles.projects.create') }}">{{ __('Add New Project') }}</x-primary-button-redirect>
                     </div>
                 </div>
             </div>
@@ -97,16 +102,24 @@
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('Social Links') }}</h3>
                     @if ($profile->socials)
                         <ul class="text-gray-700 dark:text-gray-300 space-y-2">
-                            @if ($profile->socials->github) <li>GitHub: <a href="https://github.com/{{ $profile->socials->github }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->github }}</a></li> @endif
-                            @if ($profile->socials->linkedin) <li>LinkedIn: <a href="https://linkedin.com/in/{{ $profile->socials->linkedin }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->linkedin }}</a></li> @endif
-                            @if ($profile->socials->twitter) <li>Twitter: <a href="https://twitter.com/{{ $profile->socials->twitter }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->twitter }}</a></li> @endif
-                            @if ($profile->socials->personal_website) <li>Website: <a href="{{ $profile->socials->personal_website }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->personal_website }}</a></li> @endif
+                            @if ($profile->socials->github)
+                                <li>GitHub: <a href="https://github.com/{{ $profile->socials->github }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->github }}</a></li>
+                            @endif
+                            @if ($profile->socials->linkedin)
+                                <li>LinkedIn: <a href="https://linkedin.com/in/{{ $profile->socials->linkedin }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->linkedin }}</a></li>
+                            @endif
+                            @if ($profile->socials->twitter)
+                                <li>Twitter: <a href="https://twitter.com/{{ $profile->socials->twitter }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->twitter }}</a></li>
+                            @endif
+                            @if ($profile->socials->personal_website)
+                                <li>Website: <a href="{{ $profile->socials->personal_website }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->personal_website }}</a></li>
+                            @endif
                         </ul>
                     @else
                         <p class="text-gray-500 dark:text-gray-400">{{ __('No social links added yet.') }}</p>
                     @endif
                     <div class="mt-6">
-                        <x-primary-button href="{{ route('profiles.socials.edit') }}">{{ __('Edit Social Links') }}</x-primary-button>
+                        <x-primary-button-redirect href="{{ route('profiles.socials.edit') }}">{{ __('Edit Social Links') }}</x-primary-button-redirect>
                     </div>
                 </div>
             </div>

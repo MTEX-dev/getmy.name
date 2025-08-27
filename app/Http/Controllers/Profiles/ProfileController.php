@@ -131,7 +131,7 @@ class ProfileController extends Controller
     {
         $profile = $request->user()->profile()->firstOrFail();
 
-        return view('profiles.profile_projects.create', compact('profile'));
+        return view('profiles.projects.create', compact('profile'));
     }
 
     public function storeProfileProject(Request $request): RedirectResponse
@@ -146,7 +146,7 @@ class ProfileController extends Controller
         ]);
 
         $imagePath = $request->hasFile('image')
-            ? $request->file('image')->store('profile_project_images', 'public')
+            ? $request->file('image')->store('project_images', 'public')
             : null;
 
         $profile->projects()->create([
@@ -159,18 +159,18 @@ class ProfileController extends Controller
         return redirect()->route('profiles.index')->with('status', 'Project added successfully.');
     }
 
-    public function editProfileProject(ProfileProject $profileProject): View|RedirectResponse
+    public function editProfileProject(ProfileProject $project): View|RedirectResponse
     {
-        if ($profileProject->profile->user_id !== auth()->id()) {
+        if ($project->profile->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
 
-        return view('profiles.profile_projects.edit', compact('profileProject'));
+        return view('profiles.projects.edit', compact('project'));
     }
 
-    public function updateProfileProject(Request $request, ProfileProject $profileProject): RedirectResponse
+    public function updateProfileProject(Request $request, ProfileProject $project): RedirectResponse
     {
-        if ($profileProject->profile->user_id !== auth()->id()) {
+        if ($project->profile->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -182,13 +182,13 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($profileProject->image_path) {
-                Storage::disk('public')->delete($profileProject->image_path);
+            if ($project->image_path) {
+                Storage::disk('public')->delete($project->image_path);
             }
-            $profileProject->image_path = $request->file('image')->store('profile_project_images', 'public');
+            $project->image_path = $request->file('image')->store('project_images', 'public');
         }
 
-        $profileProject->update([
+        $project->update([
             'name' => $request->name,
             'description' => $request->description,
             'url' => $request->url,
@@ -197,17 +197,17 @@ class ProfileController extends Controller
         return redirect()->route('profiles.index')->with('status', 'Project updated successfully.');
     }
 
-    public function destroyProfileProject(ProfileProject $profileProject): RedirectResponse
+    public function destroyProfileProject(ProfileProject $project): RedirectResponse
     {
-        if ($profileProject->profile->user_id !== auth()->id()) {
+        if ($project->profile->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
 
-        if ($profileProject->image_path) {
-            Storage::disk('public')->delete($profileProject->image_path);
+        if ($project->image_path) {
+            Storage::disk('public')->delete($project->image_path);
         }
 
-        $profileProject->delete();
+        $project->delete();
 
         return back()->with('status', 'Project removed.');
     }
@@ -215,9 +215,9 @@ class ProfileController extends Controller
     public function editProfileSocials(Request $request): View
     {
         $profile = $request->user()->profile()->firstOrFail();
-        $profileSocials = $profile->socials;
+        $socials = $profile->socials;
 
-        return view('profiles.profile_socials.edit', compact('profile', 'profileSocials'));
+        return view('profiles.socials.edit', compact('profile', 'socials'));
     }
 
     public function updateProfileSocials(Request $request): RedirectResponse
