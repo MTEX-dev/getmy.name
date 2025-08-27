@@ -10,6 +10,11 @@ class Social extends Model
     use HasUuids;
 
     protected $fillable = [
+        'user_id',
+        'github',
+        'linkedin',
+        'twitter',
+        'personal_website',
     ];
 
     public function user()

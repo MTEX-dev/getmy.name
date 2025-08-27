@@ -10,6 +10,8 @@ class Skill extends Model
     use HasUuids;
 
     protected $fillable = [
+        'name',
+        'level',
     ];
 
     public function user()

@@ -10,6 +10,13 @@ class Experience extends Model
     use HasUuids;
 
     protected $fillable = [
+        'user_id',
+        'title',
+        'company',
+        'location',
+        'start_date',
+        'end_date',
+        'description',
     ];  
 
     public function user()

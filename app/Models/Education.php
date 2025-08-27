@@ -10,6 +10,13 @@ class Education extends Model
     use HasUuids;
 
     protected $fillable = [
+        'user_id',
+        'school',
+        'degree',
+        'field_of_study',
+        'start_date',
+        'end_date',
+        'description',
     ];
 
     public function user()
