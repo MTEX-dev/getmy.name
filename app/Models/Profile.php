@@ -40,4 +40,9 @@ class Profile extends Model
     {
         return $this->hasMany(ProfileProject::class);
     }
+
+    public function socials(): HasOne
+    {
+        return $this->hasOne(ProfileSocial::class);
+    }
 }
