@@ -45,11 +45,7 @@
                                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                             </div>
                             <x-dropdown-link :href="route('profile.edit')" class="bg-white/80 dark:bg-gray-800/80 hover:bg-gray-100/90 dark:hover:bg-gray-700/90 backdrop-blur-sm">
-                                {{ __('Account Settings') }}
-                            </x-dropdown-link>
-                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
-                            <x-dropdown-link :href="route('profiles.index')" class="bg-white/80 dark:bg-gray-800/80 hover:bg-gray-100/90 dark:hover:bg-gray-700/90 backdrop-blur-sm">
-                                {{ __('My Portfolio Profile') }}
+                                {{ __('Profile') }}
                             </x-dropdown-link>
                             <div class="border-t border-gray-200 dark:border-gray-600"></div>
                             <form method="POST" action="{{ route('logout') }}">
@@ -107,10 +103,7 @@
 
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Account Settings') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('profiles.index')">
-                        {{ __('My Portfolio Profile') }}
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
 
                     <form method="POST" action="{{ route('logout') }}">

@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\User\ProfileController as UserAccountProfileController;
-use App\Http\Controllers\Profiles\ProfileController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
 
@@ -12,12 +11,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('account-settings')->name('profile.')->group(function () {
-        Route::get('/', [UserAccountProfileController::class, 'edit'])->name('edit');
-        Route::patch('/', [UserAccountProfileController::class, 'update'])->name('update');
-        Route::patch('/avatar', [UserAccountProfileController::class, 'updateAvatar'])->name('avatar.update');
-        Route::delete('/avatar', [UserAccountProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
-        Route::delete('/', [UserAccountProfileController::class, 'destroy'])->name('destroy');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
+        Route::delete('/avatar', [ProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
     });
 
     // Portfolio Profile Management
