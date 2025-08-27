@@ -46,4 +46,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+
+Route::get('/get/{profile:username}', [ProfileController::class, 'getProfile'])->name('profiles.get');
+
 require __DIR__.'/auth.php';

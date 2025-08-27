@@ -240,4 +240,31 @@ class ProfileController extends Controller
 
         return redirect()->route('profiles.index')->with('status', 'Social links updated.');
     }
+
+    public function getProfile(Request $request, Profile $profile): View
+    {
+        $profile->load(['skills', 'projects', 'socials']);
+
+        $data = [
+            'name' => $profile->user->name,
+            'username' => $profile->username,
+            'title' => $profile->title,
+            'email' => $profile->email,
+            'skills' => $profile->skills->pluck('name')->toArray(),
+            'projects' => $profile->projects->map(function ($project) {
+                return [
+                    'id' => $project->id,
+                    'name' => $project->name,
+                    'description' => $project->description,
+                    'url' => $project->url,
+                    'image_path' => $project->image_path ? Storage::url($project->image_path) : null,
+                ];
+            })->toArray(),
+            'socials' => $profile->socials
+                ? $profile->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
+                : [],
+        ];
+
+        return view('profiles.get', compact('data'));
+    }
 }
