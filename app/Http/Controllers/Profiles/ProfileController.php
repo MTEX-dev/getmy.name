@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Profiles;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\ProfileSkill;
-use App\Models\Project;
-use App\Models\ProfileSocial;
+use App\Models\ProfileProject; // Corrected import
+use App\Models\ProfileSocial; // Corrected import
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -23,12 +23,10 @@ class ProfileController extends Controller
         $userProfile = $request->user()->profile;
 
         if (!$userProfile) {
-            // If the user doesn't have a profile yet, redirect to create form
             return redirect()->route('profiles.create');
         }
 
-        // Load relations for display
-        $userProfile->load(['skills', 'projects', 'socials']);
+        $userProfile->load(['skills', 'ProfileProjects', 'ProfileSocials']); // Corrected relations
 
         return view('profiles.show', [
             'profile' => $userProfile,
@@ -40,7 +38,6 @@ class ProfileController extends Controller
      */
     public function create(): View|RedirectResponse
     {
-        // A user should only have one portfolio profile for now
         if (auth()->user()->profile) {
             return redirect()->route('profiles.index')->with('warning', 'You already have a portfolio profile.');
         }
@@ -56,7 +53,7 @@ class ProfileController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('profiles', 'username')],
             'title' => ['required', 'string', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'], // This email is for the public profile, not user auth
+            'email' => ['nullable', 'email', 'max:255'],
         ]);
 
         $profile = auth()->user()->profile()->create([
@@ -69,12 +66,11 @@ class ProfileController extends Controller
     }
 
     /**
-     * Display the specified resource (Public API Endpoint - for future use, assuming `show` returns JSON).
-     * For now, this is internal and will display the authenticated user's profile.
+     * Display the specified resource (Public API Endpoint - for future use).
      */
     public function show(Request $request): View
     {
-        $profile = $request->user()->profile()->with(['skills', 'projects', 'socials'])->firstOrFail();
+        $profile = $request->user()->profile()->with(['skills', 'ProfileProjects', 'ProfileSocials'])->firstOrFail(); // Corrected relations
 
         return view('profiles.show', [
             'profile' => $profile,
@@ -82,7 +78,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified portfolio profile.
+     * Show the form for editing the specified portfolio profile's core information.
      */
     public function edit(Request $request): View
     {
@@ -93,7 +89,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the specified portfolio profile in storage.
+     * Update the specified portfolio profile's core information in storage.
      */
     public function update(Request $request): RedirectResponse
     {
@@ -111,7 +107,7 @@ class ProfileController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect()->route('profiles.show')->with('status', 'Profile updated successfully.');
+        return redirect()->route('profiles.show')->with('status', 'Profile information updated successfully.');
     }
 
     /**
@@ -121,12 +117,10 @@ class ProfileController extends Controller
     {
         $profile = $request->user()->profile()->firstOrFail();
 
-        // Optionally, prompt for password confirmation for a destructive action
         $request->validateWithBag('profileDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
-        // Delete related data (skills, projects, socials) handled by cascadeOnDelete
         $profile->delete();
 
         return redirect()->route('dashboard')->with('status', 'Profile deleted successfully.');
@@ -146,7 +140,6 @@ class ProfileController extends Controller
 
     public function destroySkill(ProfileSkill $skill): RedirectResponse
     {
-        // Ensure the skill belongs to the authenticated user's profile
         if ($skill->profile->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -156,15 +149,15 @@ class ProfileController extends Controller
         return back()->with('status', 'Skill removed.');
     }
 
-    // --- Project Management ---
+    // --- ProfileProject Management ---
 
-    public function createProject(Request $request): View
+    public function createProfileProject(Request $request): View
     {
         $profile = $request->user()->profile()->firstOrFail();
-        return view('profiles.projects.create', compact('profile'));
+        return view('profiles.profile_projects.create', compact('profile')); // Corrected view path
     }
 
-    public function storeProject(Request $request): RedirectResponse
+    public function storeProfileProject(Request $request): RedirectResponse
     {
         $profile = $request->user()->profile()->firstOrFail();
 
@@ -177,10 +170,10 @@ class ProfileController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('project_images', 'public');
+            $imagePath = $request->file('image')->store('profile_project_images', 'public'); // Corrected folder name
         }
 
-        $profile->projects()->create([
+        $profile->ProfileProjects()->create([ 
             'name' => $request->name,
             'description' => $request->description,
             'url' => $request->url,
@@ -190,17 +183,17 @@ class ProfileController extends Controller
         return redirect()->route('profiles.show')->with('status', 'Project added successfully.');
     }
 
-    public function editProject(Project $project): View|RedirectResponse
+    public function editProfileProject(ProfileProject $profileProject): View|RedirectResponse 
     {
-        if ($project->profile->user_id !== auth()->id()) {
+        if ($profileProject->profile->user_id !== auth()->id()) { 
             abort(403, 'Unauthorized action.');
         }
-        return view('profiles.projects.edit', compact('project'));
+        return view('profiles.profile_projects.edit', compact('profileProject')); 
     }
 
-    public function updateProject(Request $request, Project $project): RedirectResponse
+    public function updateProfileProject(Request $request, ProfileProject $profileProject): RedirectResponse 
     {
-        if ($project->profile->user_id !== auth()->id()) {
+        if ($profileProject->profile->user_id !== auth()->id()) { 
             abort(403, 'Unauthorized action.');
         }
 
@@ -213,46 +206,47 @@ class ProfileController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($project->image_path) {
-                Storage::disk('public')->delete($project->image_path);
+            if ($profileProject->image_path) {
+                Storage::disk('public')->delete($profileProject->image_path);
             }
-            $imagePath = $request->file('image')->store('project_images', 'public');
-            $project->image_path = $imagePath;
+            $imagePath = $request->file('image')->store('profile_project_images', 'public'); // Corrected folder name
+            $profileProject->image_path = $imagePath;
         }
 
-        $project->update([
+        $profileProject->update([ 
             'name' => $request->name,
             'description' => $request->description,
             'url' => $request->url,
+            // image_path is updated above if present
         ]);
 
         return redirect()->route('profiles.show')->with('status', 'Project updated successfully.');
     }
 
-    public function destroyProject(Project $project): RedirectResponse
+    public function destroyProfileProject(ProfileProject $profileProject): RedirectResponse 
     {
-        if ($project->profile->user_id !== auth()->id()) {
+        if ($profileProject->profile->user_id !== auth()->id()) { 
             abort(403, 'Unauthorized action.');
         }
 
-        if ($project->image_path) {
-            Storage::disk('public')->delete($project->image_path);
+        if ($profileProject->image_path) {
+            Storage::disk('public')->delete($profileProject->image_path);
         }
 
-        $project->delete();
+        $profileProject->delete(); 
 
         return back()->with('status', 'Project removed.');
     }
 
-    // --- Socials Management ---
-    public function editSocials(Request $request): View
+    // --- ProfileSocial Management ---
+    public function editProfileSocials(Request $request): View
     {
         $profile = $request->user()->profile()->firstOrFail();
-        $socials = $profile->socials; // This might be null if not created yet
-        return view('profiles.socials.edit', compact('profile', 'socials'));
+        $profileSocials = $profile->ProfileSocials; 
+        return view('profiles.profile_socials.edit', compact('profile', 'profileSocials')); 
     }
 
-    public function updateSocials(Request $request): RedirectResponse
+    public function updateProfileSocials(Request $request): RedirectResponse
     {
         $profile = $request->user()->profile()->firstOrFail();
 
@@ -263,11 +257,11 @@ class ProfileController extends Controller
             'personal_website' => 'nullable|url|max:255',
         ]);
 
-        $socialData = $request->only(['github', 'linkedin', 'twitter', 'personal_website']);
+        $profileSocialData = $request->only(['github', 'linkedin', 'twitter', 'personal_website']); 
 
-        $profile->socials()->updateOrCreate(
-            ['profile_id' => $profile->id], // Find by profile_id
-            $socialData // Data to update/create
+        $profile->ProfileSocials()->updateOrCreate( 
+            ['profile_id' => $profile->id],
+            $profileSocialData 
         );
 
         return redirect()->route('profiles.show')->with('status', 'Social links updated.');

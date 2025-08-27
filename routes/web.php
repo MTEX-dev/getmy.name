@@ -12,7 +12,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    // User Account Profile Management (from Laravel Breeze/Jetstream)
     Route::prefix('account-settings')->name('profile.')->group(function () {
         Route::get('/', [UserAccountProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [UserAccountProfileController::class, 'update'])->name('update');
@@ -35,15 +34,15 @@ Route::middleware('auth')->group(function () {
         Route::delete('/skills/{skill}', [ProfileController::class, 'destroySkill'])->name('skills.destroy');
 
         // Projects
-        Route::get('/projects/create', [ProfileController::class, 'createProject'])->name('projects.create');
-        Route::post('/projects', [ProfileController::class, 'storeProject'])->name('projects.store');
-        Route::get('/projects/{project}/edit', [ProfileController::class, 'editProject'])->name('projects.edit');
-        Route::patch('/projects/{project}', [ProfileController::class, 'updateProject'])->name('projects.update');
-        Route::delete('/projects/{project}', [ProfileController::class, 'destroyProject'])->name('projects.destroy');
+        Route::get('/projects/create', [ProfileController::class, 'createProfileProject'])->name('projects.create');
+        Route::post('/projects', [ProfileController::class, 'storeProfileProject'])->name('projects.store');
+        Route::get('/projects/{profileProject}/edit', [ProfileController::class, 'editProfileProject'])->name('projects.edit');
+        Route::patch('/projects/{profileProject}', [ProfileController::class, 'updateProfileProject'])->name('projects.update');
+        Route::delete('/projects/{profileProject}', [ProfileController::class, 'destroyProfileProject'])->name('projects.destroy');
 
         // Socials
-        Route::get('/socials/edit', [ProfileController::class, 'editSocials'])->name('socials.edit');
-        Route::patch('/socials', [ProfileController::class, 'updateSocials'])->name('socials.update');
+        Route::get('/socials/edit', [ProfileController::class, 'editProfileSocials'])->name('socials.edit');
+        Route::patch('/socials', [ProfileController::class, 'updateProfileSocials'])->name('socials.update');
     });
 });
 
