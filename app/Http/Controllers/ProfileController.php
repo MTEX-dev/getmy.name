@@ -79,11 +79,13 @@ class ProfileController extends Controller
 
     public function destroySkill(Skill $skill): RedirectResponse
     {
-        $this->authorize('delete', $skill);
-
+        if(Auth::id() === $skill->user_id) {
         $skill->delete();
 
         return Redirect::route('profile.edit')->with('status', 'skill-deleted');
+        } else {
+            abort(403);
+        }
     }
 
     public function updateAvatar(Request $request): RedirectResponse
