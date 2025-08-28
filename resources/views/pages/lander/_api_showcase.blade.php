@@ -4,27 +4,25 @@
             <div class="lg:pr-8 lg:pt-4">
                 <div class="lg:max-w-lg">
                     <h2 class="text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-400">
-                        Retrieve your data
+                        {{ __('lander.api_showcase.section_title') }}
                     </h2>
                     <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-                        Simple API Calls
+                        {{ __('lander.api_showcase.title') }}
                     </p>
                     <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-                        Our API is designed for ease of use, allowing developers to quickly fetch and display their personalized data with minimal setup.
+                        {{ __('lander.api_showcase.description') }}
                     </p>
                     <div class="mt-10 max-w-xl text-base leading-7 text-gray-700 dark:text-gray-300 lg:max-w-none">
                         <p>
-                            With a secure API key, you can integrate your portfolio data into any application. Fetch your latest projects, skills, and contact information with a simple GET request.
+                            {{ __('lander.api_showcase.info_paragraph_1') }}
                         </p>
                         <p class="mt-8">
-                            We provide clear documentation and support to help you get started in minutes.
+                            {{ __('lander.api_showcase.info_paragraph_2') }}
                         </p>
                         <div class="flex items-center mt-6 gap-x-6">
                             <a href="#get-started"
-                               class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500
-                               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
-                               transition-colors duration-200">
-                                View API Docs (Coming Soon)
+                               class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors duration-200">
+                                {{ __('lander.api_showcase.cta_btn') }}
                             </a>
                         </div>
                     </div>

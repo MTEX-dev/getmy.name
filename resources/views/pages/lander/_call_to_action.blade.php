@@ -1,16 +1,16 @@
 <section id="get-started" class="bg-white dark:bg-gray-800 py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="relative isolate overflow-hidden bg-gray-900 dark:bg-indigo-900 px-6 py-24 shadow-2xl rounded-3xl sm:px-24 xl:py-32">
-            <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">Ready to empower your portfolio?</h2>
+            <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('lander.cta_banner.title') }}</h2>
             <p class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-gray-300 dark:text-indigo-200">
-                Join getmy.name and transform how you share your professional journey.
+                {{ __('lander.cta_banner.subtitle') }}
             </p>
             <div class="mx-auto mt-10 flex max-w-md items-center justify-center gap-x-6">
                 <a href="{{ route('register') }}" class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-                    Sign up now
+                    {{ __('lander.cta_banner.signup_btn') }}
                 </a>
                 <a href="https://mtex.dev" target="_blank" class="text-sm font-semibold leading-6 text-white dark:text-indigo-100">
-                    Learn about mtex.dev <span aria-hidden="true">→</span>
+                    {{ __('lander.cta_banner.learn_mtex_btn') }} <span aria-hidden="true">→</span>
                 </a>
             </div>
             <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]" aria-hidden="true">

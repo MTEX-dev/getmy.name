@@ -3,10 +3,10 @@
         <div class="mx-auto max-w-2xl lg:max-w-none">
             <div class="text-center">
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-                    Built on Trust & Innovation
+                    {{ __('lander.stats.section_title') }}
                 </h2>
                 <p class="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-400">
-                    Reliable infrastructure by mtex.dev, designed for developers.
+                    {{ __('lander.stats.subtitle') }}
                 </p>
             </div>
             <dl
@@ -14,7 +14,7 @@
             >
                 <div class="flex flex-col bg-white/50 p-8 dark:bg-gray-700/50">
                     <dt class="text-sm font-semibold leading-6 text-gray-600 dark:text-gray-400">
-                        Active Users
+                        {{ __('lander.stats.active_users') }}
                     </dt>
                     <dd
                         class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex flex-col bg-white/50 p-8 dark:bg-gray-700/50">
                     <dt class="text-sm font-semibold leading-6 text-gray-600 dark:text-gray-400">
-                        API Calls made
+                        {{ __('lander.stats.api_calls_made') }}
                     </dt>
                     <dd
                         class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
@@ -34,7 +34,7 @@
                 </div>
                 <div class="flex flex-col bg-white/50 p-8 dark:bg-gray-700/50">
                     <dt class="text-sm font-semibold leading-6 text-gray-600 dark:text-gray-400">
-                        Days Online
+                        {{ __('lander.stats.days_online') }}
                     </dt>
                     <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
                         {{  round(Carbon\Carbon::parse('2025-08-08')->diffInDays(Carbon\Carbon::now()))  }}+
@@ -42,7 +42,7 @@
                 </div>
                 <div class="flex flex-col bg-white/50 p-8 dark:bg-gray-700/50">
                     <dt class="text-sm font-semibold leading-6 text-gray-600 dark:text-gray-400">
-                        Years of Experience (mtex.dev)
+                        {{ __('lander.stats.years_experience') }}
                     </dt>
                     <dd
                         class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
