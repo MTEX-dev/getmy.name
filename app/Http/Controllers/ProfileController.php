@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use App\Models\User;
 use App\Models\ApiRequest;
 use App\Models\Social;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Http;
 
 class ProfileController extends Controller
@@ -64,6 +65,26 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'socials-updated');
     }
 
+    public function storeSkill(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'level' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $request->user()->skills()->create($validated);
+
+        return Redirect::route('profile.edit')->with('status', 'skill-added');
+    }
+
+    public function destroySkill(Skill $skill): RedirectResponse
+    {
+        $this->authorize('delete', $skill);
+
+        $skill->delete();
+
+        return Redirect::route('profile.edit')->with('status', 'skill-deleted');
+    }
 
     public function updateAvatar(Request $request): RedirectResponse
     {

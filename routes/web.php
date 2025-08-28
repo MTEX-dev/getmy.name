@@ -17,6 +17,8 @@ Route::middleware('auth')->group(function () {
         Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
         Route::delete('/avatar', [ProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
         Route::patch('/socials', [ProfileController::class, 'updateSocials'])->name('socials.update');
+        Route::post('/skills', [ProfileController::class, 'storeSkill'])->name('skills.store');
+        Route::delete('/skills/{skill}', [ProfileController::class, 'destroySkill'])->name('skills.destroy');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         Route::get('/preview', [ProfileController::class,'preview'])->name('preview');
     });
