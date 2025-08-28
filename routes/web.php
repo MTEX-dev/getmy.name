@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
         Route::delete('/avatar', [ProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+        Route::get('/preview', [ProfileController::class,'preview'])->name('preview');
     });
 
     // Portfolio Profile Management
@@ -45,7 +46,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-
+Route::get('/get/{user:username}/data', [ProfileController::class, 'getData'])->name('get.data');
 Route::get('/get/{profile:username}', [ProfileController::class, 'getProfile'])->name('profiles.get');
 
 require __DIR__.'/auth.php';

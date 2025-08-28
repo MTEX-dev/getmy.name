@@ -24,6 +24,36 @@
         </div>
 
         <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <div>
+            <x-input-label for="title" :value="__('Title') . ' (' . __('Optional') . ')'" />
+            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title', $user->title)" autocomplete="title" />
+            <x-input-error class="mt-2" :messages="$errors->get('title')" />
+        </div>
+
+        <div>
+            <x-input-label for="bio" :value="__('Bio') . ' (' . __('Optional') . ')'" />
+            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full" :value="old('bio', $user->bio)" autocomplete="bio" />
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+        </div>
+
+        <div>
+            <x-input-label for="location" :value="__('Location') . ' (' . __('Optional') . ')'" />
+            <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" x-data="locationSelect()" x-init="init()">
+                <template x-for="loc in locations">
+                    <option :value="loc" x-text="loc" :selected="loc === locationValue"></option>
+                </template>
+                <option value="Type Manually" :selected="locationValue === 'Type Manually'">{{ __('Type Manually') }}</option>
+            </select>
+            <x-text-input x-ref="manualInput" x-show="isManual" id="location_manual" name="location_manual" type="text" class="mt-1 block w-full" x-bind:value="locationValue === 'Type Manually' ? '' : locationValue" x-on:input="locationValue = $event.target.value" />
+            <x-input-error class="mt-2" :messages="$errors->get('location')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -62,3 +92,49 @@
         </div>
     </form>
 </section>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('locationSelect', () => ({
+            locationValue: '{{ old('location', $user->location) }}',
+            isManual: false,
+            locations: [
+                'New York',
+                'London',
+                'Paris',
+                'Tokyo',
+                'Berlin',
+                'Rome',
+                'Madrid',
+                'Sydney',
+                'Dubai',
+                'Singapore',
+                'Germany'
+            ],
+            init() {
+                this.$watch('locationValue', value => {
+                    this.isManual = (value === 'Type Manually');
+                    if (!this.isManual && this.$refs.manualInput) {
+                         this.$refs.manualInput.value = '';
+                    }
+                });
+
+                if (this.locationValue && this.locations.includes(this.locationValue)) {
+                    this.isManual = false;
+                } else if (this.locationValue && this.locationValue !== 'Type Manually') {
+                    this.isManual = true;
+                    if (!this.locations.includes(this.locationValue)) {
+                        this.locations.push(this.locationValue);
+                    }
+                    this.$nextTick(() => {
+                        this.$refs.manualInput.value = this.locationValue;
+                        this.locationValue = 'Type Manually';
+                    });
+                } else {
+                    this.locationValue = 'Type Manually';
+                    this.isManual = true;
+                }
+            }
+        }));
+    });
+</script>
