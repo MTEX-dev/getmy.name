@@ -16,10 +16,12 @@ Route::middleware('auth')->group(function () {
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
         Route::delete('/avatar', [ProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
+        Route::patch('/socials', [ProfileController::class, 'updateSocials'])->name('socials.update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         Route::get('/preview', [ProfileController::class,'preview'])->name('preview');
     });
 
+    /*
     // Portfolio Profile Management
     Route::prefix('my-profile')->name('profiles.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
@@ -44,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/socials/edit', [ProfileController::class, 'editProfileSocials'])->name('socials.edit');
         Route::patch('/socials', [ProfileController::class, 'updateProfileSocials'])->name('socials.update');
     });
+    */
 });
 
 Route::get('/get/{user:username}/data', [ProfileController::class, 'getData'])->name('get.data');
