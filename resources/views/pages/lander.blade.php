@@ -10,6 +10,6 @@ $startAtFooter = true;
         @include('pages.lander._features')
         @include('pages.lander._api_showcase')
         @include('pages.lander._stats')
-        @include('pages.lander._call_to_action')
+        @include('pages.lander._cta_banner')
     </main>
 @endsection

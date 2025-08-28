@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Avatar') }}
+            {{ __('profile.avatar') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's avatar.") }}
+            {{ __('profile.avatar_subtitle') }}
         </p>
     </header>
 
@@ -16,7 +16,7 @@
         @method('patch')
 
         <div>
-            <x-input-label for="avatar" :value="__('Upload Avatar (Max 1MB)')" />
+            <x-input-label for="avatar" :value="__('profile.avatar_upload')" />
             <input
                 id="avatar"
                 name="avatar"
@@ -31,7 +31,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('profile.save') }}</x-primary-button>
 
             @if (session('status') === 'avatar-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 dark:text-gray-400">
@@ -45,7 +45,7 @@
         <form method="post" action="{{ route('profile.avatar.destroy') }}" class="mt-6">
             @csrf
             @method('delete')
-            <x-danger-button>{{ __('Remove Avatar') }}</x-danger-button>
+            <x-danger-button>{{ __('profile.remove_avatar') }}</x-danger-button>
         </form>
     @endif
 </section>

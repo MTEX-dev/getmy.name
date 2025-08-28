@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('strings.dashboard') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                             </div>
                             <x-dropdown-link :href="route('profile.edit')" class="bg-white/80 dark:bg-gray-800/80 hover:bg-gray-100/90 dark:hover:bg-gray-700/90 backdrop-blur-sm">
-                                {{ __('Profile') }}
+                                {{ __('profile.profile') }}
                             </x-dropdown-link>
                             <div class="border-t border-gray-200 dark:border-gray-600"></div>
                             <form method="POST" action="{{ route('logout') }}">
@@ -53,18 +53,18 @@
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault(); this.closest('form').submit();"
                                     class="bg-white/80 dark:bg-gray-800/80 hover:bg-gray-100/90 dark:hover:bg-gray-700/90 backdrop-blur-sm">
-                                    {{ __('Log Out') }}
+                                    {{ __('auth.logout') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
                     </x-dropdown>
                 @else
                     <x-nav-link :href="route('login')">
-                        {{ __('Log In') }}
+                        {{ __('auth.login') }}
                     </x-nav-link>
                     @if (Route::has('register'))
                         <x-nav-link :href="route('register')">
-                            {{ __('Register') }}
+                            {{ __('auth.register') }}
                         </x-nav-link>
                     @endif
                 @endauth
@@ -86,7 +86,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('strings.dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -103,25 +103,25 @@
 
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                        {{ __('profile.profile') }}
                     </x-responsive-nav-link>
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            {{ __('auth.logout') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>
             @else
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('login')">
-                        {{ __('Log In') }}
+                        {{ __('auth.login') }}
                     </x-responsive-nav-link>
                     @if (Route::has('register'))
                         <x-responsive-nav-link :href="route('register')">
-                            {{ __('Register') }}
+                            {{ __('auth.register') }}
                         </x-responsive-nav-link>
                     @endif
                 </div>
