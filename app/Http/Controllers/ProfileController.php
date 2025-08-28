@@ -124,7 +124,7 @@ class ProfileController extends Controller
             'title' => $user->title,
             'bio' => $user->bio,
             'location' => $user->location,
-            'avatar_url' => $user->avatar(),
+            'avatar_url' => $user->getAvatarUrl(),
             'email' => $user->email,
             'skills' => $user->skills->pluck('name')->toArray(),
             'projects' => $user->projects->map(function ($project) {

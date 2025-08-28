@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL; // Import URL facade
 
 class User extends Authenticatable
 {
@@ -22,7 +23,7 @@ class User extends Authenticatable
         'location',
         'email',
         'password',
-        'avatar_path', 
+        'avatar_path',
     ];
 
     protected $hidden = [
@@ -45,7 +46,16 @@ class User extends Authenticatable
             : 'https://ui-avatars.com/api/?name=' .
                 strtolower(trim($this->name));
     }
-    
+
+    public function getAvatarUrl(): string
+    {
+        if ($this->avatar_path) {
+            return URL::to(Storage::url($this->avatar_path));
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . strtolower(trim($this->name));
+    }
+
     public function projects()
     {
         return $this->hasMany(Project::class);
@@ -58,7 +68,7 @@ class User extends Authenticatable
 
     public function socials()
     {
-        return $this->hasOne(Skill::class);
+        return $this->hasOne(Social::class);
     }
 
     public function experiences()
