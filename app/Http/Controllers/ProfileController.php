@@ -11,15 +11,16 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\ApiRequest;
 use Illuminate\Support\Facades\Http;
 
 class ProfileController extends Controller
 {
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+        $user->load(['skills', 'projects', 'socials', 'education', 'experiences']);
+        return view('profile.edit', compact('user'));
     }
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
@@ -104,9 +105,18 @@ class ProfileController extends Controller
         return view('profiles.get', compact('data'));
     }
 
-    public function getData(User $user): array
+    public function getData(Request $request, User $user): array
     {
         $user->load(['skills', 'projects', 'socials', 'education', 'experiences']);
+
+        ApiRequest::create([
+            'user_id' => $user->id,
+            'request_method' => $request->method(),
+            'request_url' => $request->fullUrl(),
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->header('User-Agent'),
+            'requested_at' => now(),
+        ]);
 
         return [
             'name' => $user->name,
@@ -129,6 +139,7 @@ class ProfileController extends Controller
             'socials' => $user->socials
                 ? $user->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
                 : [],
+            'api_request_count' => $user->getApiRequestCount(),
         ];
     }
 }

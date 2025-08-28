@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Education::class);
     }
+
+    public function getApiRequestCount()
+    {
+        return $this->hasMany(ApiRequest::class)->count();
+    }
 }
