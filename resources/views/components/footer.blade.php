@@ -27,6 +27,11 @@
                             Dashboard
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('profile.edit') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                            Profile
+                        </a>
+                    </li>
                 </ul>
             </div>
 

@@ -41,7 +41,11 @@
                     <pre class="mt-4 text-xs overflow-x-auto text-gray-200 dark:text-gray-300">
 <code class="language-json">{
   "name": "Jane Doe",
+  "username": "janedoe",
   "title": "Senior Laravel Developer",
+  "bio": "Experienced developer focused on building scalable web applications.",
+  "location": "Berlin, Germany",
+  "avatar_url": "http://yourdomain.com/storage/avatars/avatar-uuid.png",
   "email": "jane@example.com",
   "skills": [
     "PHP", "Laravel", "Vue.js", "Docker", "AWS"
@@ -51,13 +55,17 @@
       "id": "project-uuid-1",
       "name": "E-commerce Platform",
       "description": "Built a scalable e-commerce solution...",
-      "url": "https://example.com/project1"
+      "url": "https://example.com/project1",
+      "image_path": "http://yourdomain.com/storage/projects/project-image-uuid.png"
     }
   ],
   "socials": {
     "github": "janedoe-gh",
-    "linkedin": "janedoe-li"
-  }
+    "linkedin": "janedoe-li",
+    "twitter": "janedoe_tweets",
+    "personal_website": "https://janedoe.com"
+  },
+  "api_request_count": 123
 }</code></pre>
                 </div>
             </div>
