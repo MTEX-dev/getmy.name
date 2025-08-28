@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     */
 });
 
-Route::get('/get/{user:username}/data', [ProfileController::class, 'getData'])->name('get.data');
-Route::get('/get/{profile:username}', [ProfileController::class, 'getProfile'])->name('profiles.get');
+Route::get('/get/{user:username}/data', [ProfileController::class, 'getData'])->name('profile.get.data');
+Route::get('/get/{profile:username}', [ProfileController::class, 'getProfile'])->name('profile.get');
 
 require __DIR__.'/auth.php';
