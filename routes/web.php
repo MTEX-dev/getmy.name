@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
             Route::patch('/socials', [ProfileController::class, 'updateSocials'])->name('socials.update');
             Route::post('/skills', [ProfileController::class, 'storeSkill'])->name('skills.store');
             Route::delete('/skills/{skill}', [ProfileController::class, 'destroySkill'])->name('skills.destroy');
+            Route::post('/projects', [ProfileController::class, 'storeProject'])->name('projects.store');
+            Route::delete('/projects/{project}', [ProfileController::class, 'destroyProject'])->name('projects.destroy');
         });
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         Route::get('/preview', [ProfileController::class,'preview'])->name('preview');
