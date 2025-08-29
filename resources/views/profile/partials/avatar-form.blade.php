@@ -29,25 +29,20 @@
             @csrf
             @method('patch')
 
+            <!-- File Input (using component) -->
             <div>
                 <x-input-label for="avatar" :value="__('profile.avatar_upload')" />
-                <input
+
+                <x-file-input 
                     id="avatar"
                     name="avatar"
-                    type="file"
                     accept="image/*"
-                    class="block w-full text-sm text-gray-900 dark:text-gray-300
-                           border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer
-                           bg-gray-50 dark:bg-gray-700
-                           focus:outline-none focus:ring-2 focus:ring-violet-300 dark:focus:ring-violet-600
-                           file:py-2 file:px-4 file:rounded-md file:border-0 
-                           file:text-sm file:font-semibold
-                           file:bg-violet-100 file:text-violet-800 hover:file:bg-violet-200
-                           dark:file:bg-violet-800 dark:file:text-violet-200 dark:hover:file:bg-violet-700"
                 />
+
                 <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
             </div>
 
+            <!-- Buttons -->
             <div class="flex items-center gap-4">
                 <!-- Save Button -->
                 <x-primary-button>{{ __('profile.save') }}</x-primary-button>
@@ -65,7 +60,7 @@
                     </form>
                 @endif
 
-                <!-- Saved message -->
+                <!-- Saved Message -->
                 @if (session('status') === 'avatar-updated')
                     <p 
                         x-data="{ show: true }" 

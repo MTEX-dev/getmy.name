@@ -1,23 +1,23 @@
-@props(['disabled' => false])
-{{--
-<input type="file" {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'form-input file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100']) !!}>
---}}
+@props([
+    'disabled' => false,
+])
 
 <input 
-    type="file" 
+    type="file"
     {{ $disabled ? 'disabled' : '' }}
-    {!! $attributes->merge([
-        'class' => '
-            block w-full text-sm text-gray-900 dark:text-gray-300
-            border border-gray-300 dark:border-gray-600 
-            rounded-lg cursor-pointer
-            bg-gray-50 dark:bg-gray-700
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-md file:border-0
-            file:text-sm file:font-semibold
-            file:bg-violet-600 file:text-white
-            hover:file:bg-violet-700
-            focus:outline-none focus:ring focus:ring-violet-200 dark:focus:ring-violet-700
-        '
-    ]) !!}
+    {{ $attributes->merge([
+        'class' => 'block w-full text-sm
+                    border border-gray-300 dark:border-gray-700
+                    rounded-md shadow-sm
+                    bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-300
+                    focus:border-indigo-500 dark:focus:border-indigo-600
+                    focus:ring-indigo-500 dark:focus:ring-indigo-600
+                    file:mr-4 file:py-2 file:px-4 
+                    file:rounded-md file:border-0
+                    file:font-semibold file:uppercase file:text-xs
+                    file:bg-gray-800 file:text-white
+                    dark:file:bg-gray-200 dark:file:text-gray-800
+                    hover:file:bg-gray-700 dark:hover:file:bg-white
+                    transition ease-in-out duration-150'
+    ]) }}
 >
