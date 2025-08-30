@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\ApiRequest;
-use App\Models\Social;
-use App\Models\Skill;
 use Illuminate\Support\Facades\Http;
 
 class ProfileController extends Controller
@@ -47,76 +45,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    public function updateSocials(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'github' => ['nullable', 'string', 'max:255'],
-            'linkedin' => ['nullable', 'string', 'max:255'],
-            'twitter' => ['nullable', 'string', 'max:255'],
-            'personal_website' => ['nullable', 'url', 'max:2048'],
-        ]);
-
-        $user = $request->user();
-
-        $socials = Social::firstOrNew(['user_id' => $user->id]);
-        $socials->fill($validated);
-        $socials->save();
-
-        return Redirect::route('profile.edit')->with('status', 'socials-updated');
-    }
-
-    public function storeSkill(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'level' => ['nullable', 'string', 'max:255'],
-        ]);
-
-        $request->user()->skills()->create($validated);
-
-        return Redirect::route('profile.edit')->with('status', 'skill-added');
-    }
-
-    public function destroySkill(Skill $skill): RedirectResponse
-    {
-        if(Auth::id() === $skill->user_id) {
-        $skill->delete();
-
-        return Redirect::route('profile.edit')->with('status', 'skill-deleted');
-        } else {
-            abort(403);
-        }
-    }
-
-    public function updateAvatar(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'avatar' => ['required', 'image', 'max:1024'],
-        ]);
-
-        $path = $request->file('avatar')->store('avatars', 'public');
-
-        if ($oldAvatar = $request->user()->avatar_path) {
-            Storage::disk('public')->delete($oldAvatar);
-        }
-
-        $request->user()->update(['avatar_path' => $path]);
-
-        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
-    }
-
-    public function destroyAvatar(Request $request): RedirectResponse
-    {
-        $user = $request->user();
-
-        if ($user->avatar_path) {
-            Storage::disk('public')->delete($user->avatar_path);
-            $user->update(['avatar_path' => null]);
-        }
-
-        return Redirect::route('profile.edit')->with('status', 'avatar-removed');
-    }
-
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
@@ -142,9 +70,6 @@ class ProfileController extends Controller
     public function preview(): View
     {
         $user = Auth::user();
-        //$response = Http::get(route('get.data', ['user' => $user]));
-        //$data = $response->json();
-
         $request = Request::create('/preview', 'GET');
         $data = $this->getData($request, $user);
 
@@ -187,5 +112,33 @@ class ProfileController extends Controller
                 : [],
             'api_request_count' => $user->getApiRequestCount(),
         ];
+    }
+
+    public function editSkills(Request $request): View
+    {
+        $user = $request->user();
+        $user->load(['skills']);
+        return view('profile.skills', compact('user'));
+    }
+
+    public function editProjects(Request $request): View
+    {
+        $user = $request->user();
+        $user->load(['projects']);
+        return view('profile.projects', compact('user'));
+    }
+
+    public function editExperiences(Request $request): View
+    {
+        $user = $request->user();
+        $user->load(['experiences']);
+        return view('profile.experiences', compact('user'));
+    }
+
+    public function editSocials(Request $request): View
+    {
+        $user = $request->user();
+        $user->load(['socials']);
+        return view('profile.socials', compact('user'));
     }
 }

@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\AvatarController;
+use App\Http\Controllers\Profile\ProjectController;
+use App\Http\Controllers\Profile\SkillController;
+use App\Http\Controllers\Profile\SocialsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
 use App\Http\Controllers\LanguageController;
@@ -20,16 +24,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::middleware('verified')->group(function () {
-            Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
-            Route::delete('/avatar', [ProfileController::class, 'destroyAvatar'])->name('avatar.destroy');
-            Route::patch('/socials', [ProfileController::class, 'updateSocials'])->name('socials.update');
-            Route::post('/skills', [ProfileController::class, 'storeSkill'])->name('skills.store');
-            Route::delete('/skills/{skill}', [ProfileController::class, 'destroySkill'])->name('skills.destroy');
-            Route::post('/projects', [ProfileController::class, 'storeProject'])->name('projects.store');
-            Route::delete('/projects/{project}', [ProfileController::class, 'destroyProject'])->name('projects.destroy');
+            Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
+            Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
+            Route::patch('/socials', [SocialsController::class, 'update'])->name('socials.update');
+            Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
+            Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
+            Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+            Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
         });
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         Route::get('/preview', [ProfileController::class,'preview'])->name('preview');
+        Route::get('/skills', [ProfileController::class, 'editSkills'])->name('skills');
+        Route::get('/projects', [ProfileController::class, 'editProjects'])->name('projects');
+        Route::get('/experiences', [ProfileController::class, 'editExperiences'])->name('experiences');
+        Route::get('/socials', [ProfileController::class, 'editSocials'])->name('socials');
     });
 
     /*
