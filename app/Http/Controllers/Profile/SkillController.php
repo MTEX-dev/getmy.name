@@ -20,7 +20,7 @@ class SkillController extends Controller
 
         $request->user()->skills()->create($validated);
 
-        return Redirect::route('profile.edit')->with('status', 'skill-added');
+        return Redirect::route('profile.skills')->with('status', 'skill-added');
     }
 
     public function destroy(Skill $skill): RedirectResponse
@@ -28,7 +28,7 @@ class SkillController extends Controller
         if(Auth::id() === $skill->user_id) {
             $skill->delete();
 
-            return Redirect::route('profile.edit')->with('status', 'skill-deleted');
+            return Redirect::route('profile.skills')->with('status', 'skill-deleted');
         } else {
             abort(403);
         }

@@ -24,20 +24,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::middleware('verified')->group(function () {
-            Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
-            Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
+            Route::get('/skills', [ProfileController::class, 'editSkills'])->name('skills');
+            Route::get('/projects', [ProfileController::class, 'editProjects'])->name('projects');
+            Route::get('/experiences', [ProfileController::class, 'editExperiences'])->name('experiences');
+            Route::get('/socials', [ProfileController::class, 'editSocials'])->name('socials');
+            
             Route::patch('/socials', [SocialsController::class, 'update'])->name('socials.update');
             Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
             Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
             Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
             Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
         });
+        Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
+        Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
+
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
         Route::get('/preview', [ProfileController::class,'preview'])->name('preview');
-        Route::get('/skills', [ProfileController::class, 'editSkills'])->name('skills');
-        Route::get('/projects', [ProfileController::class, 'editProjects'])->name('projects');
-        Route::get('/experiences', [ProfileController::class, 'editExperiences'])->name('experiences');
-        Route::get('/socials', [ProfileController::class, 'editSocials'])->name('socials');
     });
 
     /*

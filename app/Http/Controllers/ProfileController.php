@@ -101,7 +101,8 @@ class ProfileController extends Controller
             'projects' => $user->projects->map(function ($project) {
                 return [
                     'id' => $project->id,
-                    'name' => $project->name,
+                    'title' => $project->title,
+                    'name' => $project->title,
                     'description' => $project->description,
                     'url' => $project->url,
                     'image_path' => $project->image_path ? Storage::url($project->image_path) : null,
@@ -112,6 +113,13 @@ class ProfileController extends Controller
                 : [],
             'api_request_count' => $user->getApiRequestCount(),
         ];
+    }
+
+    public function getProfile(Request $request, User $profile): View
+    {
+        $data = $this->getData($request, $profile);
+
+        return view('profiles.get', compact('data'));
     }
 
     public function editSkills(Request $request): View

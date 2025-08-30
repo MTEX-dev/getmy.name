@@ -25,6 +25,6 @@ class SocialsController extends Controller
         $socials->fill($validated);
         $socials->save();
 
-        return Redirect::route('profile.edit')->with('status', 'socials-updated');
+        return Redirect::route('profile.socials')->with('status', 'socials-updated');
     }
 }
