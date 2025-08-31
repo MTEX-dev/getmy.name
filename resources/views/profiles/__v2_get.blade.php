@@ -25,44 +25,24 @@
 		</style>
 	</head>
 	<body class="bg-gray-900 text-gray-300 antialiased">
-		<div class="container mx-auto max-w-6xl p-6 lg:p-12">
+		<div class="container mx-auto max-w-5xl p-6 lg:p-12">
 			<main class="grid grid-cols-1 gap-12 lg:grid-cols-3">
 				<aside class="self-start lg:sticky lg:top-12 lg:col-span-1">
 					<div class="flex flex-col space-y-6">
-						<header class="text-center lg:text-left">
-							@if (isset($data["avatar_url"]) && $data["avatar_url"])
-								<div class="mb-4 flex justify-center lg:justify-start">
-									<img
-										src="{{ $data['avatar_url'] }}"
-										alt="{{ $data['name'] }}"
-										class="h-24 w-24 rounded-full border-2 border-emerald-500 object-cover"
-									/>
-								</div>
-							@endif
+						<header>
 							<h1 class="text-4xl font-black text-white">
 								{{ $data["name"] }}
 							</h1>
 							<h2 class="gradient-text mt-1 text-xl font-medium">
 								{{ $data["title"] }}
 							</h2>
-							@if (isset($data["bio"]) && $data["bio"])
-								<p class="mt-4 text-gray-400">
-									{{ $data["bio"] }}
-								</p>
-							@else
-								<p class="mt-4 text-gray-400">
-									Building elegant solutions for the web, one line of code at a
-									time.
-								</p>
-							@endif
-							@if (isset($data["location"]) && $data["location"])
-								<p class="mt-2 text-sm text-gray-500">
-									📍 {{ $data["location"] }}
-								</p>
-							@endif
+							<p class="mt-4 text-gray-400">
+								Building elegant solutions for the web, one line of code at a
+								time.
+							</p>
 						</header>
 
-						<div class="flex items-center justify-center space-x-4 lg:justify-start">
+						<div class="flex items-center space-x-4">
 							@if (isset($data["socials"]["github"]))
 								<a
 									href="https://github.com/{{ $data['socials']['github'] }}"
@@ -147,24 +127,22 @@
 							@endif
 						</div>
 
-						@if (!empty($data["skills"]))
-							<div class="border-t border-gray-800 pt-6">
-								<h3
-									class="text-sm font-semibold uppercase tracking-wider text-gray-400"
-								>
-									Core Toolkit
-								</h3>
-								<div class="mt-4 flex flex-wrap gap-2">
-									@foreach ($data["skills"] as $skill)
-										<span
-											class="inline-flex items-center rounded-full bg-gray-800 px-3 py-1 text-sm font-medium text-emerald-400"
-										>
-											{{ $skill }}
-										</span>
-									@endforeach
-								</div>
+						<div class="border-t border-gray-800 pt-6">
+							<h3
+								class="text-sm font-semibold uppercase tracking-wider text-gray-400"
+							>
+								Core Toolkit
+							</h3>
+							<div class="mt-4 flex flex-wrap gap-2">
+								@foreach ($data["skills"] as $skill)
+									<span
+										class="inline-flex items-center rounded-full bg-gray-800 px-3 py-1 text-sm font-medium text-emerald-400"
+									>
+										{{ $skill }}
+									</span>
+								@endforeach
 							</div>
-						@endif
+						</div>
 
 						<div class="border-t border-gray-800 pt-6">
 							<h3
@@ -181,104 +159,55 @@
 					</div>
 				</aside>
 
-				<section class="lg:col-span-2 space-y-12">
-					<!-- Projects Section -->
-					<div>
-						<h3 class="mb-6 text-2xl font-bold text-white">
-							Featured Projects
-						</h3>
-						<div class="grid grid-cols-1 gap-8">
-							@forelse($data['projects'] as $project)
-								<div
-									class="group relative rounded-lg border border-gray-800 bg-gray-800/50 p-6 transition-all hover:border-emerald-500/30 hover:bg-gray-800"
-								>
-									<h4 class="text-xl font-bold text-white">
-										{{ $project["title"] }}
-									</h4>
-									@if (isset($project["description"]) && $project["description"])
-										<p class="mt-2 text-gray-400">
-											{{ $project["description"] }}
-										</p>
-									@endif
-									@if (isset($project["url"]) && $project["url"])
-										<a
-											href="{{ $project['url'] }}"
-											target="_blank"
-											rel="noopener noreferrer"
-											class="mt-4 inline-flex items-center text-sm font-semibold text-emerald-400 hover:text-emerald-300"
+				<section class="lg:col-span-2">
+					<h3 class="mb-6 text-2xl font-bold text-white">
+						Featured Projects
+					</h3>
+					<div class="grid grid-cols-1 gap-8">
+						@forelse($data['projects'] as $project)
+							<div
+								class="group relative rounded-lg border border-gray-800 bg-gray-800/50 p-6 transition-all hover:border-emerald-500/30 hover:bg-gray-800"
+							>
+								<h4 class="text-xl font-bold text-white">
+									{{ $project["name"] }}
+								</h4>
+								<p class="mt-2 text-gray-400">
+									{{ $project["description"] }}
+								</p>
+								@if (isset($project["url"]))
+									<a
+										href="{{ $project['url'] }}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="mt-4 inline-flex items-center text-sm font-semibold text-emerald-400 hover:text-emerald-300"
+									>
+										View Project
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="ml-1 h-4 w-4"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2"
 										>
-											View Project
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												class="ml-1 h-4 w-4"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="currentColor"
-												stroke-width="2"
-											>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-												/>
-											</svg>
-											<span class="absolute inset-0"></span>
-										</a>
-									@endif
-								</div>
-							@empty
-								<div
-									class="rounded-lg border border-gray-800 bg-gray-800/50 p-6"
-								>
-									<p class="text-gray-400">No projects to display yet.</p>
-								</div>
-							@endforelse
-						</div>
-					</div>
-
-					<!-- Experience Section -->
-					@if (!empty($data['experiences']))
-						<div>
-							<h3 class="mb-6 text-2xl font-bold text-white">
-								Experience
-							</h3>
-							<div class="space-y-8">
-								@foreach($data['experiences'] as $experience)
-									<div class="relative border-l-2 border-emerald-500 pl-6">
-										<div class="absolute -left-2 top-0 h-4 w-4 rounded-full bg-emerald-500"></div>
-										<div class="rounded-lg border border-gray-800 bg-gray-800/50 p-6">
-											<h4 class="text-xl font-bold text-white">
-												{{ $experience["title"] }}
-											</h4>
-											<p class="text-emerald-400 font-medium">
-												{{ $experience["company"] }}
-												@if (isset($experience["location"]) && $experience["location"])
-													<span class="text-gray-400"> • {{ $experience["location"] }}</span>
-												@endif
-											</p>
-											@if (isset($experience["start_date"]) || isset($experience["end_date"]))
-												<p class="text-sm text-gray-500 mt-1">
-													@if (isset($experience["start_date"]) && $experience["start_date"] && $experience["start_date"] !== "0001-03-31")
-														{{ date('M Y', strtotime($experience["start_date"])) }}
-													@endif
-													@if (isset($experience["end_date"]) && $experience["end_date"] && $experience["end_date"] !== "1212-12-26")
-														- {{ date('M Y', strtotime($experience["end_date"])) }}
-													@else
-														- Present
-													@endif
-												</p>
-											@endif
-											@if (isset($experience["description"]) && $experience["description"])
-												<p class="mt-3 text-gray-400">
-													{{ $experience["description"] }}
-												</p>
-											@endif
-										</div>
-									</div>
-								@endforeach
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+											/>
+										</svg>
+										<span class="absolute inset-0"></span>
+									</a>
+								@endif
 							</div>
-						</div>
-					@endif
+						@empty
+							<div
+								class="rounded-lg border border-gray-800 bg-gray-800/50 p-6"
+							>
+								<p class="text-gray-400">No projects to display yet.</p>
+							</div>
+						@endforelse
+					</div>
 				</section>
 			</main>
 
