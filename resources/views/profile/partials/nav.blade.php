@@ -14,4 +14,7 @@
     <x-nav-link :href="route('profile.socials')" :active="request()->routeIs('profile.socials')">
         {{ __('Socials') }}
     </x-nav-link>
+    <x-nav-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
+        {{ __('Preview') }}
+    </x-nav-link>
 </div>

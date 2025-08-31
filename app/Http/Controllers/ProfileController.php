@@ -73,7 +73,7 @@ class ProfileController extends Controller
         $request = Request::create('/preview', 'GET');
         $data = $this->getData($request, $user);
 
-        return view('profiles.get', compact('data'));
+        return view('profile.preview', compact('data'));
     }
 
     public function getData(Request $request, User $user): array
