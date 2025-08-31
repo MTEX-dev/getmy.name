@@ -37,7 +37,7 @@
 
         <div>
             <x-input-label for="bio" :value="__('profile.bio') . ' (' . __('profile.optional') . ')'" />
-            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full" :value="old('bio', $user->bio)" autocomplete="bio" />
+            <x-textarea-input id="bio" name="bio" class="mt-1 block w-full" :value="old('bio', $user->bio)" autocomplete="bio" />
             <x-input-error class="mt-2" :messages="$errors->get('bio')" />
         </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\Profile\ProjectController;
 use App\Http\Controllers\Profile\SkillController;
 use App\Http\Controllers\Profile\SocialsController;
+use App\Http\Controllers\Profile\ExperienceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
 use App\Http\Controllers\LanguageController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
             Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
             Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
             Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+            Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store');
+            Route::delete('/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');
         });
         Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
         Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');

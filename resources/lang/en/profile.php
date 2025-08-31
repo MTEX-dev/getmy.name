@@ -42,6 +42,20 @@ return [
     'project_added_successfully' => 'Project added successfully.',
     'project_removed_successfully' => 'Project removed successfully.',
 
+    'experiences' => 'Experiences',
+    'experiences_subtitle' => 'Showcase your professional experiences.',
+    'your_current_experiences' => 'Your Current Experiences:',
+    'confirm_delete_experience' => 'Are you sure you want to delete this experience?',
+    'no_experiences_added' => 'You haven\'t added any experiences yet.',
+    'experience_title' => 'Job Title',
+    'experience_company' => 'Company',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'experience_description' => 'Description',
+    'add_experience' => 'Add Experience',
+    'experience_added_successfully' => 'Experience added successfully.',
+    'experience_removed_successfully' => 'Experience removed successfully.',
+
     'social_links' => 'Social Links',
     'social_links_subtitle' => 'Update your social media and personal website links.',
     'github_username' => 'GitHub Username',
@@ -52,7 +66,7 @@ return [
     'twitter_placeholder' => 'e.g., yourtwitterhandle',
     'personal_website_url' => 'Personal Website URL',
     'personal_website_placeholder' => 'e.g., https://yourwebsite.com',
-    
+
     'update_password' => 'Update Password',
     'update_password_subtitle' => 'Ensure your account is using a long, random password to stay secure.',
     'current_password' => 'Current Password',

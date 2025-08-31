@@ -108,6 +108,17 @@ class ProfileController extends Controller
                     'image_path' => $project->image_path ? Storage::url($project->image_path) : null,
                 ];
             })->toArray(),
+            'experiences' => $user->experiences->map(function ($experience) {
+                return [
+                    'id' => $experience->id,
+                    'title' => $experience->title,
+                    'company' => $experience->company,
+                    'location' => $experience->location,
+                    'start_date' => $experience->start_date,
+                    'end_date' => $experience->end_date,
+                    'description' => $experience->description,
+                ];
+            })->toArray(),
             'socials' => $user->socials
                 ? $user->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
                 : [],
