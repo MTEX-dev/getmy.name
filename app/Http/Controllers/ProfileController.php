@@ -119,6 +119,17 @@ class ProfileController extends Controller
                     'description' => $experience->description,
                 ];
             })->toArray(),
+            'education' => $user->education->map(function ($education) {
+                return [
+                    'id' => $education->id,
+                    'school' => $education->school,
+                    'degree' => $education->degree,
+                    'field_of_study' => $education->field_of_study,
+                    'start_date' => $education->start_date,
+                    'end_date' => $education->end_date,
+                    'description' => $education->description,
+                ];
+            })->toArray(),
             'socials' => $user->socials
                 ? $user->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
                 : [],

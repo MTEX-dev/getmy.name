@@ -258,12 +258,16 @@
 											</p>
 											@if (isset($experience["start_date"]) || isset($experience["end_date"]))
 												<p class="text-sm text-gray-500 mt-1">
-													@if (isset($experience["start_date"]) && $experience["start_date"] && $experience["start_date"] !== "0001-03-31")
+													@if (isset($experience["start_date"]) && $experience["start_date"] && $experience["start_date"] !== "0001-03-31" && !str_starts_with($experience["start_date"], "4567"))
 														{{ date('M Y', strtotime($experience["start_date"])) }}
 													@endif
-													@if (isset($experience["end_date"]) && $experience["end_date"] && $experience["end_date"] !== "1212-12-26")
-														- {{ date('M Y', strtotime($experience["end_date"])) }}
-													@else
+													@if (isset($experience["end_date"]) && $experience["end_date"] && $experience["end_date"] !== "1212-12-26" && !str_starts_with($experience["end_date"], "4567"))
+														@if (isset($experience["start_date"]) && $experience["start_date"] && $experience["start_date"] !== "0001-03-31" && !str_starts_with($experience["start_date"], "4567"))
+															- {{ date('M Y', strtotime($experience["end_date"])) }}
+														@else
+															{{ date('M Y', strtotime($experience["end_date"])) }}
+														@endif
+													@elseif (isset($experience["start_date"]) && $experience["start_date"] && $experience["start_date"] !== "0001-03-31" && !str_starts_with($experience["start_date"], "4567"))
 														- Present
 													@endif
 												</p>
@@ -271,6 +275,54 @@
 											@if (isset($experience["description"]) && $experience["description"])
 												<p class="mt-3 text-gray-400">
 													{{ $experience["description"] }}
+												</p>
+											@endif
+										</div>
+									</div>
+								@endforeach
+							</div>
+						</div>
+					@endif
+
+					<!-- Education Section -->
+					@if (!empty($data['education']))
+						<div>
+							<h3 class="mb-6 text-2xl font-bold text-white">
+								Education
+							</h3>
+							<div class="space-y-8">
+								@foreach($data['education'] as $education)
+									<div class="relative border-l-2 border-blue-500 pl-6">
+										<div class="absolute -left-2 top-0 h-4 w-4 rounded-full bg-blue-500"></div>
+										<div class="rounded-lg border border-gray-800 bg-gray-800/50 p-6">
+											<h4 class="text-xl font-bold text-white">
+												{{ $education["degree"] }}
+												@if (isset($education["field_of_study"]) && $education["field_of_study"] && $education["field_of_study"] !== "school")
+													<span class="text-gray-300"> in {{ $education["field_of_study"] }}</span>
+												@endif
+											</h4>
+											<p class="text-blue-400 font-medium">
+												{{ $education["school"] }}
+											</p>
+											@if (isset($education["start_date"]) || isset($education["end_date"]))
+												<p class="text-sm text-gray-500 mt-1">
+													@if (isset($education["start_date"]) && $education["start_date"] && $education["start_date"] !== "0001-03-31" && !str_starts_with($education["start_date"], "4567"))
+														{{ date('M Y', strtotime($education["start_date"])) }}
+													@endif
+													@if (isset($education["end_date"]) && $education["end_date"] && $education["end_date"] !== "1212-12-26" && !str_starts_with($education["end_date"], "4567"))
+														@if (isset($education["start_date"]) && $education["start_date"] && $education["start_date"] !== "0001-03-31" && !str_starts_with($education["start_date"], "4567"))
+															- {{ date('M Y', strtotime($education["end_date"])) }}
+														@else
+															{{ date('M Y', strtotime($education["end_date"])) }}
+														@endif
+													@elseif (isset($education["start_date"]) && $education["start_date"] && $education["start_date"] !== "0001-03-31" && !str_starts_with($education["start_date"], "4567"))
+														- Present
+													@endif
+												</p>
+											@endif
+											@if (isset($education["description"]) && $education["description"])
+												<p class="mt-3 text-gray-400">
+													{{ $education["description"] }}
 												</p>
 											@endif
 										</div>
