@@ -160,4 +160,11 @@ class ProfileController extends Controller
         $user->load(['socials']);
         return view('profile.socials', compact('user'));
     }
+
+    public function editEducation(Request $request): View
+    {
+        $user = $request->user();
+        $user->load(['education']);
+        return view('profile.education', compact('user'));
+    }
 }
