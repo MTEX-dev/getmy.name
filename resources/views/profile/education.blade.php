@@ -2,7 +2,7 @@
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('profile.education.title') }}
+        {{ __('profile.education') }}
     </h2>
 @endsection
 

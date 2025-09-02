@@ -19,7 +19,7 @@ return [
     'resend_verification' => 'Click here to re-send the verification email.',
     'verification_sent' => 'A new verification link has been sent to your email address.',
 
-    'skills.title' => 'Skills',
+    'skills' => 'Skills',
     'skills_subtitle' => 'Manage your professional skills. Add skills you possess and optionally assign a level.',
     'your_current_skills' => 'Your Current Skills:',
     'remove' => 'Remove',
@@ -63,7 +63,7 @@ return [
     'experience_removed_successfully' => 'Experience removed successfully.',
     'experiences.current' => 'Current',
 
-    'education.title' => 'Education',
+    'education' => 'Education',
     'education_subtitle' => 'Showcase your educational background.',
     'your_current_education' => 'Your Current Education:',
     'confirm_delete_education' => 'Are you sure you want to delete this education entry?',
