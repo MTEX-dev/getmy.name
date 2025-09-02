@@ -82,7 +82,8 @@
                                 tooltip: {
                                     callbacks: {
                                         title: function(context) {
-                                            return new Date(context[0].label).toLocaleDateString(undefined, {
+                                            const date = new Date(context[0].parsed.x);
+                                            return date.toLocaleDateString(undefined, {
                                                 year: 'numeric',
                                                 month: 'long',
                                                 day: 'numeric'
