@@ -1,10 +1,10 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('API Request Statistics') }}
+            {{ __('profile.api_requests.stats') }}
         </h2>
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Displays the number of API requests made to your profile over the last 30 days.') }}
+            {{ __('profile.api_requests.subtitle') }}
         </p>
     </header>
 

@@ -106,6 +106,11 @@ return [
     'cancel' => 'Cancel',
 
     'preview.title' => 'Preview',
-    'api_requests' => 'API Requests:',
+
+    'api_requests.title' => 'API Requests',
+    'api_requests.subtitle' => 'Displays the number of API requests made to your profile over the last 30 days.',
+    'api_requests.stats' => 'API Request Statistics',
+
+
     '*.current' => 'Current',
 ];
