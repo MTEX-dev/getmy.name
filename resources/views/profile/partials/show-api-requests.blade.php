@@ -1,80 +1,103 @@
-<!-- TODO: update -->
-{{--
-
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('profile.skills') }}
+            {{ __('API Request Statistics') }}
         </h2>
-
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('profile.skills_subtitle') }}
+            {{ __('Displays the number of API requests made to your profile over the last 30 days.') }}
         </p>
     </header>
 
-    <div class="mt-6 space-y-6">
-        @if ($user->skills->isNotEmpty())
-            <h3 class="text-md font-medium text-gray-900 dark:text-gray-100">{{ __('profile.your_current_skills') }}</h3>
-            <ul class="list-disc list-inside text-gray-600 dark:text-gray-400">
-                @foreach ($user->skills as $skill)
-                    <li class="flex items-center justify-between py-1">
-                        <span>
-                            <span class="font-semibold">{{ $skill->name }}</span>
-                            @if ($skill->level)
-                                ({{ $skill->level }})
-                            @endif
-                        </span>
-                        <form method="post" action="{{ route('profile.skills.destroy', $skill) }}" class="inline">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 text-sm ml-4" onclick="return confirm('{{ __('profile.confirm_delete_skill') }}')">
-                                {{ __('profile.remove') }}
-                            </button>
-                        </form>
-                    </li>
-                @endforeach
-            </ul>
-        @else
-            <p class="text-sm text-gray-600 dark:text-gray-400">{{ __('profile.no_skills_added') }}</p>
-        @endif
+    <div class="mt-6">
+        <div class="relative h-96">
+            <canvas id="apiRequestsChart"></canvas>
+        </div>
     </div>
+</section>
 
-    <form method="post" action="{{ route('profile.skills.store') }}" class="mt-6 space-y-6">
-        @csrf
-
-        <div>
-            <x-input-label for="skill_name" :value="__('profile.new_skill_name')" />
-            <x-text-input id="skill_name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="off" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="skill_level" :value="__('profile.skill_level') . ' (' . __('profile.optional') . ')'" />
-            <x-text-input id="skill_level" name="level" type="text" class="mt-1 block w-full" :value="old('level')" autocomplete="off" placeholder="{{ __('profile.skill_level_placeholder') }}" />
-            <x-input-error class="mt-2" :messages="$errors->get('level')" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('profile.add_skill') }}</x-primary-button>
-
-            @if (session('status') === 'skill-added')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-green-600 dark:text-green-400"
-                >{{ __('profile.skill_added_successfully') }}</p>
-            @endif
-            @if (session('status') === 'skill-deleted')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-green-600 dark:text-green-400"
-                >{{ __('profile.skill_removed_successfully') }}</p>
-            @endif
-        </div>
-    </form>
-</section>--}}
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('{{ route('profile.api-requests.data') }}')
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('apiRequestsChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'API Requests',
+                                data: data.counts,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgb(75, 192, 192)',
+                                borderWidth: 1,
+                                fill: true,
+                                tension: 0.3
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        unit: 'day',
+                                        tooltipFormat: 'PPP',
+                                        displayFormats: {
+                                            day: 'MMM d'
+                                        }
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Date'
+                                    },
+                                    ticks: {
+                                        source: 'auto',
+                                        autoSkip: true,
+                                        maxRotation: 0,
+                                        minRotation: 0
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Number of Requests'
+                                    },
+                                    ticks: {
+                                        precision: 0
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    labels: {
+                                        color: 'rgb(156, 163, 175)'
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        title: function(context) {
+                                            return new Date(context[0].label).toLocaleDateString(undefined, {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            });
+                                        },
+                                        label: function(context) {
+                                            return `Requests: ${context.raw}`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching API request data:', error));
+        });
+    </script>
+@endpush

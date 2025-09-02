@@ -20,4 +20,7 @@
     <x-nav-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
         {{ __('profile.preview.title') }}
     </x-nav-link>
+    <x-nav-link :href="route('profile.api-requests.index')" :active="request()->routeIs('profile.api-requests.index')">
+        {{ __('API Requests') }}
+    </x-nav-link>
 </div>

@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body class="font-sans antialiased flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -38,5 +38,8 @@
     @if (!isset($hideFooter) || $hideFooter !== true)
         @include('components.footer')
     @endif
+
+
+    @stack('scripts')
 </body>
 </html>

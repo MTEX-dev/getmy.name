@@ -7,6 +7,7 @@ use App\Http\Controllers\Profile\SkillController;
 use App\Http\Controllers\Profile\SocialsController;
 use App\Http\Controllers\Profile\ExperienceController;
 use App\Http\Controllers\Profile\EducationController;
+use App\Http\Controllers\Profile\ApiRequestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
 use App\Http\Controllers\LanguageController;
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/experiences', [ProfileController::class, 'editExperiences'])->name('experiences');
             Route::get('/education', [ProfileController::class, 'editEducation'])->name('education');
             Route::get('/socials', [ProfileController::class, 'editSocials'])->name('socials');
-            
+
             Route::patch('/socials', [SocialsController::class, 'update'])->name('socials.update');
             Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
             Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
             Route::delete('/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');
             Route::post('/education', [EducationController::class, 'store'])->name('education.store');
             Route::delete('/education/{education}', [EducationController::class, 'destroy'])->name('education.destroy');
+
+            Route::get('/api-requests', [ApiRequestController::class, 'index'])->name('api-requests.index');
+            Route::get('/api-requests-data', [ApiRequestController::class, 'getApiRequestData'])->name('api-requests.data');
         });
         Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
         Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
