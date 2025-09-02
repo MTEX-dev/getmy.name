@@ -69,7 +69,7 @@
                         x-init="setTimeout(() => show = false, 2000)" 
                         class="text-sm text-gray-600 dark:text-gray-400"
                     >
-                        {{ __('Saved.') }}
+                        {{ __('profile.saved') }}
                     </p>
                 @endif
             </div>

@@ -24,7 +24,7 @@
                             @if ($education->start_date && $education->end_date)
                                 ({{ $education->start_date }} - {{ $education->end_date }})
                             @elseif($education->start_date)
-                                ({{ $education->start_date }} - Current)
+                                ({{ $education->start_date }} - {{ __('profile.education.current') }})
                             @endif
                             @if ($education->description)
                                 <br>{{ $education->description }}

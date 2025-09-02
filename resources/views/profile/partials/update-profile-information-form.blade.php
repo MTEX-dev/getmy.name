@@ -47,7 +47,7 @@
                 <template x-for="loc in locations">
                     <option :value="loc" x-text="loc" :selected="loc === locationValue"></option>
                 </template>
-                <option value="Type Manually" :selected="locationValue === 'Type Manually'">{{ __('Type Manually') }}</option>
+                <option value="Type Manually" :selected="locationValue === 'Type Manually'">{{ __('profile.location_manual') }}</option>
             </select>
             <x-text-input x-ref="manualInput" x-show="isManual" id="location_manual" name="location_manual" type="text" class="mt-1 block w-full" x-bind:value="locationValue === 'Type Manually' ? '' : locationValue" x-on:input="locationValue = $event.target.value" />
             <x-input-error class="mt-2" :messages="$errors->get('location')" />
@@ -61,16 +61,16 @@
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('profile.email_unverified') }}
 
                         <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('profile.resend_verification') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('profile.verification_sent') }}
                         </p>
                     @endif
                 </div>
@@ -87,7 +87,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('profile.saved') }}</p>
             @endif
         </div>
     </form>

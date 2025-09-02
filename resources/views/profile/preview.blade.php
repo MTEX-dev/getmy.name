@@ -13,7 +13,7 @@
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-4xl">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Profile Preview</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{{ __('profile.preview.title') }}</h3>
 
                     <div class="flex flex-col lg:flex-row gap-8 mb-8">
                         <div class="flex-shrink-0">

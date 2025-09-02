@@ -10,11 +10,16 @@ return [
     'avatar_subtitle' => 'Update your account\'s avatar.',
     'avatar_upload' => 'Upload Avatar (Max 1MB)',
     'save' => 'Save',
+    'saved' => 'Saved.',
     'remove_avatar' => 'Remove Avatar',
     'profile_title' => 'Profile Information',
     'profile_subtitle' => 'Update your account\'s profile information and email address.',
+    'location_manual' => 'Type Manually',
+    'email_unverified' => 'Your email address is unverified.',
+    'resend_verification' => 'Click here to re-send the verification email.',
+    'verification_sent' => 'A new verification link has been sent to your email address.',
 
-    'skills' => 'Skills',
+    'skills.title' => 'Skills',
     'skills_subtitle' => 'Manage your professional skills. Add skills you possess and optionally assign a level.',
     'your_current_skills' => 'Your Current Skills:',
     'remove' => 'Remove',
@@ -27,7 +32,7 @@ return [
     'skill_added_successfully' => 'Skill added successfully.',
     'skill_removed_successfully' => 'Skill removed successfully.',
 
-    'projects' => 'Projects',
+    'projects.title' => 'Projects',
     'projects_subtitle' => 'Showcase your projects. Add project details and an optional image.',
     'your_current_projects' => 'Your Current Projects:',
     'confirm_delete_project' => 'Are you sure you want to delete this project?',
@@ -41,8 +46,9 @@ return [
     'add_project' => 'Add Project',
     'project_added_successfully' => 'Project added successfully.',
     'project_removed_successfully' => 'Project removed successfully.',
+    'projects.view' => 'View Project',
 
-    'experiences' => 'Experiences',
+    'experiences.title' => 'Experiences',
     'experiences_subtitle' => 'Showcase your professional experiences.',
     'your_current_experiences' => 'Your Current Experiences:',
     'confirm_delete_experience' => 'Are you sure you want to delete this experience?',
@@ -55,8 +61,9 @@ return [
     'add_experience' => 'Add Experience',
     'experience_added_successfully' => 'Experience added successfully.',
     'experience_removed_successfully' => 'Experience removed successfully.',
+    'experiences.current' => 'Current',
 
-    'education' => 'Education',
+    'education.title' => 'Education',
     'education_subtitle' => 'Showcase your educational background.',
     'your_current_education' => 'Your Current Education:',
     'confirm_delete_education' => 'Are you sure you want to delete this education entry?',
@@ -68,7 +75,9 @@ return [
     'add_education' => 'Add Education',
     'education_added_successfully' => 'Education entry added successfully.',
     'education_removed_successfully' => 'Education entry removed successfully.',
+    'education.current' => 'Current',
 
+    'socials.title' => 'Socials',
     'social_links' => 'Social Links',
     'social_links_subtitle' => 'Update your social media and personal website links.',
     'github_username' => 'GitHub Username',
@@ -79,6 +88,11 @@ return [
     'twitter_placeholder' => 'e.g., yourtwitterhandle',
     'personal_website_url' => 'Personal Website URL',
     'personal_website_placeholder' => 'e.g., https://yourwebsite.com',
+    'socials.github' => 'GitHub',
+    'socials.linkedin' => 'LinkedIn',
+    'socials.twitter' => 'Twitter',
+    'socials.website' => 'Website',
+
 
     'update_password' => 'Update Password',
     'update_password_subtitle' => 'Ensure your account is using a long, random password to stay secure.',
@@ -90,4 +104,8 @@ return [
     'delete_account_confirm' => 'Are you sure you want to delete your account?',
     'delete_account_info_2' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
     'cancel' => 'Cancel',
+
+    'preview.title' => 'Preview',
+    'api_requests' => 'API Requests:',
+    '*.current' => 'Current',
 ];

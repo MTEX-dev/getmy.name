@@ -24,7 +24,7 @@
                             @if ($experience->start_date && $experience->end_date)
                                 ({{ $experience->start_date }} - {{ $experience->end_date }})
                             @elseif($experience->start_date)
-                                ({{ $experience->start_date }} - Current)
+                                ({{ $experience->start_date }} - {{ __('profile.experiences.current') }})
                             @endif
                             @if ($experience->description)
                                 <br>{{ $experience->description }}

@@ -3,21 +3,21 @@
         {{ __('profile.profile') }}
     </x-nav-link>
     <x-nav-link :href="route('profile.skills')" :active="request()->routeIs('profile.skills')">
-        {{ __('Skills') }}
+        {{ __('profile.skills.title') }}
     </x-nav-link>
     <x-nav-link :href="route('profile.projects')" :active="request()->routeIs('profile.projects')">
-        {{ __('Projects') }}
+        {{ __('profile.projects.title') }}
     </x-nav-link>
     <x-nav-link :href="route('profile.experiences')" :active="request()->routeIs('profile.experiences')">
-        {{ __('Experiences') }}
+        {{ __('profile.experiences.title') }}
     </x-nav-link>
     <x-nav-link :href="route('profile.education')" :active="request()->routeIs('profile.education')">
-        {{ __('Education') }}
+        {{ __('profile.education.title') }}
     </x-nav-link>
     <x-nav-link :href="route('profile.socials')" :active="request()->routeIs('profile.socials')">
-        {{ __('Socials') }}
+        {{ __('profile.socials.title') }}
     </x-nav-link>
     <x-nav-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
-        {{ __('Preview') }}
+        {{ __('profile.preview.title') }}
     </x-nav-link>
 </div>
