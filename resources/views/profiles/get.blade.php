@@ -25,7 +25,86 @@
 		</style>
 	</head>
 	<body class="bg-gray-900 text-gray-300 antialiased">
-		<div class="container mx-auto max-w-6xl p-6 lg:p-12">
+		<!-- Top Navigation Bar -->
+		<nav class="fixed top-0 right-0 z-50 p-6">
+			@auth
+				<div class="relative group">
+					<!-- Avatar Button -->
+					<button class="flex items-center space-x-2 rounded-full bg-gray-800/80 backdrop-blur-sm border border-gray-700 p-2 hover:border-emerald-500/50 transition-all duration-200">
+						<img 
+							src="{{ Auth::user()->avatar() }}" 
+							alt="{{ Auth::user()->name }}" 
+							class="h-8 w-8 rounded-full object-cover border border-emerald-500"
+						/>
+						<svg class="h-4 w-4 text-gray-400 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</button>
+					
+					<!-- Dropdown Menu -->
+					<div class="absolute right-0 mt-2 w-64 origin-top-right rounded-lg bg-gray-800 border border-gray-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform scale-95 group-hover:scale-100">
+						<div class="p-4 border-b border-gray-700">
+							<div class="flex items-center space-x-3">
+								<img 
+									src="{{ Auth::user()->avatar() }}" 
+									alt="{{ Auth::user()->name }}" 
+									class="h-10 w-10 rounded-full object-cover border border-emerald-500"
+								/>
+								<div>
+									<p class="text-sm font-medium text-white">{{ Auth::user()->name }}</p>
+									<p class="text-xs text-gray-400">{{ Auth::user()->email }}</p>
+								</div>
+							</div>
+						</div>
+						<div class="p-2">
+							<a href="{{ route('profile.edit') }}" class="flex items-center w-full px-3 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-emerald-400 transition-colors">
+								<svg class="h-4 w-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+								</svg>
+								Profile
+							</a>
+							<a href="{{ route('dashboard') }}" class="flex items-center w-full px-3 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-emerald-400 transition-colors">
+								<svg class="h-4 w-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+								</svg>
+								Dashboard
+							</a>
+							<a href="{{ route('profile.preview') }}" class="flex items-center w-full px-3 py-2 text-sm text-gray-300 rounded-md hover:bg-gray-700 hover:text-emerald-400 transition-colors">
+								<svg class="h-4 w-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+								</svg>
+								Preview Portfolio
+							</a>
+						</div>
+						<div class="p-2 border-t border-gray-700">
+							<form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<button type="submit" class="flex items-center w-full px-3 py-2 text-sm text-red-400 rounded-md hover:bg-gray-700 hover:text-red-300 transition-colors">
+									<svg class="h-4 w-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+									</svg>
+									Sign Out
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			@endauth
+
+			@guest
+				<div class="flex items-center space-x-4">
+					<a href="{{ route('login') }}" class="inline-flex items-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
+						<svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+						</svg>
+						Log In
+					</a>
+				</div>
+			@endguest
+		</nav>
+
+		<div class="container mx-auto max-w-6xl p-6 lg:p-12 pt-20">
 			<main class="grid grid-cols-1 gap-12 lg:grid-cols-3">
 				<aside class="self-start lg:sticky lg:top-12 lg:col-span-1">
 					<div class="flex flex-col space-y-6">
