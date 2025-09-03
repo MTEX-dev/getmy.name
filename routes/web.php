@@ -18,9 +18,7 @@ Route::get('/', [PageController::class,'lander'])->name('lander');
 Route::get('/language/{locale}', [LanguageController::class, 'changeLanguage'])
     ->name('change-language');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PageController::class , 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
