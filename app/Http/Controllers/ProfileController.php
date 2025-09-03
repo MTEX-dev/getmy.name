@@ -84,6 +84,7 @@ class ProfileController extends Controller
             'user_id' => $user->id,
             'request_method' => $request->method(),
             'request_url' => $request->fullUrl(),
+            //'request_url' => $request->url(),
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
             'requested_at' => now(),
