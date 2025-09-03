@@ -67,10 +67,10 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function preview(): View
+    public function preview(Request $request): View
     {
         $user = Auth::user();
-        $request = Request::create('/preview', 'GET');
+        //$request = Request::create('/preview', 'GET');
         $data = $this->getData($request, $user);
 
         return view('profile.preview', compact('data'));
