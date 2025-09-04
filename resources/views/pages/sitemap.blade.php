@@ -28,12 +28,12 @@
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     @if (isset($legalSections))
                         @foreach ($legalSections as $legalSection)
-                            <li><a href="{{ route('legal', ['section' => $legalSection]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.' . $legalSection . '.title') }}</a></li>
+                            <li><a href="{{ route('legal', ['section' => $legalSection]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('legal.' . $legalSection . '.title') }}</a></li>
                         @endforeach
                     @else
-                        <li><a href="{{ route('legal', 'imprint') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.imprint.title') }}</a></li>
-                        <li><a href="{{ route('legal', 'privacy') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.privacy.title') }}</a></li>
-                        <li><a href="{{ route('legal', 'terms') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.terms.title') }}</a></li>
+                        <li><a href="{{ route('legal', 'imprint') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('legal.imprint.title') }}</a></li>
+                        <li><a href="{{ route('legal', 'privacy') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('legal.privacy.title') }}</a></li>
+                        <li><a href="{{ route('legal', 'terms') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('legal.terms.title') }}</a></li>
                     @endif
                 </ul>
 
