@@ -18,6 +18,8 @@ Route::get('/', [PageController::class,'lander'])->name('lander');
 Route::get('/language/{locale}', [LanguageController::class, 'changeLanguage'])
     ->name('change-language');
 
+Route::get('/sitemap', [PageController::class, 'sitemap'])->name('sitemap'); // NEW ROUTE
+
 Route::get('/dashboard', [PageController::class , 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

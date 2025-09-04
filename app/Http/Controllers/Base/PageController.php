@@ -56,12 +56,23 @@ class PageController extends Controller
 
     public function legal($section)
     {
-        $sections = ['imprint', 'privacy', 'terms'];
+        $sections = $this->getLegalSections();
 
         if (!in_array($section, $sections)) {
             abort(404);
         }
 
         return view('pages.legal', compact(['sections','section']));
+    }
+
+    public function getLegalSections()
+    {
+        return ['imprint', 'privacy', 'terms'];
+    }
+
+    public function sitemap()
+    {
+        $legalSections = $this->getLegalSections();
+        return view('pages.sitemap', compact(['legalSections']));
     }
 }
