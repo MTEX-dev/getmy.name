@@ -51,6 +51,17 @@ class PageController extends Controller
             ]);
         }
 
-        return view('dashboard', compact('dates', 'topRoutes', 'methodStats', 'days'));
+        return view('pages.dashboard', compact('dates', 'topRoutes', 'methodStats', 'days'));
+    }
+
+    public function legal($section)
+    {
+        $sections = ['imprint', 'privacy', 'terms'];
+
+        if (!in_array($section, $sections)) {
+            abort(404);
+        }
+
+        return view('pages.legal', compact(['sections','section']));
     }
 }

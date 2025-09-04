@@ -83,4 +83,6 @@ Route::get('/get/{user:username}/data', [ProfileController::class, 'getData'])->
 Route::get('/get/{profile:username}', [ProfileController::class, 'getProfile'])->name('profile.get');
 //Route::get('/get/{user:username}/svg', [ProfileController::class, 'getUserSvg'])->name(    'profile.get.svg',);
 
+Route::get('/legal/{section}', [PageController::class, 'legal'])->name('legal');
+
 require __DIR__.'/auth.php';
