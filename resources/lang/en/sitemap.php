@@ -1,0 +1,24 @@
+<?php
+
+return [
+    'sitemap' => 'Sitemap',
+    'public_pages' => 'Public Pages',
+    'legal_pages' => 'Legal Pages',
+    'authenticated_pages' => 'Authenticated Pages',
+    'external_links' => 'External Links',
+    'user_portfolios' => 'User Portfolios',
+    'no_public_portfolios' => 'No public portfolios available.',
+    'user_data_endpoints' => 'User Data Endpoints',
+    'no_public_user_data_endpoints' => 'No public user data endpoints available.',
+    'api_endpoints' => 'API Endpoints',
+    'no_public_api_endpoints' => 'No public API data endpoints available.',
+    'account_settings' => 'Account Settings',
+    'edit_core_profile_info' => 'Edit Core Profile Info',
+    'manage_skills' => 'Manage Skills',
+    'manage_projects' => 'Manage Projects',
+    'manage_experiences' => 'Manage Experiences',
+    'manage_education' => 'Manage Education',
+    'manage_socials' => 'Manage Socials',
+    'api_request_logs' => 'API Request Logs',
+    'profile_preview' => 'Profile Preview',
+];

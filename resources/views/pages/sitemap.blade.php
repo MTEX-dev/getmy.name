@@ -2,7 +2,7 @@
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('Sitemap') }}
+        {{ __('sitemap.sitemap') }}
     </h2>
 @endsection
 
@@ -11,54 +11,54 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
-                    {{ __('Public Pages') }}
+                    {{ __('sitemap.public_pages') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     <li><a href="{{ route('lander') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Home') }}</a></li>
-                    <li><a href="{{ route('login') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Log In') }}</a></li>
+                    <li><a href="{{ route('login') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('auth.login') }}</a></li>
                     @if (Route::has('register'))
-                        <li><a href="{{ route('register') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Register') }}</a></li>
+                        <li><a href="{{ route('register') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('auth.register') }}</a></li>
                     @endif
-                    <li><a href="{{ route('sitemap') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Sitemap') }}</a></li>
+                    <li><a href="{{ route('sitemap') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.sitemap') }}</a></li>
                 </ul>
 
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
-                    {{ __('Legal Pages') }}
+                    {{ __('sitemap.legal_pages') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     @if (isset($legalSections))
                         @foreach ($legalSections as $legalSection)
-                            <li><a href="{{ route('legal', ['section' => $legalSection]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('legal.' . $legalSection . '.title') }}</a></li>
+                            <li><a href="{{ route('legal', ['section' => $legalSection]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.' . $legalSection . '.title') }}</a></li>
                         @endforeach
                     @else
-                        <li><a href="{{ route('legal', 'imprint') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Imprint') }}</a></li>
-                        <li><a href="{{ route('legal', 'privacy') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Privacy Policy') }}</a></li>
-                        <li><a href="{{ route('legal', 'terms') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Terms of Service') }}</a></li>
+                        <li><a href="{{ route('legal', 'imprint') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.imprint.title') }}</a></li>
+                        <li><a href="{{ route('legal', 'privacy') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.privacy.title') }}</a></li>
+                        <li><a href="{{ route('legal', 'terms') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('lang.terms.title') }}</a></li>
                     @endif
                 </ul>
 
                 @auth
                     <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
-                        {{ __('Authenticated Pages') }}
+                        {{ __('sitemap.authenticated_pages') }}
                     </h3>
                     <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                        <li><a href="{{ route('dashboard') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Dashboard') }}</a></li>
-                        <li><a href="{{ route('profile.edit') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Account Settings') }}</a></li>
+                        <li><a href="{{ route('dashboard') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('strings.dashboard') }}</a></li>
+                        <li><a href="{{ route('profile.edit') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.account_settings') }}</a></li>
                         @if (auth()->user())
-                            <li><a href="{{ route('profile.edit') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Edit Core Profile Info') }}</a></li>
-                            <li><a href="{{ route('profile.skills') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Manage Skills') }}</a></li>
-                            <li><a href="{{ route('profile.projects') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Manage Projects') }}</a></li>
-                            <li><a href="{{ route('profile.experiences') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Manage Experiences') }}</a></li>
-                            <li><a href="{{ route('profile.education') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Manage Education') }}</a></li>
-                            <li><a href="{{ route('profile.socials') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Manage Socials') }}</a></li>
-                            <li><a href="{{ route('profile.api-requests.index') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('API Request Logs') }}</a></li>
-                            <li><a href="{{ route('profile.preview') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('Profile Preview') }}</a></li>
+                            <li><a href="{{ route('profile.edit') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.edit_core_profile_info') }}</a></li>
+                            <li><a href="{{ route('profile.skills') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.manage_skills') }}</a></li>
+                            <li><a href="{{ route('profile.projects') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.manage_projects') }}</a></li>
+                            <li><a href="{{ route('profile.experiences') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.manage_experiences') }}</a></li>
+                            <li><a href="{{ route('profile.education') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.manage_education') }}</a></li>
+                            <li><a href="{{ route('profile.socials') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.manage_socials') }}</a></li>
+                            <li><a href="{{ route('profile.api-requests.index') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.api_request_logs') }}</a></li>
+                            <li><a href="{{ route('profile.preview') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.profile_preview') }}</a></li>
                         @endif
                     </ul>
                 @endauth
 
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
-                    {{ __('External Links') }}
+                    {{ __('sitemap.external_links') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     <li><a href="https://fternis.de" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">Fabian Ternis Portfolio</a></li>
@@ -66,36 +66,33 @@
                 </ul>
 
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
-                    {{ __('User Portfolios') }}
+                    {{ __('sitemap.user_portfolios') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     @forelse($users as $user)
                         <li><a href="{{ route('profile.get', ['user' => $user]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $user->username }}</a></li>
                     @empty
-                        <li>{{ __('No public portfolios available.') }}</li>
+                        <li>{{ __('sitemap.no_public_portfolios') }}</li>
                     @endforelse
                 </ul>
 
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
-                    {{ __('User Data Endpoints') }}
+                    {{ __('sitemap.user_data_endpoints') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     @forelse($users as $user)
                         <li><a href="{{ route('profile.get.data', ['user' => $user]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }}</a></li>
                     @empty
-                        <li>{{ __('No public user data endpoints available.') }}</li>
+                        <li>{{ __('sitemap.no_public_user_data_endpoints') }}</li>
                     @endforelse
                 </ul>
 
-
-
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
-                    {{ __('API Endpoints') }}
+                    {{ __('sitemap.api_endpoints') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                        <li>{{ __('No public API data endpoints available.') }}</li>
+                        <li>{{ __('sitemap.no_public_api_endpoints') }}</li>
                 </ul>
-
             </div>
         </div>
     </div>

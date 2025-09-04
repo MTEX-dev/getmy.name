@@ -18,9 +18,9 @@
                 </h3>
                 <ul class="mt-4 space-y-2">
                     <li><a href="{{ route('lander') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">{{ __('Home') }}</a></li>
-                    <li><a href="{{ route('dashboard') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">{{ __('Dashboard') }}</a></li>
+                    <li><a href="{{ route('dashboard') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">{{ __('strings.dashboard') }}</a></li>
                     <li><a href="{{ route('profile.edit') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">{{ __('profile.profile') }}</a></li>
-                    <li><a href="{{ route('sitemap') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">{{ __('Sitemap') }}</a></li>
+                    <li><a href="{{ route('sitemap') }}" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">{{ __('sitemap.sitemap') }}</a></li>
                 </ul>
             </div>
 
@@ -31,7 +31,7 @@
                 <ul class="mt-4 space-y-2">
                     <li>
                         <a href="https://gimy.site" target="_blank" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                            gimy.site <span class="text-xs text-indigo-500">({{ __('Free static hosting') }})</span>
+                            gimy.site <span class="text-xs text-indigo-500">({{ __('Free static webhosting') }})</span>
                         </a>
                     </li>
                 </ul>
@@ -43,9 +43,9 @@
                 {{ __('Built with') }} ❤️ {{ __('by') }} <a href="https://mtex.dev" class="hover:underline" target="_blank">mtex.dev</a>
             </div>
             <div class="flex space-x-4">
-                <a href="{{ route('legal', 'imprint') }}" class="hover:underline">{{ __('Imprint') }}</a>
-                <a href="{{ route('legal', 'privacy') }}" class="hover:underline">{{ __('Privacy Policy') }}</a>
-                <a href="{{ route('legal', 'terms') }}" class="hover:underline">{{ __('Terms of Service') }}</a>
+                <a href="{{ route('legal', 'imprint') }}" class="hover:underline">{{ __('legal.imprint.title') }}</a>
+                <a href="{{ route('legal', 'privacy') }}" class="hover:underline">{{ __('legal.privacy.title') }}</a>
+                <a href="{{ route('legal', 'terms') }}" class="hover:underline">{{ __('legal.terms.title') }}</a>
             </div>
         </div>
     </div>
