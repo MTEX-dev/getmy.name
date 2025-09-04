@@ -7,6 +7,7 @@ use App\Models\ApiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\User;
 
 class PageController extends Controller
 {
@@ -73,6 +74,8 @@ class PageController extends Controller
     public function sitemap()
     {
         $legalSections = $this->getLegalSections();
-        return view('pages.sitemap', compact(['legalSections']));
+        $users = User::all();
+
+        return view('pages.sitemap', compact(['legalSections', 'users']));
     }
 }

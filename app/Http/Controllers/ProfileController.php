@@ -138,9 +138,9 @@ class ProfileController extends Controller
         ];
     }
 
-    public function getProfile(Request $request, User $profile): View
+    public function getProfile(Request $request, User $user): View
     {
-        $data = $this->getData($request, $profile);
+        $data = $this->getData($request, $user);
 
         return view('profiles.get', compact('data'));
     }

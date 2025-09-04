@@ -64,6 +64,38 @@
                     <li><a href="https://fternis.de" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">Fabian Ternis Portfolio</a></li>
                     <li><a href="https://mtex.dev" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">mtex.dev</a></li>
                 </ul>
+
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
+                    {{ __('User Portfolios') }}
+                </h3>
+                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                    @forelse($users as $user)
+                        <li><a href="{{ route('profile.get', ['user' => $user]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $user->username }}</a></li>
+                    @empty
+                        <li>{{ __('No public portfolios available.') }}</li>
+                    @endforelse
+                </ul>
+
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
+                    {{ __('User Data Endpoints') }}
+                </h3>
+                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                    @forelse($users as $user)
+                        <li><a href="{{ route('profile.get.data', ['user' => $user]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }}</a></li>
+                    @empty
+                        <li>{{ __('No public user data endpoints available.') }}</li>
+                    @endforelse
+                </ul>
+
+
+
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
+                    {{ __('API Endpoints') }}
+                </h3>
+                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>{{ __('No public API data endpoints available.') }}</li>
+                </ul>
+
             </div>
         </div>
     </div>
