@@ -113,4 +113,9 @@ return [
 
 
     '*.current' => 'Aktuell',
+
+
+    'about_me_title' => 'Über Mich',
+    'about_me_subtitle' => 'Erzähle anderen Etwas über dich',
+    'about_me' => 'Über Mich',
 ];
