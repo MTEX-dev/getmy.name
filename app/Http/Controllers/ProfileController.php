@@ -76,8 +76,11 @@ class ProfileController extends Controller
         return view('profile.preview', compact('data'));
     }
 
-    public function getData(Request $request, User $user): array
+    public function getData(Request $request, string $username): array
     {
+        //$user->load(['skills', 'projects', 'socials', 'education', 'experiences']);
+
+        $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
         $user->load(['skills', 'projects', 'socials', 'education', 'experiences']);
 
         ApiRequest::create([
@@ -139,9 +142,9 @@ class ProfileController extends Controller
         ];
     }
 
-    public function getProfile(Request $request, User $user): View
+    public function getProfile(Request $request,string $username): View
     {
-        $data = $this->getData($request, $user);
+        $data = $this->getData($request, $username);
 
         return view('profiles.get', compact('data'));
     }
