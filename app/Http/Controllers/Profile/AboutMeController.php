@@ -15,7 +15,9 @@ class AboutMeController extends Controller
      */
     public function edit(): \Illuminate\View\View
     {
-        return view('profile.edit');
+        return view('profile.about-me', [
+            'user' => Auth::user(),
+        ]);
     }
 
     /**
@@ -29,14 +31,10 @@ class AboutMeController extends Controller
 
         $user = Auth::user();
 
-        if (!$user) {
-            return redirect()->back()->with('error', __('auth.not_authenticated'));
-        }
-
         $user->about_me = $validatedData['about_me'];
 
         $user->save();
 
-        return redirect()->route('profile.edit')->with('status', 'about-me-updated');
+        return redirect()->route('profile.about-me')->with('status', 'about-me-updated');
     }
 }
