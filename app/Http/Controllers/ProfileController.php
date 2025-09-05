@@ -98,6 +98,7 @@ class ProfileController extends Controller
             'location' => $user->location,
             'avatar_url' => $user->getAvatarUrl(),
             'email' => $user->email,
+            'about_me' => $user->about_me,
             'skills' => $user->skills->pluck('name')->toArray(),
             'projects' => $user->projects->map(function ($project) {
                 return [

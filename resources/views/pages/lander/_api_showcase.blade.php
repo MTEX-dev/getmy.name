@@ -45,6 +45,7 @@
   "location": "Berlin, Germany",
   "avatar_url": "http://getmy-name.test/storage/avatars/avatar-hash.png",
   "email": "jane@example.com",
+  "about_me": "I am a passionate Laravel developer with over 10 years of experience in building robust and scalable web applications. My expertise spans across the full development lifecycle, from conceptualization and design to deployment and maintenance. I enjoy working with modern technologies and continuously strive to learn and implement best practices in software development. In my free time, I contribute to open-source projects and mentor junior developers. I believe in clean code, automated testing, and continuous integration to deliver high-quality solutions.",
   "skills": [
     "PHP", "JavaScript", "Laravel", "Vue.js", "Docker"
   ],
