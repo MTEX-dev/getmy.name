@@ -29,34 +29,13 @@
             'Website', 'bi-globe2', function ($v) { return $v; }
         ],
     ];
-
-    $title = $get('name', 'Developer') . ' — Portfolio';
-    $description = Str::limit($get('bio', 'A developer\'s portfolio.'), 160);
-    $imageUrl = $get('avatar_url');
 @endphp
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ $title }}</title>
-
-    <meta name="description" content="{{ $description }}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{ $title }}">
-    <meta property="og:description" content="{{ $description }}">
-    <meta property="og:image" content="{{ $imageUrl }}">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="{{ $title }}">
-    <meta property="twitter:description" content="{{ $description }}">
-    <meta property="twitter:image" content="{{ $imageUrl }}">
-    @if($get('socials.twitter'))
-        <meta name="twitter:creator" content="{{ '@' . ltrim($get('socials.twitter'), '@') }}">
-    @endif
+    <title>{{ $get('name', 'Developer') }} — Portfolio</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
