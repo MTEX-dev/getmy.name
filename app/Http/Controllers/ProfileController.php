@@ -69,9 +69,9 @@ class ProfileController extends Controller
 
     public function preview(Request $request): View
     {
-        $user = Auth::user();
+        $username = Auth::user()->username;
         //$request = Request::create('/preview', 'GET');
-        $data = $this->getData($request, $user);
+        $data = $this->getData($request, $username);
 
         return view('profile.preview', compact('data'));
     }
