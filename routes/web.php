@@ -99,5 +99,6 @@ Route::get('/get/{username}', [ProfileController::class, 'getProfile'])->name('p
 //Route::get('/get/{user:username}/svg', [ProfileController::class, 'getUserSvg'])->name(    'profile.get.svg',);
 
 Route::get('/legal/{section}', [PageController::class, 'legal'])->name('legal');
+Route::get('/api-docs', [\App\Http\Controllers\ApiDocumentationController::class, 'index'])->name('api-docs');
 
 require __DIR__.'/auth.php';
