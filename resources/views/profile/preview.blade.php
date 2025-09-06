@@ -13,12 +13,14 @@
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-4xl">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{{ __('profile.preview.title') }}</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">
+                        {{ __('profile.preview.title') }}
+                    </h3>
 
                     <div class="flex flex-col lg:flex-row gap-8 mb-8">
                         <div class="flex-shrink-0">
                             <div class="w-32 h-32 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                @if($data['avatar_url'])
+                                @if ($data['avatar_url'])
                                     <img src="{{ $data['avatar_url'] }}" alt="{{ $data['name'] }}"
                                         class="w-full h-full object-cover">
                                 @else
@@ -34,19 +36,36 @@
                         </div>
 
                         <div class="flex-grow">
-                            <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">{{ $data['name'] }}
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                                {{ $data['name'] }}
                             </h1>
-                            <p class="text-lg text-blue-600 dark:text-blue-400 mb-2">{{ $data['title'] }}</p>
-                            <p class="text-gray-600 dark:text-gray-300 mb-2">{{ '@'.$data['username'] }}</p>
-                            @if($data['location'])
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">📍 {{ $data['location'] }}</p>
+                            <p class="text-lg text-blue-600 dark:text-blue-400 mb-2">
+                                {{ $data['title'] }}
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-300 mb-2">
+                                {{ '@' . $data['username'] }}
+                            </p>
+                            @if ($data['location'])
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                    📍 {{ $data['location'] }}
+                                </p>
                             @endif
-                            @if($data['bio'])
-                                <p class="text-gray-700 dark:text-gray-300 mb-4">{{ $data['bio'] }}</p>
+                            @if ($data['bio'])
+                                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                    {{ $data['bio'] }}
+                                </p>
+                            @endif
+                            @if ($data['about_me'])
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                                    About Me
+                                </h3>
+                                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                    {{ $data['about_me'] }}
+                                </p>
                             @endif
 
                             <div class="flex gap-4 mb-4">
-                                @if($data['socials']['github'])
+                                @if ($data['socials']['github'])
                                     <a href="https://github.com/{{ $data['socials']['github'] }}" target="_blank"
                                         class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
                                         <span class="sr-only">GitHub</span>
@@ -56,7 +75,7 @@
                                         </svg>
                                     </a>
                                 @endif
-                                @if($data['socials']['linkedin'])
+                                @if ($data['socials']['linkedin'])
                                     <a href="https://linkedin.com/in/{{ $data['socials']['linkedin'] }}"
                                         target="_blank"
                                         class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
@@ -67,7 +86,7 @@
                                         </svg>
                                     </a>
                                 @endif
-                                @if($data['socials']['twitter'])
+                                @if ($data['socials']['twitter'])
                                     <a href="https://twitter.com/{{ $data['socials']['twitter'] }}" target="_blank"
                                         class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
                                         <span class="sr-only">Twitter</span>
@@ -77,7 +96,7 @@
                                         </svg>
                                     </a>
                                 @endif
-                                @if($data['socials']['personal_website'])
+                                @if ($data['socials']['personal_website'])
                                     <a href="{{ $data['socials']['personal_website'] }}" target="_blank"
                                         class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
                                         <span class="sr-only">Website</span>
@@ -91,11 +110,13 @@
                         </div>
                     </div>
 
-                    @if(!empty($data['skills']))
+                    @if (!empty($data['skills']))
                         <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Skills</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                Skills
+                            </h3>
                             <div class="flex flex-wrap gap-2">
-                                @foreach($data['skills'] as $skill)
+                                @foreach ($data['skills'] as $skill)
                                     <span
                                         class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
                                         {{ $skill }}
@@ -105,26 +126,32 @@
                         </div>
                     @endif
 
-                    @if(!empty($data['experiences']))
+                    @if (!empty($data['experiences']))
                         <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Experience</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                Experience
+                            </h3>
                             <div class="space-y-6">
-                                @foreach($data['experiences'] as $experience)
+                                @foreach ($data['experiences'] as $experience)
                                     <div class="border-l-2 border-blue-200 dark:border-blue-700 pl-4">
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                            {{ $experience['title'] }}</h4>
+                                            {{ $experience['title'] }}
+                                        </h4>
                                         <p class="text-blue-600 dark:text-blue-400 font-medium">
-                                            {{ $experience['company'] }}</p>
-                                        @if($experience['location'])
+                                            {{ $experience['company'] }}
+                                        </p>
+                                        @if ($experience['location'])
                                             <p class="text-gray-600 dark:text-gray-400 text-sm">
-                                                {{ $experience['location'] }}</p>
+                                                {{ $experience['location'] }}
+                                            </p>
                                         @endif
                                         <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">
                                             {{ \Carbon\Carbon::parse($experience['start_date'])->format('M Y') }} -
                                             {{ \Carbon\Carbon::parse($experience['end_date'])->format('M Y') }}
                                         </p>
-                                        @if($experience['description'])
-                                            <p class="text-gray-700 dark:text-gray-300">{{ $experience['description'] }}
+                                        @if ($experience['description'])
+                                            <p class="text-gray-700 dark:text-gray-300">
+                                                {{ $experience['description'] }}
                                             </p>
                                         @endif
                                     </div>
@@ -133,22 +160,28 @@
                         </div>
                     @endif
 
-                    @if(!empty($data['education']))
+                    @if (!empty($data['education']))
                         <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Education</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                Education
+                            </h3>
                             <div class="space-y-6">
-                                @foreach($data['education'] as $education)
+                                @foreach ($data['education'] as $education)
                                     <div class="border-l-2 border-green-200 dark:border-green-700 pl-4">
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                            {{ $education['degree'] }} in {{ $education['field_of_study'] }}</h4>
+                                            {{ $education['degree'] }} in
+                                            {{ $education['field_of_study'] }}
+                                        </h4>
                                         <p class="text-green-600 dark:text-green-400 font-medium">
-                                            {{ $education['school'] }}</p>
+                                            {{ $education['school'] }}
+                                        </p>
                                         <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">
                                             {{ \Carbon\Carbon::parse($education['start_date'])->format('M Y') }} -
                                             {{ \Carbon\Carbon::parse($education['end_date'])->format('M Y') }}
                                         </p>
-                                        @if($education['description'])
-                                            <p class="text-gray-700 dark:text-gray-300">{{ $education['description'] }}
+                                        @if ($education['description'])
+                                            <p class="text-gray-700 dark:text-gray-300">
+                                                {{ $education['description'] }}
                                             </p>
                                         @endif
                                     </div>
@@ -157,24 +190,28 @@
                         </div>
                     @endif
 
-                    @if(!empty($data['projects']))
+                    @if (!empty($data['projects']))
                         <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Projects</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                Projects
+                            </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                @foreach($data['projects'] as $project)
+                                @foreach ($data['projects'] as $project)
                                     <div
                                         class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                                        @if($project['image_path'])
+                                        @if ($project['image_path'])
                                             <img src="{{ $project['image_path'] }}" alt="{{ $project['title'] }}"
                                                 class="w-full h-48 object-cover rounded-lg mb-4">
                                         @endif
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            {{ $project['title'] }}</h4>
-                                        @if($project['description'])
+                                            {{ $project['title'] }}
+                                        </h4>
+                                        @if ($project['description'])
                                             <p class="text-gray-600 dark:text-gray-300 mb-4">
-                                                {{ $project['description'] }}</p>
+                                                {{ $project['description'] }}
+                                            </p>
                                         @endif
-                                        @if($project['url'])
+                                        @if ($project['url'])
                                             <a href="{{ $project['url'] }}" target="_blank"
                                                 class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200">
                                                 View Project
