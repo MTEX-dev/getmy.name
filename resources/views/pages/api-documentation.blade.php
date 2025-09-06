@@ -101,7 +101,8 @@
                                 ]
                                 as $section => $data
                             )
-                                <section id="{{ $section }}" class="mb-16">
+                                <section id="{{ $section }}" class="mb-16 scroll-mt-24">
+
                                     <div class="relative pl-16">
                                         <div
                                             class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
