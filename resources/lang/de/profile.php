@@ -118,4 +118,16 @@ return [
     'about_me_title' => 'Über Mich',
     'about_me_subtitle' => 'Erzähle anderen Etwas über dich',
     'about_me' => 'Über Mich',
+
+    'api_tokens' => 'API-Tokens',
+    'api_tokens_subtitle' => 'API-Tokens für externe Dienste verwalten.',
+    'create_token' => 'Token erstellen',
+    'token_name' => 'Token-Name',
+    'permissions' => 'Berechtigungen',
+    'create' => 'Erstellen',
+    'manage_tokens' => 'API-Tokens verwalten',
+    'last_used' => 'Zuletzt verwendet',
+    'delete' => 'Löschen',
+    'token_created' => 'API-Token erstellt',
+    'token_created_info' => 'Ihr neuer API-Token lautet:',
 ];

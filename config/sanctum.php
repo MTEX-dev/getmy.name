@@ -81,4 +81,21 @@ return [
         'validate_csrf_token' => Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
     ],
 
+    'abilities' => [
+        'profile:read',
+        'profile:write',
+        'skills:read',
+        'skills:write',
+        'projects:read',
+        'projects:write',
+        'experiences:read',
+        'experiences:write',
+        'education:read',
+        'education:write',
+        'socials:read',
+        'socials:write',
+        'about-me:read',
+        'about-me:write',
+    ],
+
 ];

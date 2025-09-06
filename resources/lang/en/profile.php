@@ -118,4 +118,16 @@ return [
     'about_me_title' => 'About Me',
     'about_me_subtitle' => 'Tell others more about yourself.',
     'about_me' => 'About Me',
+
+    'api_tokens' => 'API Tokens',
+    'api_tokens_subtitle' => 'Manage API tokens for external services.',
+    'create_token' => 'Create Token',
+    'token_name' => 'Token Name',
+    'permissions' => 'Permissions',
+    'create' => 'Create',
+    'manage_tokens' => 'Manage API Tokens',
+    'last_used' => 'Last used',
+    'delete' => 'Delete',
+    'token_created' => 'API Token Created',
+    'token_created_info' => 'Your new API token is:',
 ];

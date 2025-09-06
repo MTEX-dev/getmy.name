@@ -50,6 +50,10 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/api-requests', [ApiRequestController::class, 'index'])->name('api-requests.index');
             Route::get('/api-requests-data', [ApiRequestController::class, 'getApiRequestData'])->name('api-requests.data');
+
+            Route::get('/api-tokens', [\App\Http\Controllers\Profile\ApiTokenController::class, 'index'])->name('api-tokens.index');
+            Route::post('/api-tokens', [\App\Http\Controllers\Profile\ApiTokenController::class, 'store'])->name('api-tokens.store');
+            Route::delete('/api-tokens/{tokenId}', [\App\Http\Controllers\Profile\ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
         });
         Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
         Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');

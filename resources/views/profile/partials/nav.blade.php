@@ -26,4 +26,7 @@
     <x-nav-link :href="route('profile.api-requests.index')" :active="request()->routeIs('profile.api-requests.index')">
         {{ __('profile.api_requests.title') }}
     </x-nav-link>
+    <x-nav-link :href="route('profile.api-tokens.index')" :active="request()->routeIs('profile.api-tokens.index')">
+        {{ __('API Tokens') }}
+    </x-nav-link>
 </div>
