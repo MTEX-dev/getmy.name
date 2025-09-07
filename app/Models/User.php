@@ -89,4 +89,57 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(ApiRequest::class)->count();
     }
+
+    public function profileData(): array
+    {
+        $this->load(['skills', 'projects', 'socials', 'education', 'experiences']);
+
+        return [
+            'name' => $this->name,
+            'username' => $this->username,
+            'title' => $this->title,
+            'bio' => $this->bio,
+            'location' => $this->location,
+            'avatar_url' => $this->getAvatarUrl(),
+            'email' => $this->email,
+            'about_me' => $this->about_me,
+            'skills' => $this->skills->pluck('name')->toArray(),
+            'projects' => $this->projects->map(function ($project) {
+                return [
+                    'id' => $project->id,
+                    'title' => $project->title,
+                    'name' => $project->title,
+                    'description' => $project->description,
+                    'url' => $project->url,
+                    'image_path' => $project->image_path ? Storage::url($project->image_path) : null,
+                ];
+            })->toArray(),
+            'experiences' => $this->experiences->map(function ($experience) {
+                return [
+                    'id' => $experience->id,
+                    'title' => $experience->title,
+                    'company' => $experience->company,
+                    'location' => $experience->location,
+                    'start_date' => $experience->start_date,
+                    'end_date' => $experience->end_date,
+                    'description' => $experience->description,
+                ];
+            })->toArray(),
+            'education' => $this->education->map(function ($education) {
+                return [
+                    'id' => $education->id,
+                    'school' => $education->school,
+                    'degree' => $education->degree,
+                    'field_of_study' => $education->field_of_study,
+                    'start_date' => $education->start_date,
+                    'end_date' => $education->end_date,
+                    'description' => $education->description,
+                ];
+            })->toArray(),
+            'socials' => $this->socials
+                ? $this->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
+                : [],
+            'api_request_count' => $this->getApiRequestCount(),
+        ];
+    }
 }

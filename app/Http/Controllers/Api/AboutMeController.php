@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class ProfileController extends Controller
+class AboutMeController extends Controller
 {
-    public function show($username)
+    public function index($username)
     {
         $user = User::where('username', $username)->firstOrFail();
-
-        return response()->json($user->profileData());
+        return response()->json(['about_me' => $user->about_me]);
     }
 
     public function update(Request $request)
@@ -21,14 +20,11 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $validatedData = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $user->id,
-            'bio' => 'nullable|string',
-            'location' => 'nullable|string',
+            'about_me' => 'nullable|string',
         ]);
 
         $user->update($validatedData);
 
-        return response()->json($user->profileData());
+        return response()->json(['about_me' => $user->about_me]);
     }
 }

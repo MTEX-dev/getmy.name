@@ -70,76 +70,26 @@ class ProfileController extends Controller
     public function preview(Request $request): View
     {
         $username = Auth::user()->username;
-        //$request = Request::create('/preview', 'GET');
-        $data = $this->getData($request, $username);
+        $user = User::where('username', $username)->firstOrFail();
+        $data = $user->profileData();
 
         return view('profile.preview', compact('data'));
     }
 
     public function getData(Request $request, string $username): array
     {
-        //$user->load(['skills', 'projects', 'socials', 'education', 'experiences']);
-
         $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
-        $user->load(['skills', 'projects', 'socials', 'education', 'experiences']);
 
         ApiRequest::create([
             'user_id' => $user->id,
             'request_method' => $request->method(),
             'request_url' => $request->fullUrl(),
-            //'request_url' => $request->url(),
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
             'requested_at' => now(),
         ]);
 
-        return [
-            'name' => $user->name,
-            'username' => $user->username,
-            'title' => $user->title,
-            'bio' => $user->bio,
-            'location' => $user->location,
-            'avatar_url' => $user->getAvatarUrl(),
-            'email' => $user->email,
-            'about_me' => $user->about_me,
-            'skills' => $user->skills->pluck('name')->toArray(),
-            'projects' => $user->projects->map(function ($project) {
-                return [
-                    'id' => $project->id,
-                    'title' => $project->title,
-                    'name' => $project->title,
-                    'description' => $project->description,
-                    'url' => $project->url,
-                    'image_path' => $project->image_path ? Storage::url($project->image_path) : null,
-                ];
-            })->toArray(),
-            'experiences' => $user->experiences->map(function ($experience) {
-                return [
-                    'id' => $experience->id,
-                    'title' => $experience->title,
-                    'company' => $experience->company,
-                    'location' => $experience->location,
-                    'start_date' => $experience->start_date,
-                    'end_date' => $experience->end_date,
-                    'description' => $experience->description,
-                ];
-            })->toArray(),
-            'education' => $user->education->map(function ($education) {
-                return [
-                    'id' => $education->id,
-                    'school' => $education->school,
-                    'degree' => $education->degree,
-                    'field_of_study' => $education->field_of_study,
-                    'start_date' => $education->start_date,
-                    'end_date' => $education->end_date,
-                    'description' => $education->description,
-                ];
-            })->toArray(),
-            'socials' => $user->socials
-                ? $user->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
-                : [],
-            'api_request_count' => $user->getApiRequestCount(),
-        ];
+        return $user->profileData();
     }
 
     public function getProfile(Request $request,string $username): View
