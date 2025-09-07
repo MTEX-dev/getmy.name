@@ -11,7 +11,7 @@ class SocialsController extends Controller
 {
     public function index($username)
     {
-        $user = User::where('username', $username)->firstOrFail();
+        $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
         return response()->json($user->socials);
     }
 

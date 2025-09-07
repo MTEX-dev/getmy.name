@@ -12,8 +12,8 @@ class ExperienceController extends Controller
 {
     public function index($username)
     {
-        $user = User::where('username', $username)->firstOrFail();
-        return response()->json($user->experiences);
+        $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
+        return response()->json($user->experiences->makeHidden(['user_id']));
     }
 
     public function store(Request $request)

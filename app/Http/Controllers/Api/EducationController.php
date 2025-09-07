@@ -12,8 +12,8 @@ class EducationController extends Controller
 {
     public function index($username)
     {
-        $user = User::where('username', $username)->firstOrFail();
-        return response()->json($user->education);
+        $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
+        return response()->json($user->education->makeHidden(['user_id']));
     }
 
     public function store(Request $request)
