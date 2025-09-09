@@ -20,6 +20,7 @@
                         <li><a href="{{ route('register') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('auth.register') }}</a></li>
                     @endif
                     <li><a href="{{ route('sitemap') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.sitemap') }}</a></li>
+                    <li><a href="{{ route('api-docs') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('sitemap.api_docs') }}</a></li>
                 </ul>
 
                 <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-10 mb-6">
@@ -70,7 +71,7 @@
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     @forelse($users as $user)
-                        <li><a href="{{ route('profile.get', ['user' => $user]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $user->username }}</a></li>
+                        <li><a href="{{ route('profile.get', ['username' => $user->username]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $user->username }}</a></li>
                     @empty
                         <li>{{ __('sitemap.no_public_portfolios') }}</li>
                     @endforelse
@@ -81,7 +82,7 @@
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
                     @forelse($users as $user)
-                        <li><a href="{{ route('profile.get.data', ['user' => $user]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }}</a></li>
+                        <li><a href="{{ route('profile.get.data', ['username' => $user->username]) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }}</a></li>
                     @empty
                         <li>{{ __('sitemap.no_public_user_data_endpoints') }}</li>
                     @endforelse
@@ -91,7 +92,17 @@
                     {{ __('sitemap.api_endpoints') }}
                 </h3>
                 <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                    @forelse($users as $user)
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - Profile</a></li>
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username . '/skills') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - Skills</a></li>
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username . '/projects') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - Projects</a></li>
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username . '/experiences') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - Experiences</a></li>
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username . '/education') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - Education</a></li>
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username . '/socials') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - Socials</a></li>
+                        <li><a href="{{ url('/api/v1/profile/' . $user->username . '/about-me') }}" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">{{ $user->username }} - About Me</a></li>
+                    @empty
                         <li>{{ __('sitemap.no_public_api_endpoints') }}</li>
+                    @endforelse
                 </ul>
             </div>
         </div>

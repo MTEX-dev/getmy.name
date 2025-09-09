@@ -21,4 +21,5 @@ return [
     'manage_socials' => 'Manage Socials',
     'api_request_logs' => 'API Request Logs',
     'profile_preview' => 'Profile Preview',
+    'api_docs' => 'API Documentation',
 ];
