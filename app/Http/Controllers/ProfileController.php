@@ -48,7 +48,7 @@ class ProfileController extends Controller
     public function updateTemplate(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'template' => ['required', 'string', 'in:default,modern'],
+            'template' => ['required', 'string', 'in:default,modern,test'],
         ]);
 
         $request->user()->fill($validatedData);
@@ -110,10 +110,10 @@ class ProfileController extends Controller
         $data = $this->getData($request, $username);
 
         $template = $user->template ?? 'default';
-        $viewName = 'profiles.get.' . $template;
+        $viewName = 'profile.get.' . $template;
 
         if (!view()->exists($viewName)) {
-            $viewName = 'profiles.get.default';
+            $viewName = 'profile.get.default';
         }
 
         return view($viewName, compact('data'));

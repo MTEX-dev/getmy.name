@@ -92,8 +92,8 @@
     </script>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased">
-    <div class="flex flex-col md:flex-row min-h-screen">
-        <aside class="md:w-64 lg:w-72 xl:w-80 md:h-screen md:sticky top-0 bg-white dark:bg-gray-950 p-6 sm:p-8 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-800">
+    <div class="flex flex-col md:flex-row min-h-screen relative">
+        <aside class="md:w-64 lg:w-72 xl:w-80 md:h-screen md:fixed md:top-0 md:left-0 bg-white dark:bg-gray-950 p-6 sm:p-8 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
             <div class="flex flex-col h-full">
                 <div class="text-center">
                     <div class="mx-auto h-28 w-28 sm:h-32 sm:w-32 rounded-full overflow-hidden ring-2 ring-offset-4 ring-offset-white dark:ring-offset-gray-950 ring-primary-500 shadow-lg">
@@ -133,7 +133,7 @@
             </div>
         </aside>
 
-        <main id="top" class="flex-1 scroll-mt-16">
+        <main id="top" class="flex-1 md:ml-64 lg:ml-72 xl:ml-80 scroll-mt-16">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
                 @if($get('about_me'))
                     <section id="about" class="scroll-mt-20">
