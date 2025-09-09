@@ -578,8 +578,8 @@
             @if(isset($data['username']))
                 <span class="mx-1">|</span> User: {{ $data['username'] }}
             @endif
-            @if(isset($data['api_requests']))
-                <span class="mx-1">|</span> API Requests: {{ $data['api_requests'] }}
+            @if(isset($data['api_request_count']))
+                <span class="mx-1">|</span> API Requests: {{ $data['api_request_count'] }}
             @endif
         </p>
     </footer>

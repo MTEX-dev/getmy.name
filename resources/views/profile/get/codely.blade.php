@@ -586,7 +586,9 @@
             <span>Spaces: 4</span>
             <span>UTF-8</span>
             <span>CRLF</span>
-            <span title="Powered by getmy.name from mtex.dev">Powered by <a href="https://getmy.name" target="_blank">getmy.name</a> & <a href="https://mtex.dev" target="_blank">mtex.dev</a></span>
+            <!--span title="Powered by getmy.name from mtex.dev">Powered by<a href="https://getmy.name" target="_blank">getmy.name</a> & <a href="https://mtex.dev" target="_blank">mtex.dev</a></span-->
+            <span><a href="https://getmy.name" target="_blank">getmy.name</a></span>
+            <span><a href="https://mtex.dev" target="_blank">mtex.dev</a></span>
             @if(isset($data['username']))
                 <span title="User"><i class="bi bi-person"></i>{{ $data['username'] }}</span>
             @endif
