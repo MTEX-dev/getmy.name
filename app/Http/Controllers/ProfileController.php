@@ -48,7 +48,7 @@ class ProfileController extends Controller
     public function updateTemplate(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'template' => ['required', 'string', 'in:default,modern,test,aether'],
+            'template' => ['required', 'string', 'in:default,modern,test,aether,serenity'],
         ]);
 
         $request->user()->fill($validatedData);

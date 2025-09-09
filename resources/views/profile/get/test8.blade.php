@@ -40,8 +40,6 @@
             --card-bg-dark: rgba(250, 128, 114, 0.1);
             --border-light: rgba(51, 51, 51, 0.2);
             --border-dark: rgba(250, 235, 215, 0.2);
-            --shadow-light: rgba(0, 0, 0, 0.05);
-            --shadow-dark: rgba(250, 128, 114, 0.15);
         }
 
         * {
@@ -55,8 +53,6 @@
             line-height: 1.6;
             transition: all 0.3s ease;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body.light-mode {
@@ -82,17 +78,16 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            box-shadow: 0 4px 20px var(--shadow-dark);
+            box-shadow: 0 4px 20px rgba(250, 128, 114, 0.3);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
-            outline: none;
         }
 
         .theme-toggle:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px var(--shadow-dark);
+            box-shadow: 0 6px 25px rgba(250, 128, 114, 0.4);
         }
 
         .container {
@@ -115,7 +110,7 @@
             margin: 0 auto 30px;
             display: block;
             object-fit: cover;
-            box-shadow: 0 10px 30px var(--shadow-dark);
+            box-shadow: 0 10px 30px rgba(250, 128, 114, 0.3);
             transition: transform 0.3s ease;
         }
 
@@ -159,7 +154,6 @@
             justify-content: center;
             gap: 20px;
             margin-top: 30px;
-            flex-wrap: wrap;
         }
 
         .social-links a {
@@ -173,7 +167,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 2px 10px rgba(250, 128, 114, 0.2);
         }
 
         .social-links a:hover {
@@ -194,7 +187,6 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            text-shadow: 1px 1px 2px rgba(250, 128, 114, 0.2);
         }
 
         .about-me {
@@ -219,32 +211,27 @@
             border-radius: 25px;
             font-weight: 500;
             transition: all 0.3s ease;
-            white-space: nowrap;
-            box-shadow: 0 2px 5px var(--shadow-light);
         }
 
         .light-mode .skill-tag {
             background: var(--card-bg-light);
             border: 1px solid var(--border-light);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
         }
 
         .dark-mode .skill-tag {
             background: var(--card-bg-dark);
             border: 1px solid var(--border-dark);
-            box-shadow: 0 2px 5px rgba(250, 128, 114, 0.1);
         }
 
         .skill-tag:hover {
             transform: translateY(-2px);
             background: var(--salmon);
             color: white;
-            box-shadow: 0 4px 10px rgba(250, 128, 114, 0.3);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -255,21 +242,18 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 25px var(--shadow-light);
         }
 
         .light-mode .card {
             background: var(--card-bg-light);
             border: 1px solid var(--border-light);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
         .dark-mode .card {
             background: var(--card-bg-dark);
             border: 1px solid var(--border-dark);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(250, 128, 114, 0.1);
         }
 
         .card::before {
@@ -279,13 +263,12 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ff6b47, var(--salmon));
-            z-index: 1;
+            background: linear-gradient(45deg, var(--salmon), #ff6b47);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px var(--shadow-dark);
+            box-shadow: 0 15px 35px rgba(250, 128, 114, 0.2);
         }
 
         .card h3 {
@@ -327,7 +310,6 @@
             border-radius: 20px;
             font-size: 0.9rem;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(250, 128, 114, 0.2);
         }
 
         .project-link:hover {
@@ -350,7 +332,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 5px;
         }
 
         .education-info {
@@ -396,7 +377,7 @@
             }
 
             .social-links {
-                justify-content: center;
+                flex-wrap: wrap;
             }
 
             .grid {
