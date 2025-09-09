@@ -45,6 +45,18 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
+    public function updateTemplate(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'template' => ['required', 'string', 'in:default,modern'],
+        ]);
+
+        $request->user()->fill($validatedData);
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'template-updated');
+    }
+
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
@@ -92,11 +104,19 @@ class ProfileController extends Controller
         return $user->profileData();
     }
 
-    public function getProfile(Request $request,string $username): View
+    public function getProfile(Request $request, string $username): View
     {
+        $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
         $data = $this->getData($request, $username);
 
-        return view('profiles.get', compact('data'));
+        $template = $user->template ?? 'default';
+        $viewName = 'profiles.get.' . $template;
+
+        if (!view()->exists($viewName)) {
+            $viewName = 'profiles.get.default';
+        }
+
+        return view($viewName, compact('data'));
     }
 
     public function editSkills(Request $request): View

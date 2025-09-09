@@ -130,4 +130,8 @@ return [
     'delete' => 'Delete',
     'token_created' => 'API Token Created',
     'token_created_info' => 'Your new API token is:',
+
+    'template.title' => 'Profile Template',
+    'template.description' => 'Choose a template for your public profile.',
+    'template.label' => 'Template',
 ];

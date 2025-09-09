@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::patch('/template', [ProfileController::class, 'updateTemplate'])->name('template.update');
         Route::middleware('verified')->group(function () {
             Route::get('/skills', [ProfileController::class, 'editSkills'])->name('skills');
             Route::get('/projects', [ProfileController::class, 'editProjects'])->name('projects');
