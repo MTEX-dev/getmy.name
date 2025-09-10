@@ -4,32 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ $data['name'] }} — {{ $data['title'] }}</title>
-
-  {{-- Basic Meta Tags --}}
-  <meta name="description" content="{{ $data['bio'] ?? $data['title'] }}">
-  <meta name="author" content="{{ $data['name'] }}">
-
-  {{-- Open Graph / Facebook --}}
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url()->current() }}">
-  <meta property="og:title" content="{{ $data['name'] }} — {{ $data['title'] }}">
-  <meta property="og:description" content="{{ $data['bio'] ?? $data['title'] }}">
-  @if(!empty($data['avatar_url']))
-    <meta property="og:image" content="{{ $data['avatar_url'] }}">
-  @endif
-
-  {{-- Twitter --}}
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="{{ url()->current() }}">
-  <meta property="twitter:title" content="{{ $data['name'] }} — {{ $data['title'] }}">
-  <meta property="twitter:description" content="{{ $data['bio'] ?? $data['title'] }}">
-  @if(!empty($data['socials']['twitter']))
-    <meta name="twitter:creator" content="@{{ $data['socials']['twitter'] }}">
-  @endif
-  @if(!empty($data['avatar_url']))
-    <meta property="twitter:image" content="{{ $data['avatar_url'] }}">
-  @endif
-
   @vite(['resources/css/app.css','resources/js/app.js'])
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
