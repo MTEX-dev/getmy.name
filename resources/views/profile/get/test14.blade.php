@@ -60,7 +60,7 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            background-image:
+            background-image: 
                 radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 50%),
                 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="60" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.06)"/></svg>');
             display: flex;
@@ -222,11 +222,6 @@
             margin-right: 8px;
         }
 
-        .start-button img {
-            width: 16px;
-            height: 16px;
-        }
-
         .start-button:hover {
             background: linear-gradient(to bottom, #8AE234 0%, #73D216 100%);
         }
@@ -284,69 +279,7 @@
             line-height: 1.2;
         }
 
-        .start-menu {
-            position: absolute;
-            bottom: 40px;
-            left: 0;
-            width: 250px;
-            background: var(--taskbar-bg);
-            border: 2px outset var(--xp-border-light);
-            z-index: 99;
-            display: none;
-            flex-direction: column;
-            color: white;
-        }
-        
-        .start-menu.active {
-            display: flex;
-        }
-
-        .start-menu-header {
-            background: var(--taskbar-gradient);
-            padding: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .start-menu-header img {
-            width: 40px;
-            height: 40px;
-            border-radius: 3px;
-            border: 1px solid var(--xp-light-blue);
-        }
-
-        .start-menu-body {
-            background: white;
-            padding: 5px;
-        }
-
-        .start-menu-programs {
-            list-style: none;
-        }
-
-        .start-menu-programs li {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px;
-            cursor: pointer;
-            color: black;
-            font-size: 11px;
-        }
-
-        .start-menu-programs li:hover {
-            background: var(--xp-blue);
-            color: white;
-        }
-        
-        .start-menu-programs img {
-            width: 24px;
-            height: 24px;
-        }
-        
+        /* Program-specific styles */
         .notepad-content {
             font-family: 'Courier New', monospace;
             white-space: pre-wrap;
@@ -405,15 +338,12 @@
             font-family: 'Courier New', monospace;
             font-size: 14px;
             margin-bottom: 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .calculator-buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(5, 1fr);
-            gap: 4px;
+            gap: 2px;
         }
 
         .calc-button {
@@ -428,10 +358,6 @@
         .calc-button:active {
             border: 1px inset var(--xp-border-light);
         }
-        
-        .calc-button.zero { grid-column: span 2; }
-        .calc-button.equals { grid-column: span 2; }
-        .calc-button.operator, .calc-button.equals { background-color: var(--xp-dark-gray); }
 
         .media-player-content {
             background: #1a1a1a;
@@ -516,6 +442,7 @@
             background: var(--xp-light-blue);
         }
 
+        /* Window positioning */
         #window-about { top: 50px; left: 100px; width: 500px; height: 400px; }
         #window-skills { top: 80px; left: 130px; width: 450px; height: 350px; }
         #window-projects { top: 110px; left: 160px; width: 600px; height: 500px; }
@@ -550,7 +477,8 @@
     </style>
 </head>
 <body>
-    <div class="desktop" id="desktop">
+    <div class="desktop">
+        <!-- Desktop Icons -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-window="about">
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' fill='%23FFD700' stroke='%23B8860B' stroke-width='2'/%3E%3Ctext x='16' y='20' text-anchor='middle' font-family='Arial' font-size='16' font-weight='bold' fill='%23000'%3Ei%3C/text%3E%3C/svg%3E" alt="">
@@ -586,7 +514,9 @@
             </div>
         </div>
 
+        <!-- Windows Container -->
         <div class="windows-container">
+            <!-- About Me Window -->
             <div class="window" id="window-about">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -615,6 +545,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Skills Window -->
             <div class="window" id="window-skills">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -650,6 +581,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Projects Window -->
             <div class="window" id="window-projects">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -665,12 +597,12 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 <div class="window-content">
                     <div class="explorer-content">
                         <div class="explorer-toolbar">
-                            Projects Folder - {{ count($data['projects'] ?? []) }} items
+                            📁 Projects Folder - {{ count($data['projects'] ?? []) }} items
                         </div>
                         <div class="explorer-list">
                             @forelse($data['projects'] as $project)
                                 <div class="project-item">
-                                    <h4>{{ $project['title'] ?? $project['name'] ?? 'Untitled Project' }}</h4>
+                                    <h4>🚀 {{ $project['title'] ?? $project['name'] ?? 'Untitled Project' }}</h4>
                                     <p>{{ $project['description'] ?? 'No description provided.' }}</p>
                                     @if(!empty($project['url']))
                                         <p><strong>URL:</strong> <a href="{{ $project['url'] }}" target="_blank">{{ $project['url'] }}</a></p>
@@ -687,6 +619,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Experience Window -->
             <div class="window" id="window-experience">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -702,7 +635,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 <div class="window-content">
                     @forelse($data['experiences'] as $exp)
                         <div class="experience-item">
-                            <h4>{{ $exp['title'] ?? 'Job Title' }} at {{ $exp['company'] ?? 'Company Name' }}</h4>
+                            <h4>💼 {{ $exp['title'] ?? 'Job Title' }} at {{ $exp['company'] ?? 'Company Name' }}</h4>
                             <div class="date-range">
                                 {{ $exp['start_date'] ?? 'Start Date' }} - {{ $exp['end_date'] ?? 'Present' }}
                                 @if(!empty($exp['location']))
@@ -719,6 +652,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Education Window -->
             <div class="window" id="window-education">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -734,7 +668,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 <div class="window-content">
                     @forelse($data['education'] as $edu)
                         <div class="education-item">
-                            <h4>{{ $edu['degree'] ?? 'Degree' }} at {{ $edu['institution'] ?? 'Institution' }}</h4>
+                            <h4>🎓 {{ $edu['degree'] ?? 'Degree' }} at {{ $edu['institution'] ?? 'Institution' }}</h4>
                             <div class="date-range">
                                 {{ $edu['start_date'] ?? 'Start Date' }} - {{ $edu['end_date'] ?? 'Graduation Date' }}
                             </div>
@@ -748,6 +682,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Contact Window -->
             <div class="window" id="window-contact">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -773,6 +708,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Media Player Window -->
             <div class="window" id="window-media">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -791,6 +727,7 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 </div>
             </div>
 
+            <!-- Calculator Window -->
             <div class="window" id="window-calculator">
                 <div class="window-titlebar">
                     <div class="window-title">
@@ -806,65 +743,42 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
                 <div class="window-content calculator-content">
                     <div class="calculator-display" id="calc-display">0</div>
                     <div class="calculator-buttons">
-                        <div class="calc-button" data-action="clear">C</div>
-                        <div class="calc-button operator">/</div>
-                        <div class="calc-button operator">*</div>
-                        <div class="calc-button operator">-</div>
-                        <div class="calc-button number">7</div>
-                        <div class="calc-button number">8</div>
-                        <div class="calc-button number">9</div>
-                        <div class="calc-button operator" style="grid-row: span 2;">+</div>
-                        <div class="calc-button number">4</div>
-                        <div class="calc-button number">5</div>
-                        <div class="calc-button number">6</div>
-                        <div class="calc-button number">1</div>
-                        <div class="calc-button number">2</div>
-                        <div class="calc-button number">3</div>
-                        <div class="calc-button equals" style="grid-row: span 2;">=</div>
-                        <div class="calc-button number zero" style="grid-column: span 2;">0</div>
-                        <div class="calc-button decimal">.</div>
+                        <div class="calc-button">7</div>
+                        <div class="calc-button">8</div>
+                        <div class="calc-button">9</div>
+                        <div class="calc-button">/</div>
+                        <div class="calc-button">4</div>
+                        <div class="calc-button">5</div>
+                        <div class="calc-button">6</div>
+                        <div class="calc-button">*</div>
+                        <div class="calc-button">1</div>
+                        <div class="calc-button">2</div>
+                        <div class="calc-button">3</div>
+                        <div class="calc-button">-</div>
+                        <div class="calc-button">0</div>
+                        <div class="calc-button">.</div>
+                        <div class="calc-button">=</div>
+                        <div class="calc-button">+</div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Taskbar -->
         <div class="taskbar">
-            <div class="start-button" id="start-button">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f00' d='M0 0h11v11H0z'/%3E%3Cpath fill='%230f0' d='M13 0h11v11H13z'/%3E%3Cpath fill='%2300f' d='M0 13h11v11H0z'/%3E%3Cpath fill='%23ff0' d='M13 13h11v11H13z'/%3E%3C/svg%3E" alt="Start">
-                Start
-            </div>
+            <div class="start-button">🟢 Start</div>
             <div class="taskbar-programs" id="taskbar-programs"></div>
             <div class="system-tray">
                 <div class="clock" id="clock">00:00</div>
             </div>
         </div>
-        
-        <div class="start-menu" id="start-menu">
-            <div class="start-menu-header">
-                <img src="{{ $data['avatar_url'] ?? asset('images/default-avatar.jpg') }}" alt="User Avatar">
-                <span>{{ $data['name'] ?? 'User' }}</span>
-            </div>
-            <div class="start-menu-body">
-                <ul class="start-menu-programs">
-                    <li data-window="about"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' fill='%23FFD700' stroke='%23B8860B' stroke-width='2'/%3E%3Ctext x='16' y='20' text-anchor='middle' font-family='Arial' font-size='16' font-weight='bold' fill='%23000'%3Ei%3C/text%3E%3C/svg%3E" alt=""><span>About Me</span></li>
-                    <li data-window="skills"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='6' width='28' height='20' fill='%234169E1' stroke='%232E4BC6' stroke-width='2'/%3E%3Crect x='4' y='8' width='24' height='16' fill='%23000'/%3E%3Ctext x='16' y='18' text-anchor='middle' font-family='monospace' font-size='8' fill='%2300FF00'%3E&lt;/&gt;%3C/text%3E%3C/svg%3E" alt=""><span>My Skills</span></li>
-                    <li data-window="projects"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='18' fill='%23FFF' stroke='%23999' stroke-width='2'/%3E%3Crect x='6' y='6' width='20' height='14' fill='%23E0E0E0'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%23C0C0C0' stroke='%23999' stroke-width='1'/%3E%3Ccircle cx='12' cy='25' r='1' fill='%23666'/%3E%3Ccircle cx='20' cy='25' r='1' fill='%23666'/%3E%3C/svg%3E" alt=""><span>Projects</span></li>
-                    <li data-window="experience"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='8' width='20' height='16' fill='%238B4513' stroke='%23654321' stroke-width='2'/%3E%3Crect x='8' y='10' width='16' height='12' fill='%23A0522D'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23FFD700'/%3E%3Crect x='14' y='6' width='4' height='4' fill='%23654321'/%3E%3C/svg%3E" alt=""><span>Experience</span></li>
-                    <li data-window="education"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,4 28,12 16,20 4,12' fill='%234169E1' stroke='%232E4BC6' stroke-width='2'/%3E%3Cpolygon points='16,6 26,12 16,18 6,12' fill='%235B7FE8'/%3E%3Crect x='4' y='20' width='24' height='4' fill='%232E4BC6'/%3E%3C/svg%3E" alt=""><span>Education</span></li>
-                    <li data-window="contact"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='8' width='24' height='16' fill='%23FFF' stroke='%23999' stroke-width='2'/%3E%3Cpath d='M4 8 L16 16 L28 8' stroke='%23999' stroke-width='2' fill='none'/%3E%3C/svg%3E" alt=""><span>Contact</span></li>
-                </ul>
-            </div>
-        </div>
     </div>
 
     <script>
-        const desktop = document.getElementById('desktop');
         const icons = document.querySelectorAll('.desktop-icon');
         const windows = document.querySelectorAll('.window');
         const taskbarPrograms = document.getElementById('taskbar-programs');
         const clock = document.getElementById('clock');
-        const startButton = document.getElementById('start-button');
-        const startMenu = document.getElementById('start-menu');
 
         function openWindow(id) {
             const win = document.getElementById('window-' + id);
@@ -873,13 +787,13 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
             windows.forEach(w => w.classList.remove('active'));
             win.classList.add('active');
 
+            // Taskbar button
             let btn = document.querySelector('.taskbar-program[data-window="' + id + '"]');
             if (!btn) {
                 btn = document.createElement('div');
-                btn.className = 'taskbar-program';
+                btn.className = 'taskbar-program active';
                 btn.dataset.window = id;
-                const iconSrc = document.querySelector(`.desktop-icon[data-window="${id}"] img`).src;
-                btn.innerHTML = `<img src="${iconSrc}" alt=""><span>${id.charAt(0).toUpperCase() + id.slice(1)}</span>`;
+                btn.innerHTML = '<img src="" alt="">' + id.charAt(0).toUpperCase() + id.slice(1);
                 btn.onclick = () => openWindow(id);
                 taskbarPrograms.appendChild(btn);
             }
@@ -906,112 +820,6 @@ Portfolio Requests: {{ $data['api_request_count'] ?? 0 }}
         }
         setInterval(updateClock, 1000);
         updateClock();
-
-        startButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            startMenu.classList.toggle('active');
-        });
-
-        desktop.addEventListener('click', () => {
-            if (startMenu.classList.contains('active')) {
-                startMenu.classList.remove('active');
-            }
-        });
-
-        document.querySelectorAll('.start-menu-programs li').forEach(item => {
-            item.addEventListener('click', () => {
-                openWindow(item.dataset.window);
-                startMenu.classList.remove('active');
-            });
-        });
-        
-        const calculator = document.getElementById('window-calculator');
-        const calcDisplay = document.getElementById('calc-display');
-        const calcButtons = calculator.querySelector('.calculator-buttons');
-
-        const calculatorState = {
-            displayValue: '0',
-            firstOperand: null,
-            waitingForSecondOperand: false,
-            operator: null,
-        };
-
-        function updateDisplay() {
-            calcDisplay.textContent = calculatorState.displayValue;
-        }
-        updateDisplay();
-
-        function inputDigit(digit) {
-            const { displayValue, waitingForSecondOperand } = calculatorState;
-            if (waitingForSecondOperand === true) {
-                calculatorState.displayValue = digit;
-                calculatorState.waitingForSecondOperand = false;
-            } else {
-                calculatorState.displayValue = displayValue === '0' ? digit : displayValue + digit;
-            }
-        }
-
-        function inputDecimal(dot) {
-            if (calculatorState.waitingForSecondOperand) return;
-            if (!calculatorState.displayValue.includes(dot)) {
-                calculatorState.displayValue += dot;
-            }
-        }
-
-        function handleOperator(nextOperator) {
-            const { firstOperand, displayValue, operator } = calculatorState;
-            const inputValue = parseFloat(displayValue);
-
-            if (operator && calculatorState.waitingForSecondOperand) {
-                calculatorState.operator = nextOperator;
-                return;
-            }
-
-            if (firstOperand == null && !isNaN(inputValue)) {
-                calculatorState.firstOperand = inputValue;
-            } else if (operator) {
-                const result = performCalculation[operator](firstOperand, inputValue);
-                calculatorState.displayValue = String(result);
-                calculatorState.firstOperand = result;
-            }
-            
-            calculatorState.waitingForSecondOperand = true;
-            calculatorState.operator = nextOperator;
-        }
-
-        const performCalculation = {
-            '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
-            '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
-            '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
-            '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
-            '=': (firstOperand, secondOperand) => secondOperand
-        };
-
-        function resetCalculator() {
-            calculatorState.displayValue = '0';
-            calculatorState.firstOperand = null;
-            calculatorState.waitingForSecondOperand = false;
-            calculatorState.operator = null;
-        }
-
-        calcButtons.addEventListener('click', (event) => {
-            const { target } = event;
-            if (!target.matches('.calc-button')) return;
-
-            if (target.classList.contains('operator')) {
-                handleOperator(target.textContent);
-            } else if (target.classList.contains('decimal')) {
-                inputDecimal(target.textContent);
-            } else if (target.classList.contains('number')) {
-                inputDigit(target.textContent);
-            } else if (target.dataset.action === 'clear') {
-                resetCalculator();
-            } else if (target.classList.contains('equals')) {
-                handleOperator(target.textContent);
-            }
-            
-            updateDisplay();
-        });
     </script>
 </body>
 </html>
