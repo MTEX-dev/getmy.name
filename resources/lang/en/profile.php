@@ -23,6 +23,7 @@ return [
     'skills_subtitle' => 'Manage your professional skills. Add skills you possess and optionally assign a level.',
     'your_current_skills' => 'Your Current Skills:',
     'remove' => 'Remove',
+    'edit' => 'Edit',
     'confirm_delete_skill' => 'Are you sure you want to delete this skill?',
     'no_skills_added' => 'You haven\'t added any skills yet.',
     'new_skill_name' => 'New Skill Name',

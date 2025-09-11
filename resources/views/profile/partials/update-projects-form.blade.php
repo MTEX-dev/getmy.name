@@ -30,16 +30,22 @@
                                     class="h-8 w-8 inline-block ml-2 rounded-full object-cover">
                             @endif
                         </span>
-                        <form method="post" action="{{ route('profile.projects.destroy', $project) }}"
-                            class="inline">
-                            @csrf
-                            @method('delete')
-                            <button type="submit"
-                                class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 text-sm ml-4"
-                                onclick="return confirm('{{ __('profile.confirm_delete_project') }}')">
-                                {{ __('profile.remove') }}
-                            </button>
-                        </form>
+                        <div class="flex items-center">
+                            <a href="{{ route('profile.projects.edit', $project) }}"
+                               class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 text-sm">
+                                {{ __('profile.edit') }}
+                            </a>
+                            <form method="post" action="{{ route('profile.projects.destroy', $project) }}"
+                                  class="inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit"
+                                        class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 text-sm ml-4"
+                                        onclick="return confirm('{{ __('profile.confirm_delete_project') }}')">
+                                    {{ __('profile.remove') }}
+                                </button>
+                            </form>
+                        </div>
                     </li>
                 @endforeach
             </ul>

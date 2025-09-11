@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
             Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
             Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+            Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+            Route::patch('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
             Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
             Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store');
             Route::delete('/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');

@@ -23,6 +23,7 @@ return [
     'skills_subtitle' => 'Verwalten Sie Ihre beruflichen Fähigkeiten. Fügen Sie Fähigkeiten hinzu, die Sie besitzen, und weisen Sie optional ein Level zu.',
     'your_current_skills' => 'Ihre aktuellen Fähigkeiten:',
     'remove' => 'Entfernen',
+    'edit' => 'Bearbeiten',
     'confirm_delete_skill' => 'Sind Sie sicher, dass Sie diese Fähigkeit löschen möchten?',
     'no_skills_added' => 'Sie haben noch keine Fähigkeiten hinzugefügt.',
     'new_skill_name' => 'Name der neuen Fähigkeit',
