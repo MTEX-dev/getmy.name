@@ -16,10 +16,24 @@ class Project extends Model
         'description',
         'url',
         'image',
+        'github_url',
+        'live_demo_url',
+        'role',
+        'challenges',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function technologies()
+    {
+        return $this->hasMany(ProjectTechnologie::class);
+    }
+
+    public function features()
+    {
+        return $this->hasMany(ProjectFeature::class);
     }
 }
