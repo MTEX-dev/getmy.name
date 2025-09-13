@@ -55,9 +55,9 @@
             <x-input-error class="mt-2" :messages="$errors->get('challenges')" />
         </div>
 
-        <div>
+        <div class="pt-6">
             <x-input-label for="technologies" :value="__('Technologies')" />
-            <div class="mt-1 space-y-2">
+            <div class="mt-2 space-y-2">
                 @foreach ($project->technologies as $technology)
                     <div class="flex items-center gap-2">
                         <form method="post" action="{{ route('profile.projects.technologies.update', [$project, $technology]) }}" class="flex-grow">
@@ -101,9 +101,9 @@
             <x-input-error class="mt-2" :messages="$errors->get('technologies')" />
         </div>
 
-        <div>
+        <div class="pt-6">
             <x-input-label for="features" :value="__('Features')" />
-            <div class="mt-1 space-y-2">
+            <div class="mt-2 space-y-2">
                 @foreach ($project->features as $feature)
                     <div class="flex items-center gap-2">
                         <form method="post" action="{{ route('profile.projects.features.update', [$project, $feature]) }}" class="flex-grow">
@@ -147,13 +147,13 @@
             <x-input-error class="mt-2" :messages="$errors->get('features')" />
         </div>
 
-        <div>
+        <div class="pt-6">
             <x-input-label for="image" :value="__('Image')" />
             <x-file-input id="image" name="image" class="mt-1 block w-full" />
             @if ($project->image)
-                <div class="mt-2">
+                <div class="mt-4">
                     <img src="{{ Storage::url($project->image) }}" alt="{{ $project->title }}" class="h-20 w-20 object-cover">
-                    <form id="remove-image-form" method="post" action="{{ route('profile.projects.image.remove', $project) }}" class="mt-2">
+                    <form id="remove-image-form" method="post" action="{{ route('profile.projects.image.remove', $project) }}" class="mt-4">
                         @csrf
                         @method('delete')
                         <x-danger-button type="submit">{{ __('Remove Image') }}</x-danger-button>
@@ -163,7 +163,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('image')" />
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 pt-6">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'project-updated')
