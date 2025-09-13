@@ -38,8 +38,6 @@ class ProjectController extends Controller
             'live_demo_url' => ['nullable', 'url', 'max:2048'],
             'role' => ['nullable', 'string', 'max:255'],
             'challenges' => ['nullable', 'string'],
-            'technologies' => ['nullable', 'string'],
-            'features' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'max:2048'],
         ]);
 
@@ -51,22 +49,6 @@ class ProjectController extends Controller
         }
 
         $project->update($validated);
-
-        $project->technologies()->delete();
-        if ($request->technologies) {
-            $technologies = array_map('trim', explode(',', $request->technologies));
-            foreach ($technologies as $technology) {
-                $project->technologies()->create(['technologie' => $technology]);
-            }
-        }
-
-        $project->features()->delete();
-        if ($request->features) {
-            $features = array_map('trim', explode(',', $request->features));
-            foreach ($features as $feature) {
-                $project->features()->create(['feature' => $feature]);
-            }
-        }
 
         return Redirect::route('profile.projects.edit', $project)->with('status', 'project-updated');
     }
@@ -101,5 +83,103 @@ class ProjectController extends Controller
         } else {
             abort(403);
         }
+    }
+
+    public function addTechnology(
+        Request $request,
+        Project $project,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'technologie' => ['required', 'string', 'max:255'],
+        ]);
+
+        $project->technologies()->create($validated);
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-added');
+    }
+
+    public function updateTechnology(
+        Request $request,
+        Project $project,
+        $technologyId,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'technologie' => ['required', 'string', 'max:255'],
+        ]);
+
+        $technology = $project->technologies()->findOrFail($technologyId);
+        $technology->update($validated);
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-updated');
+    }
+
+    public function removeTechnology(
+        Project $project,
+        $technologyId,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id) {
+            abort(403);
+        }
+
+        $technology = $project->technologies()->findOrFail($technologyId);
+        $technology->delete();
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-removed');
+    }
+
+    public function addFeature(Request $request, Project $project): RedirectResponse
+    {
+        if (Auth::id() !== $project->user_id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'feature' => ['required', 'string', 'max:255'],
+        ]);
+
+        $project->features()->create($validated);
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-added');
+    }
+
+    public function updateFeature(
+        Request $request,
+        Project $project,
+        $featureId,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'feature' => ['required', 'string', 'max:255'],
+        ]);
+
+        $feature = $project->features()->findOrFail($featureId);
+        $feature->update($validated);
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-updated');
+    }
+
+    public function removeFeature(
+        Project $project,
+        $featureId,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id) {
+            abort(403);
+        }
+
+        $feature = $project->features()->findOrFail($featureId);
+        $feature->delete();
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-removed');
     }
 }

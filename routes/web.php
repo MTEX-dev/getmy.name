@@ -38,6 +38,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
             Route::patch('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
             Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+            Route::delete('/projects/{project}/image', [ProjectController::class, 'removeImage'])->name('projects.image.remove');
+            Route::post('/projects/{project}/technologies', [ProjectController::class, 'addTechnology'])->name('projects.technologies.add');
+            Route::patch('/projects/{project}/technologies/{technology}', [ProjectController::class, 'updateTechnology'])->name('projects.technologies.update');
+            Route::delete('/projects/{project}/technologies/{technology}', [ProjectController::class, 'removeTechnology'])->name('projects.technologies.remove');
+            Route::post('/projects/{project}/features', [ProjectController::class, 'addFeature'])->name('projects.features.add');
+            Route::patch('/projects/{project}/features/{feature}', [ProjectController::class, 'updateFeature'])->name('projects.features.update');
+            Route::delete('/projects/{project}/features/{feature}', [ProjectController::class, 'removeFeature'])->name('projects.features.remove');
             Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store');
             Route::delete('/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');
             Route::post('/education', [EducationController::class, 'store'])->name('education.store');
