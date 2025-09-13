@@ -169,7 +169,7 @@ class ProjectController extends Controller
             abort(403);
         }
 
-        $project->technologies()->where('uuid', $technology)->delete();
+        $project->technologies()->where('id', $technology)->delete();
 
         return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-removed');
     }
@@ -197,7 +197,7 @@ class ProjectController extends Controller
             abort(403);
         }
 
-        $project->features()->where('uuid', $feature)->delete();
+        $project->features()->where('id', $feature)->delete();
 
         return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-removed');
     }

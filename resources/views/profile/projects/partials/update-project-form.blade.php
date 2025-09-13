@@ -61,7 +61,10 @@
                 @foreach ($project->technologies as $technology)
                     <div class="flex items-center gap-2">
                         <x-text-input name="technologies[{{ $technology->uuid }}]" type="text" class="block w-full" :value="old('technologies[' . $technology->uuid . ']', $technology->technologie)" />
-                        <x-danger-button form="remove-technology-{{ $technology->uuid }}">{{ __('Remove') }}</x-danger-button>
+                        <form id="remove-technology-{{ $technology->id }}" method="post" action="{{ route('profile.projects.technologies.remove', ['project' => $project, 'technology' => $technology]) }}" class="hidden">
+                            @csrf
+                            @method('delete')
+                        </form>
                     </div>
                 @endforeach
                 <div class="flex items-center gap-2">
