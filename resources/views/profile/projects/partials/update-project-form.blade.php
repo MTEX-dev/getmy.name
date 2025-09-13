@@ -21,7 +21,7 @@
 
         <div>
             <x-input-label for="description" :value="__('Description')" />
-            <x-textarea-input id="description" name="description" class="mt-1 block w-full">{{ old('description', $project->description) }}</x-textarea-input>
+            <x-textarea-input id="description" name="description" class="mt-1 block w-full" value="{{ old('description', $project->description) }}" />
             <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 
@@ -51,7 +51,7 @@
 
         <div>
             <x-input-label for="challenges" :value="__('Challenges')" />
-            <x-textarea-input id="challenges" name="challenges" class="mt-1 block w-full">{{ old('challenges', $project->challenges) }}</x-textarea-input>
+            <x-textarea-input id="challenges" name="challenges" class="mt-1 block w-full" value="{{ old('challenges', $project->challenges) }}" />
             <x-input-error class="mt-2" :messages="$errors->get('challenges')" />
         </div>
 
