@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
-use App\Models\Technology;
+use App\Models\ProjectTechnology;
 use App\Models\Feature;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -121,7 +121,7 @@ class ProjectController extends Controller
         return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-added');
     }
 
-    public function updateTechnology(Request $request, Project $project, Technology $technology): RedirectResponse
+    public function updateTechnology(Request $request, Project $project,ProjectTechnology $technology): RedirectResponse
     {
         if (Auth::id() !== $project->user_id || $project->id !== $technology->project_id) {
             abort(403);
@@ -138,7 +138,7 @@ class ProjectController extends Controller
 
     public function removeTechnology(
         Project $project,
-        Technology $technology,
+       ProjectTechnology $technology,
     ): RedirectResponse {
         if (Auth::id() !== $project->user_id || $project->id !== $technology->project_id) {
             abort(403);
