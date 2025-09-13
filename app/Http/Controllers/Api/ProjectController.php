@@ -58,6 +58,20 @@ class ProjectController extends Controller
         return response()->json($project->load('features'));
     }
 
+    public function updateFeature(Request $request, Project $project, $featureId)
+    {
+        $this->authorize('update', $project);
+
+        $validatedData = $request->validate([
+            'feature' => 'required|string|max:255',
+        ]);
+
+        $feature = $project->features()->findOrFail($featureId);
+        $feature->update($validatedData);
+
+        return response()->json($project->load('features'));
+    }
+
     public function removeFeature(Project $project, $featureId)
     {
         $this->authorize('update', $project);
