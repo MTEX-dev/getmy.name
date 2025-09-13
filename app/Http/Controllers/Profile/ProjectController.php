@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
+use App\Models\Feature;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,14 +42,6 @@ class ProjectController extends Controller
             'role' => ['nullable', 'string', 'max:255'],
             'challenges' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'max:2048'],
-            'technologies' => ['nullable', 'array'],
-            'technologies.*' => ['string', 'max:255'],
-            'new_technologies' => ['nullable', 'array'],
-            'new_technologies.*' => ['nullable', 'string', 'max:255'],
-            'features' => ['nullable', 'array'],
-            'features.*' => ['string', 'max:255'],
-            'new_features' => ['nullable', 'array'],
-            'new_features.*' => ['nullable', 'string', 'max:255'],
         ]);
 
         if ($request->hasFile('image')) {
@@ -57,42 +51,8 @@ class ProjectController extends Controller
             $project->image = $request->file('image')->store('projects', 'public');
         }
 
-        $project->title = $validated['title'];
-        $project->description = $validated['description'];
-        $project->url = $validated['url'];
-        $project->github_url = $validated['github_url'];
-        $project->live_demo_url = $validated['live_demo_url'];
-        $project->role = $validated['role'];
-        $project->challenges = $validated['challenges'];
+        $project->fill($validated);
         $project->save();
-
-        if (isset($validated['technologies'])) {
-            foreach ($validated['technologies'] as $uuid => $technologie) {
-                $project->technologies()->where('uuid', $uuid)->update(['technologie' => $technologie]);
-            }
-        }
-
-        if (isset($validated['new_technologies'])) {
-            foreach ($validated['new_technologies'] as $newTechnologie) {
-                if ($newTechnologie) {
-                    $project->technologies()->create(['technologie' => $newTechnologie]);
-                }
-            }
-        }
-
-        if (isset($validated['features'])) {
-            foreach ($validated['features'] as $uuid => $feature) {
-                $project->features()->where('uuid', $uuid)->update(['feature' => $feature]);
-            }
-        }
-
-        if (isset($validated['new_features'])) {
-            foreach ($validated['new_features'] as $newFeature) {
-                if ($newFeature) {
-                    $project->features()->create(['feature' => $newFeature]);
-                }
-            }
-        }
 
         return Redirect::route('profile.projects.edit', $project)->with('status', 'project-updated');
     }
@@ -161,15 +121,30 @@ class ProjectController extends Controller
         return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-added');
     }
 
-    public function removeTechnology(
-        Project $project,
-        string $technology,
-    ): RedirectResponse {
-        if (Auth::id() !== $project->user_id) {
+    public function updateTechnology(Request $request, Project $project, Technology $technology): RedirectResponse
+    {
+        if (Auth::id() !== $project->user_id || $project->id !== $technology->project_id) {
             abort(403);
         }
 
-        $project->technologies()->where('id', $technology)->delete();
+        $validated = $request->validate([
+            'technologie' => ['required', 'string', 'max:255'],
+        ]);
+
+        $technology->update($validated);
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-updated');
+    }
+
+    public function removeTechnology(
+        Project $project,
+        Technology $technology,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id || $project->id !== $technology->project_id) {
+            abort(403);
+        }
+
+        $technology->delete();
 
         return Redirect::route('profile.projects.edit', $project)->with('status', 'technology-removed');
     }
@@ -189,15 +164,30 @@ class ProjectController extends Controller
         return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-added');
     }
 
-    public function removeFeature(
-        Project $project,
-        string $feature,
-    ): RedirectResponse {
-        if (Auth::id() !== $project->user_id) {
+    public function updateFeature(Request $request, Project $project, Feature $feature): RedirectResponse
+    {
+        if (Auth::id() !== $project->user_id || $project->id !== $feature->project_id) {
             abort(403);
         }
 
-        $project->features()->where('id', $feature)->delete();
+        $validated = $request->validate([
+            'feature' => ['required', 'string', 'max:255'],
+        ]);
+
+        $feature->update($validated);
+
+        return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-updated');
+    }
+
+    public function removeFeature(
+        Project $project,
+        Feature $feature,
+    ): RedirectResponse {
+        if (Auth::id() !== $project->user_id || $project->id !== $feature->project_id) {
+            abort(403);
+        }
+
+        $feature->delete();
 
         return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-removed');
     }
