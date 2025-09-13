@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ProjectTechnologie extends Model
+class ProjectTechnology extends Model
 {
     use  HasUuids;
     protected $table = 'project_technologies';

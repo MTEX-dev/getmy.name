@@ -29,7 +29,7 @@ class Project extends Model
 
     public function technologies()
     {
-        return $this->hasMany(ProjectTechnologie::class);
+        return $this->hasMany(ProjectTechnology::class);
     }
 
     public function features()
