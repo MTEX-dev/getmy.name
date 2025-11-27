@@ -2,7 +2,7 @@
 
 @php
 $classes = ($active ?? false)
-            ? 'block w-full ps-3 pe-4 py-2 border-l-4 border-gimysite-400 dark:border-gimysite-600 text-start text-base font-medium text-gimysite-700 dark:text-gimysite-300 bg-gimysite-50 dark:bg-gimysite-900/50 focus:outline-none focus:text-gimysite-800 dark:focus:text-gimysite-200 focus:bg-gimysite-100 dark:focus:bg-gimysite-900 focus:border-gimysite-700 dark:focus:border-gimysite-300 transition duration-150 ease-in-out'
+            ? 'block w-full ps-3 pe-4 py-2 border-l-4 border-getmyname-400 dark:border-getmyname-600 text-start text-base font-medium text-getmyname-700 dark:text-getmyname-300 bg-getmyname-50 dark:bg-getmyname-900/50 focus:outline-none focus:text-getmyname-800 dark:focus:text-getmyname-200 focus:bg-getmyname-100 dark:focus:bg-getmyname-900 focus:border-getmyname-700 dark:focus:border-getmyname-300 transition duration-150 ease-in-out'
             : 'block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out';
 @endphp
 

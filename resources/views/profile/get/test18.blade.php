@@ -75,7 +75,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <section class="pt-24 pb-20 bg-gradient-to-br from-blue-50 to-getmyname-100 dark:from-gray-900 dark:to-gray-800">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <div class="relative inline-block mb-8">
@@ -88,7 +88,7 @@
                     {{ $data['name'] }}
                 </h1>
                 
-                <p class="text-xl sm:text-2xl text-indigo-600 dark:text-indigo-400 font-medium mb-6">
+                <p class="text-xl sm:text-2xl text-getmyname-600 dark:text-getmyname-400 font-medium mb-6">
                     {{ $data['title'] }}
                 </p>
                 
@@ -106,7 +106,7 @@
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="mailto:{{ $data['email'] }}" 
-                       class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl">
+                       class="inline-flex items-center px-6 py-3 bg-getmyname-600 hover:bg-getmyname-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
@@ -129,7 +129,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">About Me</h2>
-                <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                <div class="w-20 h-1 bg-getmyname-600 mx-auto"></div>
             </div>
             
             <div class="prose prose-lg dark:prose-invert max-w-none">
@@ -145,12 +145,12 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Skills</h2>
-                <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                <div class="w-20 h-1 bg-getmyname-600 mx-auto"></div>
             </div>
             
             <div class="flex flex-wrap gap-3 justify-center">
                 @foreach($data['skills'] as $skill)
-                    <span class="px-4 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full border border-gray-200 dark:border-gray-600 hover:border-indigo-300 dark:hover:border-indigo-500 hover:shadow-md transition-all duration-300 font-medium">
+                    <span class="px-4 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full border border-gray-200 dark:border-gray-600 hover:border-getmyname-300 dark:hover:border-getmyname-500 hover:shadow-md transition-all duration-300 font-medium">
                         {{ $skill }}
                     </span>
                 @endforeach
@@ -163,7 +163,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Projects</h2>
-                <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                <div class="w-20 h-1 bg-getmyname-600 mx-auto"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -173,7 +173,7 @@
                             <img src="{{ $project['image_path'] }}" alt="{{ $project['title'] }}" 
                                  class="w-full h-48 object-cover rounded-lg mb-6">
                         @else
-                            <div class="w-full h-48 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-lg mb-6 flex items-center justify-center">
+                            <div class="w-full h-48 bg-gradient-to-br from-getmyname-400 to-purple-500 rounded-lg mb-6 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                 </svg>
@@ -184,7 +184,7 @@
                         <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{{ $project['description'] }}</p>
                         
                         <a href="{{ $project['url'] }}" target="_blank" rel="noopener"
-                           class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors">
+                           class="inline-flex items-center text-getmyname-600 dark:text-getmyname-400 hover:text-getmyname-700 dark:hover:text-getmyname-300 font-medium transition-colors">
                             View Project
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -201,7 +201,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Experience</h2>
-                <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                <div class="w-20 h-1 bg-getmyname-600 mx-auto"></div>
             </div>
             
             <div class="space-y-8">
@@ -210,7 +210,7 @@
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ $experience['title'] }}</h3>
-                                <p class="text-indigo-600 dark:text-indigo-400 font-medium">{{ $experience['company'] }}</p>
+                                <p class="text-getmyname-600 dark:text-getmyname-400 font-medium">{{ $experience['company'] }}</p>
                                 @if($experience['location'])
                                     <p class="text-gray-500 dark:text-gray-400 text-sm">{{ $experience['location'] }}</p>
                                 @endif
@@ -234,7 +234,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Education</h2>
-                <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                <div class="w-20 h-1 bg-getmyname-600 mx-auto"></div>
             </div>
             
             <div class="space-y-8">
@@ -243,7 +243,7 @@
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ $education['degree'] }}</h3>
-                                <p class="text-indigo-600 dark:text-indigo-400 font-medium">{{ $education['school'] }}</p>
+                                <p class="text-getmyname-600 dark:text-getmyname-400 font-medium">{{ $education['school'] }}</p>
                                 <p class="text-gray-500 dark:text-gray-400 text-sm">{{ $education['field_of_study'] }}</p>
                             </div>
                             <div class="text-gray-500 dark:text-gray-400 text-sm mt-2 sm:mt-0">
@@ -265,7 +265,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="mb-4 sm:mb-0">
-                    <p class="text-gray-300">Powered by <a href="https://getmy.name" class="text-indigo-400 hover:text-indigo-300 transition-colors">getmy.name</a> from <a href="https://mtex.dev" class="text-indigo-400 hover:text-indigo-300 transition-colors">mtex.dev</a></p>
+                    <p class="text-gray-300">Powered by <a href="https://getmy.name" class="text-getmyname-400 hover:text-getmyname-300 transition-colors">getmy.name</a> from <a href="https://mtex.dev" class="text-getmyname-400 hover:text-getmyname-300 transition-colors">mtex.dev</a></p>
                 </div>
                 <div class="text-gray-500 text-sm">
                     API Requests: {{ number_format($data['api_request_count']) }}

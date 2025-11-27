@@ -135,4 +135,10 @@ return [
     'template.title' => 'Profile Template',
     'template.description' => 'Choose a template for your public profile.',
     'template.label' => 'Template',
+
+    'password' => 'Password',
+    'design' => 'Design',
+    'projects' => 'Manage Projects',
+    'experiences' => 'Your previous experiences',
+    
 ];

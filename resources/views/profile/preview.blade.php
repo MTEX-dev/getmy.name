@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -9,8 +9,6 @@
 @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            @include('profile.partials.nav')
-
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-4xl">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">
@@ -39,7 +37,7 @@
                             <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                                 {{ $data['name'] }}
                             </h1>
-                            <p class="text-lg text-blue-600 dark:text-blue-400 mb-2">
+                            <p class="text-lg text-getmyname-600 dark:text-getmyname-400 mb-2">
                                 {{ $data['title'] }}
                             </p>
                             <p class="text-gray-600 dark:text-gray-300 mb-2">
@@ -118,7 +116,7 @@
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($data['skills'] as $skill)
                                     <span
-                                        class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
+                                        class="px-3 py-1 bg-getmyname-100 dark:bg-getmyname-900 text-getmyname-800 dark:text-getmyname-200 rounded-full text-sm font-medium">
                                         {{ $skill }}
                                     </span>
                                 @endforeach
@@ -133,11 +131,11 @@
                             </h3>
                             <div class="space-y-6">
                                 @foreach ($data['experiences'] as $experience)
-                                    <div class="border-l-2 border-blue-200 dark:border-blue-700 pl-4">
+                                    <div class="border-l-2 border-getmyname-200 dark:border-getmyname-700 pl-4">
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                             {{ $experience['title'] }}
                                         </h4>
-                                        <p class="text-blue-600 dark:text-blue-400 font-medium">
+                                        <p class="text-getmyname-600 dark:text-getmyname-400 font-medium">
                                             {{ $experience['company'] }}
                                         </p>
                                         @if ($experience['location'])
@@ -167,12 +165,12 @@
                             </h3>
                             <div class="space-y-6">
                                 @foreach ($data['education'] as $education)
-                                    <div class="border-l-2 border-green-200 dark:border-green-700 pl-4">
+                                    <div class="border-l-2 border-getmyname-200 dark:border-getmyname-700 pl-4">
                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                             {{ $education['degree'] }} in
                                             {{ $education['field_of_study'] }}
                                         </h4>
-                                        <p class="text-green-600 dark:text-green-400 font-medium">
+                                        <p class="text-getmyname-600 dark:text-getmyname-400 font-medium">
                                             {{ $education['school'] }}
                                         </p>
                                         <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">
@@ -213,7 +211,7 @@
                                         @endif
                                         @if ($project['url'])
                                             <a href="{{ $project['url'] }}" target="_blank"
-                                                class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200">
+                                                class="inline-flex items-center text-getmyname-600 dark:text-getmyname-400 hover:text-getmyname-800 dark:hover:text-getmyname-200">
                                                 View Project
                                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">

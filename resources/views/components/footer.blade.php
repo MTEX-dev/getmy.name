@@ -31,7 +31,7 @@
                 <ul class="mt-4 space-y-2">
                     <li>
                         <a href="https://gimy.site" target="_blank" class="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                            gimy.site <span class="text-xs text-indigo-500">({{ __('Free static webhosting') }})</span>
+                            gimy.site <span class="text-xs text-getmyname-500">({{ __('Free static webhosting') }})</span>
                         </a>
                     </li>
                 </ul>

@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 min-h-screen transition-all duration-300">
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-getmyname-50 dark:from-slate-900 dark:via-slate-800 dark:to-getmyname-900 min-h-screen transition-all duration-300">
     
     <!-- Theme Switcher -->
     <div class="fixed top-4 right-4 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full p-2 shadow-lg border border-slate-200 dark:border-slate-700">
@@ -17,7 +17,7 @@
                     class="p-2 rounded-full transition-all duration-200">
                 <i class="bi bi-sun-fill text-sm"></i>
             </button>
-            <button @click="setTheme('dark')" :class="theme === 'dark' ? 'bg-indigo-600 text-white ring-2 ring-indigo-300' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'" 
+            <button @click="setTheme('dark')" :class="theme === 'dark' ? 'bg-getmyname-600 text-white ring-2 ring-getmyname-300' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'" 
                     class="p-2 rounded-full transition-all duration-200">
                 <i class="bi bi-moon-stars-fill text-sm"></i>
             </button>
@@ -42,7 +42,7 @@
                         <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">
                             {{ $data['name'] }}
                         </h1>
-                        <h2 class="text-xl md:text-2xl text-indigo-600 dark:text-indigo-400 font-medium mb-4">
+                        <h2 class="text-xl md:text-2xl text-getmyname-600 dark:text-getmyname-400 font-medium mb-4">
                             {{ $data['title'] }}
                         </h2>
                         <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed max-w-2xl">
@@ -93,7 +93,7 @@
                 <!-- About Me -->
                 <section class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-200/50 dark:border-slate-700/50 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-                        <i class="bi bi-person-fill text-indigo-600 dark:text-indigo-400 mr-3"></i>
+                        <i class="bi bi-person-fill text-getmyname-600 dark:text-getmyname-400 mr-3"></i>
                         About Me
                     </h3>
                     <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
@@ -104,7 +104,7 @@
                 <!-- Projects -->
                 <section class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-200/50 dark:border-slate-700/50 transform rotate-0.5 hover:rotate-0 transition-transform duration-300">
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center">
-                        <i class="bi bi-code-square text-indigo-600 dark:text-indigo-400 mr-3"></i>
+                        <i class="bi bi-code-square text-getmyname-600 dark:text-getmyname-400 mr-3"></i>
                         Featured Projects
                     </h3>
                     <div class="grid gap-6">
@@ -122,7 +122,7 @@
                                 </p>
                                 @if(isset($project['url']))
                                     <a href="{{ $project['url'] }}" target="_blank" rel="noopener" 
-                                       class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition-colors duration-200 text-sm font-medium">
+                                       class="inline-flex items-center px-4 py-2 bg-getmyname-600 hover:bg-getmyname-700 text-white rounded-full transition-colors duration-200 text-sm font-medium">
                                         <i class="bi bi-box-arrow-up-right mr-2"></i>
                                         View Project
                                     </a>
@@ -135,18 +135,18 @@
                 <!-- Experience -->
                 <section class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-200/50 dark:border-slate-700/50 transform -rotate-0.5 hover:rotate-0 transition-transform duration-300">
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center">
-                        <i class="bi bi-briefcase-fill text-indigo-600 dark:text-indigo-400 mr-3"></i>
+                        <i class="bi bi-briefcase-fill text-getmyname-600 dark:text-getmyname-400 mr-3"></i>
                         Experience
                     </h3>
                     <div class="space-y-6">
                         @foreach($data['experiences'] as $experience)
-                            <div class="relative pl-8 border-l-2 border-indigo-200 dark:border-indigo-800 last:border-l-0">
-                                <div class="absolute -left-2 top-0 w-4 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full"></div>
+                            <div class="relative pl-8 border-l-2 border-getmyname-200 dark:border-getmyname-800 last:border-l-0">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-getmyname-600 dark:bg-getmyname-400 rounded-full"></div>
                                 <div class="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
                                     <h4 class="text-xl font-semibold text-slate-900 dark:text-white">
                                         {{ $experience['title'] }}
                                     </h4>
-                                    <h5 class="text-lg font-medium text-indigo-600 dark:text-indigo-400 mb-2">
+                                    <h5 class="text-lg font-medium text-getmyname-600 dark:text-getmyname-400 mb-2">
                                         {{ $experience['company'] }} • {{ $experience['location'] }}
                                     </h5>
                                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">
@@ -170,12 +170,12 @@
                 <!-- Skills -->
                 <section class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-200/50 dark:border-slate-700/50 transform rotate-1 hover:rotate-0 transition-transform duration-300">
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-                        <i class="bi bi-gear-fill text-indigo-600 dark:text-indigo-400 mr-3"></i>
+                        <i class="bi bi-gear-fill text-getmyname-600 dark:text-getmyname-400 mr-3"></i>
                         Skills
                     </h3>
                     <div class="flex flex-wrap gap-3">
                         @foreach($data['skills'] as $skill)
-                            <span class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-shadow duration-300 hover:scale-105 transform">
+                            <span class="px-4 py-2 bg-gradient-to-r from-getmyname-500 to-purple-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-shadow duration-300 hover:scale-105 transform">
                                 {{ $skill }}
                             </span>
                         @endforeach
@@ -185,7 +185,7 @@
                 <!-- Education -->
                 <section class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-200/50 dark:border-slate-700/50 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-                        <i class="bi bi-mortarboard-fill text-indigo-600 dark:text-indigo-400 mr-3"></i>
+                        <i class="bi bi-mortarboard-fill text-getmyname-600 dark:text-getmyname-400 mr-3"></i>
                         Education
                     </h3>
                     <div class="space-y-6">
@@ -194,7 +194,7 @@
                                 <h4 class="text-lg font-semibold text-slate-900 dark:text-white">
                                     {{ $education['degree'] }}
                                 </h4>
-                                <h5 class="text-md font-medium text-indigo-600 dark:text-indigo-400 mb-1">
+                                <h5 class="text-md font-medium text-getmyname-600 dark:text-getmyname-400 mb-1">
                                     {{ $education['field_of_study'] }}
                                 </h5>
                                 <p class="text-slate-700 dark:text-slate-300 mb-2">

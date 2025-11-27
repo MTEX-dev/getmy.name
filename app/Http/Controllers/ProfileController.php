@@ -23,6 +23,24 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user'));
     }
 
+    public function password(Request $request): View
+    {
+        $user = $request->user();
+        return view('profile.password', compact('user'));
+    }
+
+    public function avatar(Request $request): View
+    {
+        $user = $request->user();
+        return view('profile.avatar', compact('user'));
+    }
+
+    public function design(Request $request): View
+    {
+        $user = $request->user();
+        return view('profile.design', compact('user'));
+    }
+
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();

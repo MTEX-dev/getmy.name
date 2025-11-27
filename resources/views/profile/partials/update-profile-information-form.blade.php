@@ -43,7 +43,7 @@
 
         <div>
             <x-input-label for="location" :value="__('profile.location') . ' (' . __('profile.optional') . ')'" />
-            <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" x-data="locationSelect()" x-init="init()">
+            <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-data="locationSelect()" x-init="init()">
                 <template x-for="loc in locations">
                     <option :value="loc" x-text="loc" :selected="loc === locationValue"></option>
                 </template>
@@ -63,7 +63,7 @@
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('profile.email_unverified') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-getmyname-500 dark:focus:ring-offset-gray-800">
                             {{ __('profile.resend_verification') }}
                         </button>
                     </p>

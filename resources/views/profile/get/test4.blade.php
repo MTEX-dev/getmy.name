@@ -108,7 +108,7 @@
     </style>
 </head>
 
-<body class="font-inter bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 text-gray-900 dark:text-white transition-all duration-500">
+<body class="font-inter bg-gradient-to-br from-slate-50 via-blue-50 to-getmyname-50 dark:from-gray-900 dark:via-blue-900 dark:to-getmyname-900 text-gray-900 dark:text-white transition-all duration-500">
     <div class="nebula-gradient" aria-hidden="true"></div>
 
     <div class="relative z-10">

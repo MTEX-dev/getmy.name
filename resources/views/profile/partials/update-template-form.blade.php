@@ -22,7 +22,7 @@
             <select
                 id="template"
                 name="template"
-                class="mt-1 block w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600 sm:text-sm"
+                class="mt-1 block w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-base focus:border-getmyname-500 focus:outline-none focus:ring-getmyname-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-getmyname-600 dark:focus:ring-getmyname-600 sm:text-sm"
             >
                 @foreach (['default', 'modern', 'aether', 'serenity', 'codely', 'test'] as $template)
                     <option

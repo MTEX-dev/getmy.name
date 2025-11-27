@@ -21,6 +21,9 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['aut
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+        Route::get('/password', [ProfileController::class, 'password'])->name('password');
+        Route::get('/avatar', [ProfileController::class, 'avatar'])->name('avatar');
+        Route::get('/design', [ProfileController::class, 'design'])->name('design');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::patch('/template', [ProfileController::class, 'updateTemplate'])->name('template.update');
         Route::middleware('verified')->group(function () {

@@ -3,7 +3,7 @@
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start">
             <div class="lg:pr-8 lg:pt-4">
                 <div class="lg:max-w-lg">
-                    <h2 class="text-base font-semibold leading-7 text-gimysite-600 dark:text-gimysite-400">
+                    <h2 class="text-base font-semibold leading-7 text-getmyname-600 dark:text-getmyname-400">
                         {{ __('lander.api_showcase.section_title') }}
                     </h2>
                     <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
@@ -21,7 +21,7 @@
                         </p>
                         <div class="flex items-center mt-6 gap-x-6">
                             <a href="#get-started"
-                               class="rounded-md bg-gimysite-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gimysite-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gimysite-600 transition-colors duration-200">
+                               class="rounded-md bg-getmyname-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-getmyname-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-getmyname-600 transition-colors duration-200">
                                 {{ __('lander.api_showcase.cta_btn') }}
                             </a>
                         </div>

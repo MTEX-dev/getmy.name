@@ -83,7 +83,7 @@
           {{ $data['location'] }}
         </p>
         <a href="mailto:{{ $data['email'] }}"
-           class="inline-block mt-4 px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 focus:outline-none transition">Contact
+           class="inline-block mt-4 px-4 py-2 rounded-md bg-getmyname-600 text-white text-sm font-medium hover:bg-getmyname-700 focus:outline-none transition">Contact
           Me</a>
       </div>
       <div class="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
@@ -135,7 +135,7 @@
               </div>
               <div class="mt-auto flex items-center justify-between">
                 <a href="{{ $project['url'] }}" target="_blank" rel="noopener noreferrer"
-                   class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline">Visit</a>
+                   class="text-sm font-medium text-getmyname-600 dark:text-getmyname-400 hover:underline">Visit</a>
                 <span class="text-xs text-gray-500 dark:text-gray-400">ID: {{ $project['id'] }}</span>
               </div>
             </article>

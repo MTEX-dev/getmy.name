@@ -29,7 +29,7 @@
                         <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">Contact: {{ $profile->email }}</p>
                     @endif
                     <p class="text-gray-500 dark:text-gray-500 text-xs mt-2">
-                        Public API Endpoint: <code class="text-indigo-600 dark:text-indigo-400">https://getmy.name/api/{{ $profile->username }}</code>
+                        Public API Endpoint: <code class="text-getmyname-600 dark:text-getmyname-400">https://getmy.name/api/{{ $profile->username }}</code>
                     </p>
                     <div class="mt-6 flex items-center gap-4">
                         <x-primary-button-redirect :href="route('profiles.edit')">{{ __('Edit Core Info') }}</x-primary-button-redirect>
@@ -73,7 +73,7 @@
                             <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200">{{ $project->name }}</h4>
                             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ $project->description }}</p>
                             @if ($project->url)
-                                <a href="{{ $project->url }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 text-sm hover:underline mt-1 block">View Project</a>
+                                <a href="{{ $project->url }}" target="_blank" class="text-getmyname-600 dark:text-getmyname-400 text-sm hover:underline mt-1 block">View Project</a>
                             @endif
                             @if ($project->image_path)
                                 <img src="{{ $project->imageUrl() }}" alt="{{ $project->name }}" class="mt-3 w-32 h-20 object-cover rounded-md" />
@@ -103,16 +103,16 @@
                     @if ($profile->socials)
                         <ul class="text-gray-700 dark:text-gray-300 space-y-2">
                             @if ($profile->socials->github)
-                                <li>GitHub: <a href="https://github.com/{{ $profile->socials->github }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->github }}</a></li>
+                                <li>GitHub: <a href="https://github.com/{{ $profile->socials->github }}" target="_blank" class="text-getmyname-600 dark:text-getmyname-400 hover:underline">{{ $profile->socials->github }}</a></li>
                             @endif
                             @if ($profile->socials->linkedin)
-                                <li>LinkedIn: <a href="https://linkedin.com/in/{{ $profile->socials->linkedin }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->linkedin }}</a></li>
+                                <li>LinkedIn: <a href="https://linkedin.com/in/{{ $profile->socials->linkedin }}" target="_blank" class="text-getmyname-600 dark:text-getmyname-400 hover:underline">{{ $profile->socials->linkedin }}</a></li>
                             @endif
                             @if ($profile->socials->twitter)
-                                <li>Twitter: <a href="https://twitter.com/{{ $profile->socials->twitter }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->twitter }}</a></li>
+                                <li>Twitter: <a href="https://twitter.com/{{ $profile->socials->twitter }}" target="_blank" class="text-getmyname-600 dark:text-getmyname-400 hover:underline">{{ $profile->socials->twitter }}</a></li>
                             @endif
                             @if ($profile->socials->personal_website)
-                                <li>Website: <a href="{{ $profile->socials->personal_website }}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">{{ $profile->socials->personal_website }}</a></li>
+                                <li>Website: <a href="{{ $profile->socials->personal_website }}" target="_blank" class="text-getmyname-600 dark:text-getmyname-400 hover:underline">{{ $profile->socials->personal_website }}</a></li>
                             @endif
                         </ul>
                     @else

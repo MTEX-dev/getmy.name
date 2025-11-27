@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -9,8 +9,6 @@
 @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            @include('profile.partials.nav')
-
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -34,7 +32,7 @@
                             <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 @foreach ($availableAbilities as $ability)
                                     <label class="flex items-center">
-                                        <input type="checkbox" name="abilities[]" value="{{ $ability }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
+                                        <input type="checkbox" name="abilities[]" value="{{ $ability }}" class="rounded border-gray-300 text-getmyname-600 shadow-sm focus:ring-getmyname-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-getmyname-600 dark:focus:ring-offset-gray-800">
                                         <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $ability }}</span>
                                     </label>
                                 @endforeach

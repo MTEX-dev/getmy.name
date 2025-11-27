@@ -37,7 +37,7 @@
                text-gray-600 dark:text-gray-300
                hover:bg-gray-200 dark:hover:bg-gray-600
                focus:outline-none focus:ring-2 focus:ring-offset-2 
-               focus:ring-gimysite-500 focus:ring-offset-gray-50 dark:focus:ring-offset-gray-800
+               focus:ring-getmyname-500 focus:ring-offset-gray-50 dark:focus:ring-offset-gray-800
                transition-colors duration-300 ease-in-out shadow-md"
         aria-label="Toggle theme"
         x-cloak

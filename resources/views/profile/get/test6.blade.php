@@ -242,7 +242,7 @@
 
             <section id="projects" class="py-16 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto">
-                    <h2 class="text-4xl font-bold mb-12 text-center text-indigo-600 dark:text-indigo-400 scroll-reveal">Featured Projects</h2>
+                    <h2 class="text-4xl font-bold mb-12 text-center text-getmyname-600 dark:text-getmyname-400 scroll-reveal">Featured Projects</h2>
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @if(!empty($data['projects']) && is_array($data['projects']))
@@ -264,7 +264,7 @@
                                         @if(!empty($project['tags']) && is_array($project['tags']))
                                             <div class="flex flex-wrap gap-2 mb-4">
                                                 @foreach($project['tags'] as $tag)
-                                                    <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-full text-xs">{{ $tag }}</span>
+                                                    <span class="px-3 py-1 bg-getmyname-100 dark:bg-getmyname-900 text-getmyname-700 dark:text-getmyname-300 rounded-full text-xs">{{ $tag }}</span>
                                                 @endforeach
                                             </div>
                                         @endif
