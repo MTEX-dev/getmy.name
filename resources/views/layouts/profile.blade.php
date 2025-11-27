@@ -71,6 +71,9 @@
                         <a href="{{ route('profile.api-tokens.index') }}" class="{{ request()->routeIs('profile.api-tokens.index') ? $activeClass : $inactiveClass }}">
                             {{ __('API Tokens') }}
                         </a>
+                        <a href="{{ route('profile.activity') }}" class="{{ request()->routeIs('profile.activity') ? $activeClass : $inactiveClass }}">
+                            {{ __('profile.activity.title') }}
+                        </a>
                     </nav>
                 </div>
             </aside>

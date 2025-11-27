@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectTechnology;
-use App\Models\Feature;
+use App\Models\ProjectFeature;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -164,7 +164,7 @@ class ProjectController extends Controller
         return Redirect::route('profile.projects.edit', $project)->with('status', 'feature-added');
     }
 
-    public function updateFeature(Request $request, Project $project, Feature $feature): RedirectResponse
+    public function updateFeature(Request $request, Project $project, ProjectProjectFeature $feature): RedirectResponse
     {
         if (Auth::id() !== $project->user_id || $project->id !== $feature->project_id) {
             abort(403);
@@ -181,7 +181,7 @@ class ProjectController extends Controller
 
     public function removeFeature(
         Project $project,
-        Feature $feature,
+        ProjectFeature $feature,
     ): RedirectResponse {
         if (Auth::id() !== $project->user_id || $project->id !== $feature->project_id) {
             abort(403);

@@ -140,5 +140,6 @@ return [
     'design' => 'Design',
     'projects' => 'Manage Projects',
     'experiences' => 'Your previous experiences',
+    'activity.title' => 'Profile Activity',
     
 ];
