@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
 class ProjectTechnology extends Model
 {
-    use  HasUuids, SoftDeletes, LogsActivity;
+    use HasFactory, HasUuids, SoftDeletes, LogsActivity;
     protected $table = 'project_technologies';
 
     protected static $logFillable = true;
