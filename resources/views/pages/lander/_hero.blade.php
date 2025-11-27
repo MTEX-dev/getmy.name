@@ -1,5 +1,5 @@
-<section class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 pt-28 dark:from-indigo-900/20 sm:pt-36 lg:pt-44">
-    <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 dark:bg-gray-800 dark:shadow-indigo-900/10 dark:ring-indigo-900 sm:-mr-80 lg:-mr-96" aria-hidden="true"></div>
+<section class="relative isolate overflow-hidden bg-gradient-to-b from-gimysite-100/20 pt-28 dark:from-gimysite-900/20 sm:pt-36 lg:pt-44">
+    <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-gimysite-600/10 ring-1 ring-gimysite-50 dark:bg-gray-800 dark:shadow-gimysite-900/10 dark:ring-gimysite-900 sm:-mr-80 lg:-mr-96" aria-hidden="true"></div>
     <div class="mx-auto max-w-7xl px-6 pt-12 pb-36 sm:pt-20 sm:pb-44 lg:px-8">
         <div class="mx-auto max-w-2xl lg:mx-0">
             <h2 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-6xl">{{ __('lander.hero.title') }}</h2>
@@ -7,10 +7,10 @@
                 {{ __('lander.hero.subtitle') }}
             </p>
             <p class="mt-4 text-md leading-7 text-gray-500 dark:text-gray-500">
-                {{ __('lander.hero.crafted_by') }} <a href="https://mtex.dev" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">mtex.dev</a>.
+                {{ __('lander.hero.crafted_by') }} <a href="https://mtex.dev" target="_blank" class="text-gimysite-600 dark:text-gimysite-400 hover:underline">mtex.dev</a>.
             </p>
             <div class="mt-10 flex items-center gap-x-6">
-                <a href="{{ route('register') }}" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <a href="{{ route('register') }}" class="rounded-md bg-gimysite-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gimysite-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gimysite-600">
                     {{ __('lander.hero.guest_cta_btn') }}
                 </a>
                 <a href="#features" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">

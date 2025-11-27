@@ -5,7 +5,7 @@
         <div class="py-24 sm:py-32">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <div class="mx-auto max-w-3xl lg:text-center">
-                    <h2 class="text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-400">
+                    <h2 class="text-base font-semibold leading-7 text-gimysite-600 dark:text-gimysite-400">
                         {{ __('api_docs.subtitle') }}
                     </h2>
                     <p class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -33,7 +33,7 @@
                                     as $section
                                 )
                                     <a href="#{{ $section }}"
-                                        class="block text-lg font-medium text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">
+                                        class="block text-lg font-medium text-gray-700 hover:text-gimysite-600 dark:text-gray-300 dark:hover:text-gimysite-400">
                                         {{ __('api_docs.' . $section . '.title') }}
                                     </a>
                                 @endforeach
@@ -105,7 +105,7 @@
 
                                     <div class="relative pl-16">
                                         <div
-                                            class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                                            class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-gimysite-600">
                                             <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                 {!! $data['icon'] !!}
