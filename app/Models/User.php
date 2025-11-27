@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -17,6 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use HasUuids;
     use HasApiTokens;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
