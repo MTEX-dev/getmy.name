@@ -20,7 +20,7 @@
 
                         <div>
                             <x-input-label for="name" :value="__('Token Name')" />
-                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required autofocus />
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"  autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
 

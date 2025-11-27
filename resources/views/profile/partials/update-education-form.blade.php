@@ -55,14 +55,14 @@
         <div>
             <x-input-label for="education_school" :value="__('profile.school')" />
             <x-text-input id="education_school" name="school" type="text" class="mt-1 block w-full"
-                :value="old('school')" required autocomplete="off" />
+                :value="old('school')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('school')" />
         </div>
 
         <div>
             <x-input-label for="education_degree" :value="__('profile.degree')" />
             <x-text-input id="education_degree" name="degree" type="text" class="mt-1 block w-full"
-                :value="old('degree')" required autocomplete="off" />
+                :value="old('degree')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('degree')" />
         </div>
 
@@ -76,7 +76,7 @@
         <div>
             <x-input-label for="education_start_date" :value="__('profile.start_date')" />
             <x-text-input id="education_start_date" name="start_date" type="date"
-                class="mt-1 block w-full" :value="old('start_date')" required autocomplete="off" />
+                class="mt-1 block w-full" :value="old('start_date')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('start_date')" />
         </div>
 

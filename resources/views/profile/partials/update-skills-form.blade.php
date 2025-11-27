@@ -41,7 +41,7 @@
 
         <div>
             <x-input-label for="skill_name" :value="__('profile.new_skill_name')" />
-            <x-text-input id="skill_name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="off" />
+            <x-text-input id="skill_name" name="name" type="text" class="mt-1 block w-full" :value="old('name')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 

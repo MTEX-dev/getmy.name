@@ -55,14 +55,14 @@
         <div>
             <x-input-label for="experience_title" :value="__('profile.experience_title')" />
             <x-text-input id="experience_title" name="title" type="text" class="mt-1 block w-full"
-                :value="old('title')" required autocomplete="off" />
+                :value="old('title')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('title')" />
         </div>
 
         <div>
             <x-input-label for="experience_company" :value="__('profile.experience_company')" />
             <x-text-input id="experience_company" name="company" type="text" class="mt-1 block w-full"
-                :value="old('company')" required autocomplete="off" />
+                :value="old('company')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('company')" />
         </div>
 
@@ -76,7 +76,7 @@
         <div>
             <x-input-label for="experience_start_date" :value="__('profile.start_date')" />
             <x-text-input id="experience_start_date" name="start_date" type="date"
-                class="mt-1 block w-full" :value="old('start_date')" required autocomplete="off" />
+                class="mt-1 block w-full" :value="old('start_date')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('start_date')" />
         </div>
 

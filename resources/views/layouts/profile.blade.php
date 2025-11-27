@@ -18,6 +18,7 @@
 </head>
 <body class="font-sans antialiased flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
     @include('components.navbar')
+    @include('components.toast-messages')
 
     <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-200 to-transparent dark:from-gray-700 dark:to-transparent -z-10"></div>
 

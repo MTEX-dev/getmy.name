@@ -19,14 +19,14 @@
 
                     <div>
                         <x-input-label for="username" :value="__('Username')" />
-                        <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username')" required autofocus />
+                        <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username')"  autofocus />
                         <x-input-error class="mt-2" :messages="$errors->get('username')" />
                         <p class="mt-2 text-sm text-gray-500">This will be part of your public API URL (e.g., getmy.name/api/<span class="font-bold">username</span>).</p>
                     </div>
 
                     <div>
                         <x-input-label for="title" :value="__('Your Title')" />
-                        <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title')" required />
+                        <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title')"  />
                         <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         <p class="mt-2 text-sm text-gray-500">e.g., Senior Laravel Developer, Fullstack Engineer</p>
                     </div>

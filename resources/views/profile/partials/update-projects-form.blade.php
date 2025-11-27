@@ -62,7 +62,7 @@
         <div>
             <x-input-label for="project_title" :value="__('profile.new_project_title')" />
             <x-text-input id="project_title" name="title" type="text" class="mt-1 block w-full"
-                :value="old('title')" required autocomplete="off" />
+                :value="old('title')"  autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('title')" />
         </div>
 
