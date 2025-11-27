@@ -171,4 +171,14 @@ class ProfileController extends Controller
         $user->load(['education']);
         return view('profile.education', compact('user'));
     }
+
+    public function activity(Request $request): View
+    {
+        $user = $request->user();
+        $activity = \Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return view('profile.activity', compact('activity'));
+    }
 }

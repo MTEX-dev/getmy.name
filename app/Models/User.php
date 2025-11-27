@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -19,6 +21,17 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasUuids;
     use HasApiTokens;
     use SoftDeletes;
+    use LogsActivity;
+
+    protected static $logFillable = true;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
+    }
 
     protected $fillable = [
         'name',
