@@ -86,9 +86,9 @@ return [
 
 
     'available_locales' => [
-    'English' => 'en',
-    'German' => 'de',
-    'French' => 'fr',
+        'en' => 'English',
+        'de' => 'Deutsch',
+        'fr' => 'FrEnCh',
     ],
 
     /*

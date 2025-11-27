@@ -18,8 +18,8 @@
          x-transition:leave-end="transform opacity-0 scale-95"
          class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none backdrop-blur-sm"
          role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-        <div class="py-1" role="none">
-            @foreach (config('app.available_locales') as $name => $code)
+        <div class="overflow-hidden" role="none">
+            @foreach (config('app.available_locales') as $code => $name)
                 <a href="{{ route('change-language', ['locale' => $code]) }}"
                    class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm
                           {{ App::currentLocale() === $code ? 'bg-gray-100 dark:bg-gray-600 font-semibold' : 'hover:bg-gray-50 dark:hover:bg-gray-600' }}"
