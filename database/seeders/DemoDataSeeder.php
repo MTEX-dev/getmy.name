@@ -22,14 +22,14 @@ class DemoDataSeeder extends Seeder
     {
         // Create specific users
         $michael = User::factory()->create([
-            'name' => 'Michaelninder',
+            'name' => 'Fabian Ternis',
             'username' => 'michaelninder',
             'email' => 'f.ternis@xpsystems.eu',
             'password' => Hash::make('Password'),
         ]);
 
         $dogwater = User::factory()->create([
-            'name' => 'DogWaterDev',
+            'name' => 'Ramsay Brewer',
             'username' => 'DogWaterDev',
             'email' => 'r.brewer@xpsystems.eu',
             'password' => Hash::make('Password'),
