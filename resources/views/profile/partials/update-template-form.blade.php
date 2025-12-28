@@ -17,23 +17,27 @@
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="template" :value="__('profile.template.label')" />
-            <select
-                id="template"
-                name="template"
-                class="mt-1 block w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-base focus:border-getmyname-500 focus:outline-none focus:ring-getmyname-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-getmyname-600 dark:focus:ring-getmyname-600 sm:text-sm"
-            >
-                @foreach (['default', 'modern', 'aether', 'serenity', 'codely', 'test'] as $template)
-                    <option
-                        value="{{ $template }}"
-                        @if ($user->template === $template) selected @endif
-                    >
-                        {{ ucfirst($template) }}
-                    </option>
-                @endforeach
-            </select>
-            <x-input-error class="mt-2" :messages="$errors->get('template')" />
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+                <x-input-label for="template" :value="__('profile.template.label')" />
+                <select
+                    id="template"
+                    name="template"
+                    class="mt-1 block w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-base focus:border-getmyname-500 focus:outline-none focus:ring-getmyname-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-getmyname-600 dark:focus:ring-getmyname-600 sm:text-sm"
+                    x-on:change="$dispatch('template-preview', $el.value)"
+                >
+                    @foreach ($templates as $template)
+                        <option
+                            value="{{ $template }}"
+                            @selected(old('template', $user->template) === $template)
+                        >
+                            {{ ucfirst($template) }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-input-error class="mt-2" :messages="$errors->get('template')" />
+            </div>
+
         </div>
 
         <div class="flex items-center gap-4">

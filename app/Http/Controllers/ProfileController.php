@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use App\Models\User;
 use App\Models\ApiRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -38,7 +39,9 @@ class ProfileController extends Controller
     public function design(Request $request): View
     {
         $user = $request->user();
-        return view('profile.design', compact('user'));
+        $templates = config('getmyname.design_templates');
+        
+        return view('profile.design', compact('user', 'templates'));
     }
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
@@ -66,13 +69,16 @@ class ProfileController extends Controller
     public function updateTemplate(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'template' => ['required', 'string', 'in:default,modern,test,aether,serenity,codely'],
+            'template' => [
+                'required', 
+                'string',
+                Rule::in(config('getmyname.design_templates'))
+            ],
         ]);
 
-        $request->user()->fill($validatedData);
-        $request->user()->save();
+        $request->user()->update($validatedData);
 
-        return Redirect::route('profile.edit')->with('status', 'template-updated');
+        return Redirect::route('profile.design')->with('status', 'template-updated');
     }
 
     public function destroy(Request $request): RedirectResponse
