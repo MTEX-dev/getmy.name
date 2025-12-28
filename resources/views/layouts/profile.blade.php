@@ -51,7 +51,7 @@
                         <a href="{{ route('profile.skills') }}" class="{{ request()->routeIs('profile.skills') ? $activeClass : $inactiveClass }}">
                             {{ __('profile.skills') }}
                         </a>
-                        <a href="{{ route('profile.projects') }}" class="{{ request()->routeIs('profile.projects') ? $activeClass : $inactiveClass }}">
+                        <a href="{{ route('profile.projects') }}" class="{{ request()->routeIs('profile.project*') ? $activeClass : $inactiveClass }}">
                             {{ __('profile.projects.title') }}
                         </a>
                         <a href="{{ route('profile.experiences') }}" class="{{ request()->routeIs('profile.experiences') ? $activeClass : $inactiveClass }}">
