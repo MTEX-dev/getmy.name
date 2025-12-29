@@ -116,6 +116,7 @@ return [
     'cancel' => 'Cancel',
 
     'preview.title' => 'Preview',
+    'preview.title_template' => 'Preview with Selected ":template" Template',
 
     'api_requests.title' => 'API Requests',
     'api_requests.subtitle' => 'Displays the number of API requests made to your profile over the last 30 days.',
@@ -150,5 +151,4 @@ return [
     'projects' => 'Manage Projects',
     'experiences' => 'Your previous experiences',
     'activity.title' => 'Profile Activity',
-
 ];

@@ -62,12 +62,13 @@ Route::middleware('auth')->group(function () {
         Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
         Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
-        Route::get('/preview', [ProfileController::class, 'preview'])->name('preview');
+        Route::get('/preview/{template?}', [ProfileController::class, 'preview'])->name('preview');
     });
 });
 
 Route::get('/get/{username}/data', [ProfileController::class, 'getData'])->name('profile.get.data');
-Route::get('/get/{username}', [ProfileController::class, 'getProfile'])->name('profile.get');
+Route::get('/get/{username}/{template?}', [ProfileController::class, 'getProfile'])->name('profile.get');
+
 Route::get('/legal/{section}', [PageController::class, 'legal'])->name('legal');
 Route::get('/api-docs', [\App\Http\Controllers\ApiDocumentationController::class, 'index'])->name('api-docs');
 

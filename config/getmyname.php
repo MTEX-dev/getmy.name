@@ -1,6 +1,7 @@
 <?php
 
     return [
+
     'design_templates' => [
         'default',
         'refined',
@@ -31,5 +32,5 @@
         //'youtube' => 'https://youtube.com/',
         'youtube_url' => '',
         'modrinth' => 'https://modrint.com/user/',
-    ]
+    ],
 ];

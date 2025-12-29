@@ -103,13 +103,24 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function preview(Request $request): View
+    public function preview(Request $request, ?string $template = null): View
     {
-        $username = Auth::user()->username;
-        $user = User::where('username', $username)->firstOrFail();
-        $data = $user->profileData();
+        //$username = Auth::user()->username;
+        //$user = User::where('username', $username)->firstOrFail();
+        //$data = $user->profileData();
+        $data = Auth::user()->profileData();
+        //$template = 'default';
 
-        return view('profile.preview', compact('data'));
+        dump($template);
+        if (!$template || !in_array($template, config('getmyname.design_templates', []))) {
+            //$template = $user->template ?? 'default';
+            $template = null;
+            dump("?");
+            dump(config('getmyname.design_templates'));
+        }
+
+
+        return view('profile.preview', compact('data', 'template'));
     }
 
     public function getData(Request $request, string $username): array
@@ -128,12 +139,18 @@ class ProfileController extends Controller
         return $user->profileData();
     }
 
-    public function getProfile(Request $request, string $username): View
+    public function getProfile(Request $request, string $username, string $template): View
     {
         $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
         $data = $this->getData($request, $username);
 
-        $template = $user->template ?? 'default';
+        $designTemplates = config('getmyname.design_templates', []);
+        $templateIsValid = in_array($template, $designTemplates);
+
+        if (!$templateIsValid) {
+            $template = $user->template ?? 'default';
+        }
+
         $viewName = 'profile.get.' . $template;
 
         if (!view()->exists($viewName)) {
