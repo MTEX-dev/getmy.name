@@ -103,21 +103,19 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function preview(Request $request, ?string $template = null): View
+    public function preview(Request $request): View
     {
-        //$username = Auth::user()->username;
-        //$user = User::where('username', $username)->firstOrFail();
-        //$data = $user->profileData();
-        $data = Auth::user()->profileData();
-        //$template = 'default';
+        $user = Auth::user();
+        $data = $user->profileData();
 
-        dump($template);
+        $template = $request->query('template');
+
+        //dump($template);
+
         if (!$template || !in_array($template, config('getmyname.design_templates', []))) {
-            //$template = $user->template ?? 'default';
             $template = null;
-            dump("?");
-            dump(config('getmyname.design_templates'));
         }
+
 
 
         return view('profile.preview', compact('data', 'template'));
