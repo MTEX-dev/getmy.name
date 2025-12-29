@@ -32,6 +32,10 @@ class Social extends Model
         'linkedin',
         'twitter',
         'personal_website',
+        'codepen',
+        'instagram',
+        'youtube_url',
+        //'modrinth',
     ];
 
     public function user()

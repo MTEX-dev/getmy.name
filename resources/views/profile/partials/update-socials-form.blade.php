@@ -37,6 +37,33 @@
             <x-input-error class="mt-2" :messages="$errors->get('personal_website')" />
         </div>
 
+        <div>
+            <div class="flex items-center gap-x-2">
+                <x-input-label for="codepen" :value="__('profile.codepen_username') . ' (' . __('profile.optional') . ')'" />
+                @include('components.badges.new')
+            </div>
+            <x-text-input id="codepen" name="codepen" type="text" class="mt-1 block w-full" :value="old('codepen', $user->socials->codepen ?? '')" autocomplete="codepen" placeholder="{{ __('profile.codepen_placeholder') }}" />
+            <x-input-error class="mt-2" :messages="$errors->get('codepen')" />
+        </div>
+
+        <div>
+            <div class="flex items-center gap-x-2">
+                <x-input-label for="instagram" :value="__('profile.instagram_username') . ' (' . __('profile.optional') . ')'" />
+                @include('components.badges.new')
+            </div>
+            <x-text-input id="instagram" name="instagram" type="text" class="mt-1 block w-full" :value="old('instagram', $user->socials->instagram ?? '')" autocomplete="instagram" placeholder="{{ __('profile.instagram_placeholder') }}" />
+            <x-input-error class="mt-2" :messages="$errors->get('instagram')" />
+        </div>
+
+        <div>
+            <div class="flex items-center gap-x-2">
+                <x-input-label for="youtube_url" :value="__('profile.youtube_url') . ' (' . __('profile.optional') . ')'" />
+                @include('components.badges.new')
+            </div>
+            <x-text-input id="youtube_url" name="youtube_url" type="url" class="mt-1 block w-full" :value="old('youtube_url', $user->socials->youtube_url ?? '')" autocomplete="youtube_url" placeholder="{{ __('profile.youtube_placeholder') }}" />
+            <x-input-error class="mt-2" :messages="$errors->get('youtube_url')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('profile.save') }}</x-primary-button>
 

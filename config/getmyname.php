@@ -20,4 +20,16 @@
         //'querynal',
         //'test',
     ],
+
+    'social_platforms' => [
+        'github' => 'https://github.com/',
+        'twitter' => 'https://x.com/',
+        'linkedin' => 'https://linkedin.com/in/',
+        'website' => '',
+        'codepen' => 'https://github.com/',
+        'instagram' => 'https://github.com/',
+        //'youtube' => 'https://youtube.com/',
+        'youtube_url' => '',
+        'modrinth' => 'https://modrint.com/user/',
+    ]
 ];

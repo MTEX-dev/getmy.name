@@ -11,4 +11,5 @@ return [
     'forgot_password' => 'Passwort vergessen?',
     'already_registered' => 'Bereits registriert?',
     'api_docs' => 'API-Doku',
+    'new' => 'Neu',
 ];

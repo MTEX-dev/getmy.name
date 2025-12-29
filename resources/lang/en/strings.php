@@ -11,6 +11,7 @@ return [
     'forgot_password' => 'Forgot your password?',
     'already_registered' => 'Already registered?',
     'api_docs' => 'API Docs',
+    'new' => 'New',
 
     'messages' => [
         'theme_change' => 'Theme Changed!',

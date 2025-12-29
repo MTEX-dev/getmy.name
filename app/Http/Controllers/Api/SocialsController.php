@@ -20,10 +20,13 @@ class SocialsController extends Controller
         $user = Auth::user();
 
         $validatedData = $request->validate([
-            'github_username' => 'nullable|string|max:255',
-            'linkedin_username' => 'nullable|string|max:255',
-            'twitter_username' => 'nullable|string|max:255',
-            'personal_website_url' => 'nullable|url',
+            'github' => ['nullable', 'string', 'max:255'],
+            'linkedin' => ['nullable', 'string', 'max:255'],
+            'twitter' => ['nullable', 'string', 'max:255'],
+            'personal_website' => ['nullable', 'url', 'max:2048'],
+            'codepen' => ['nullable', 'string', 'max:255'],
+            'instagram' => ['nullable', 'string', 'max:255'],
+            'youtube_url' => ['nullable', 'url', 'max:2048'],
         ]);
 
         foreach ($validatedData as $platform => $username) {

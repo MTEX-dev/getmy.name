@@ -89,10 +89,19 @@ return [
     'twitter_placeholder' => 'e.g., yourtwitterhandle',
     'personal_website_url' => 'Personal Website URL',
     'personal_website_placeholder' => 'e.g., https://yourwebsite.com',
+    'codepen_username' => 'CodePen Username',
+    'codepen_placeholder' => 'e.g., yourcodepenusername',
+    'instagram_username' => 'Instagram Username',
+    'instagram_placeholder' => 'e.g., yourinstagramhandle',
+    'youtube_url' => 'YouTube Channel URL',
+    'youtube_placeholder' => 'e.g., https://youtube.com/yourchannel',
     'socials.github' => 'GitHub',
     'socials.linkedin' => 'LinkedIn',
     'socials.twitter' => 'Twitter',
     'socials.website' => 'Website',
+    'socials.codepen' => 'CodePen',
+    'socials.instagram' => 'Instagram',
+    'socials.youtube' => 'YouTube',
 
 
     'update_password' => 'Update Password',
@@ -141,5 +150,5 @@ return [
     'projects' => 'Manage Projects',
     'experiences' => 'Your previous experiences',
     'activity.title' => 'Profile Activity',
-    
+
 ];

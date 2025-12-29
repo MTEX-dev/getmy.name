@@ -7,6 +7,7 @@ use App\Models\Social;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class SocialsController extends Controller
 {
@@ -17,6 +18,9 @@ class SocialsController extends Controller
             'linkedin' => ['nullable', 'string', 'max:255'],
             'twitter' => ['nullable', 'string', 'max:255'],
             'personal_website' => ['nullable', 'url', 'max:2048'],
+            'codepen' => ['nullable', 'string', 'max:255'],
+            'instagram' => ['nullable', 'string', 'max:255'],
+            'youtube_url' => ['nullable', 'url', 'max:2048'],
         ]);
 
         $user = $request->user();
