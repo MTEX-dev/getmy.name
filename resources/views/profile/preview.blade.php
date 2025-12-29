@@ -9,6 +9,14 @@
 @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            @foreach($avaibleTemplates as $avaibleTemplate)
+                <a href="{{ route('profile.preview', ['template' => $avaibleTemplate]) }}"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm
+                        {{ (isset($template) && $template == $avaibleTemplate) ? 'bg-getmyname-600 hover:bg-getmyname-700 focus:ring-getmyname-500 text-white ring-2 ring-getmyname-500' : 'text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-gray-500 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600' }}
+                        focus:outline-none focus:ring-2 focus:ring-offset-2">
+                    {{ ucfirst($avaibleTemplate) }}
+                </a>
+            @endforeach
             @if (isset($template) && $template)
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">
@@ -117,6 +125,38 @@
                                             </svg>
                                         </a>
                                     @endif
+                                    @if ($data['socials']['codepen'])
+                                        <a href="https://codepen.io/{{ $data['socials']['codepen'] }}"
+                                            target="_blank"
+                                            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                                            <span class="sr-only">CodePen</span>
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.084 3.163 9.429 7.627 11.196v-7.9h-2.932v-3.296h2.932v-2.204c0-2.903 1.77-4.48 4.368-4.48 1.242 0 2.315.093 2.628.134v3.03l-1.795.007c-1.403 0-1.674.667-1.674 1.642v2.164h3.362l-.547 3.296h-2.815v7.917c4.47-.935 7.823-5.023 7.823-9.765z" />
+                                            </svg>
+                                        </a>
+                                    @endif
+                                    @if ($data['socials']['instagram'])
+                                        <a href="https://instagram.com/{{ $data['socials']['instagram'] }}"
+                                            target="_blank"
+                                            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                                            <span class="sr-only">Instagram</span>
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M7.5 0h9a7.5 7.5 0 017.5 7.5v9a7.5 7.5 0 01-7.5 7.5h-9a7.5 7.5 0 01-7.5-7.5v-9A7.5 7.5 0 017.5 0zm0 2A5.5 5.5 0 002 7.5v9A5.5 5.5 0 007.5 22h9a5.5 5.5 0 005.5-5.5v-9A5.5 5.5 0 0016.5 2h-9zm10.5 4a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" />
+                                            </svg>
+                                        </a>
+                                    @endif
+                                    @if ($data['socials']['youtube_url'])
+                                        <a href="{{ $data['socials']['youtube_url'] }}" target="_blank"
+                                            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                                            <span class="sr-only">YouTube</span>
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M21.583 7.141c-.249-.861-.75-1.554-1.442-2.246C18.455 3.321 15.66 3 12 3s-6.455.321-8.141 1.895c-.692.692-1.193 1.385-1.442 2.246-.249.861-.318 1.962-.318 4.859s.069 3.998.318 4.859c.249.861.75 1.554 1.442 2.246C5.545 20.679 8.34 21 12 21s6.455-.321 8.141-1.895c.692-.692 1.193-1.385 1.442-2.246.249-.861.318-1.962.318-4.859s-.069-3.998-.318-4.859zM9.52 15.263V8.737l6.593 3.263-6.593 3.263z" />
+                                            </svg>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -206,7 +246,7 @@
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
                                     Projects
                                 </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 md::grid-cols-2 gap-6">
                                     @foreach ($data['projects'] as $project)
                                         <div
                                             class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">

@@ -10,8 +10,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div 
-                    class="max-w-xl" 
+                <div
+                    class="max-w-xl"
                     x-data="{ currentTemplate: '{{ old('template', $user->template ?? 'default') }}' }"
                     x-on:template-changed.prevent="currentTemplate = $event.detail"
                 >
@@ -28,8 +28,13 @@
                                     <p class="text-xs text-getmyname-700 dark:text-getmyname-400">See how "<span x-text="currentTemplate"></span>" looks with your data.</p>
                                 </div>
                             </div>
-                            <a 
-                                :href="'{{ route('profile.preview') }}?template=' + currentTemplate" 
+                            <!--a
+                                :href="`{{ route('profile.preview') }}/${currentTemplate}`"
+                                target="_blank"
+                                class="inline-flex items-center gap-2 rounded-lg bg-white dark:bg-gray-900 px-4 py-2 text-sm font-semibold text-getmyname-600 dark:text-getmyname-400 shadow-sm ring-1 ring-inset ring-getmyname-200 dark:ring-getmyname-800 hover:bg-getmyname-50 dark:hover:bg-gray-800 transition-all"
+                            -->
+                            <a
+                                href="{{ route('profile.preview', ['template' => old('template', $user->template ?? 'default')]) }}"
                                 target="_blank"
                                 class="inline-flex items-center gap-2 rounded-lg bg-white dark:bg-gray-900 px-4 py-2 text-sm font-semibold text-getmyname-600 dark:text-getmyname-400 shadow-sm ring-1 ring-inset ring-getmyname-200 dark:ring-getmyname-800 hover:bg-getmyname-50 dark:hover:bg-gray-800 transition-all"
                             >

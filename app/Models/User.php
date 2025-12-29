@@ -153,8 +153,15 @@ class User extends Authenticatable implements MustVerifyEmail
                 ];
             })->toArray(),
             'socials' => $this->socials
-                ? $this->socials->only(['github', 'linkedin', 'twitter', 'personal_website'])
-                : [],
+                ? $this->socials->only([
+                    'github',
+                    'linkedin',
+                    'twitter',
+                    'personal_website',
+                    'codepen',
+                    'instagram',
+                    'youtube_url',
+                ]) : [],
             'api_request_count' => $this->getApiRequestCount(),
         ];
     }
