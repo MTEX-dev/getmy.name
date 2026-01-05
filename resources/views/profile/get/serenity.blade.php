@@ -434,23 +434,42 @@
                 @endif
 
                 <div class="social-links">
-                    @if(!empty($data['socials']['github']))
-                        <a href="https://github.com/{{ $data['socials']['github'] }}" target="_blank"><i class="bi bi-github"></i>GitHub</a>
-                    @endif
-                    @if(!empty($data['socials']['linkedin']))
-                        <a href="https://linkedin.com/in/{{ $data['socials']['linkedin'] }}" target="_blank"><i class="bi bi-linkedin"></i>LinkedIn</a>
-                    @endif
-                    @if(!empty($data['socials']['twitter']))
-                        <a href="https://twitter.com/{{ $data['socials']['twitter'] }}" target="_blank"><i class="bi bi-twitter"></i>Twitter</a>
-                    @endif
-                    @if(!empty($data['socials']['personal_website']))
-                        <a href="{{ $data['socials']['personal_website'] }}" target="_blank"><i class="bi bi-globe"></i>Website</a>
-                    @endif
+                    @php
+                        $platforms = [
+                            'github' => ['url' => 'https://github.com/', 'icon' => 'bi-github', 'label' => 'GitHub'],
+                            'linkedin' => ['url' => 'https://linkedin.com/in/', 'icon' => 'bi-linkedin', 'label' => 'LinkedIn'],
+                            'twitter' => ['url' => 'https://twitter.com/', 'icon' => 'bi-twitter-x', 'label' => 'Twitter'],
+                            'bluesky' => ['url' => 'https://bsky.app/profile/', 'icon' => 'bi-cloud', 'label' => 'Bluesky'],
+                            'personal_website' => ['url' => '', 'icon' => 'bi-globe', 'label' => 'Website'],
+                            'codepen' => ['url' => 'https://codepen.io/', 'icon' => 'bi-code-slash', 'label' => 'CodePen'],
+                            'instagram' => ['url' => 'https://instagram.com/', 'icon' => 'bi-instagram', 'label' => 'Instagram'],
+                            'youtube_url' => ['url' => '', 'icon' => 'bi-youtube', 'label' => 'YouTube'],
+                            'stackoverflow' => ['url' => 'https://stackoverflow.com/users/', 'icon' => 'bi-stack-overflow', 'label' => 'Stack Overflow'],
+                            'dev_to' => ['url' => 'https://dev.to/', 'icon' => 'bi-terminal', 'label' => 'Dev.to'],
+                            'hashnode' => ['url' => 'https://hashnode.com/@', 'icon' => 'bi-journal-text', 'label' => 'Hashnode'],
+                            'npm' => ['url' => 'https://www.npmjs.com/~', 'icon' => 'bi-box-seam', 'label' => 'NPM'],
+                            'product_hunt' => ['url' => 'https://www.producthunt.com/@', 'icon' => 'bi-search', 'label' => 'Product Hunt'],
+                            'polywork' => ['url' => 'https://www.polywork.com/', 'icon' => 'bi-person-badge', 'label' => 'Polywork'],
+                            'gitlab' => ['url' => 'https://gitlab.com/', 'icon' => 'bi-gitlab', 'label' => 'GitLab'],
+                            'dribbble' => ['url' => 'https://dribbble.com/', 'icon' => 'bi-dribbble', 'label' => 'Dribbble'],
+                            'figma' => ['url' => 'https://www.figma.com/@', 'icon' => 'bi-figma', 'label' => 'Figma'],
+                        ];
+                    @endphp
+
+                    @foreach($platforms as $key => $config)
+                        @if(!empty($data['socials'][$key]))
+                            <a href="{{ str_starts_with($data['socials'][$key], 'http') ? $data['socials'][$key] : $config['url'] . $data['socials'][$key] }}" target="_blank">
+                                <i class="bi {{ $config['icon'] }}"></i>{{ $config['label'] }}
+                            </a>
+                        @endif
+                    @endforeach
+
                     @if(!empty($data['email']))
-                        <a href="mailto:{{ $data['email'] }}"><i class="bi bi-envelope"></i>Contact</a>
+                        <a href="mailto:{{ $data['email'] }}">
+                            <i class="bi bi-envelope"></i>Contact
+                        </a>
                     @endif
                 </div>
-            </div>
 
             @if(!empty($data['about_me']))
                 <div class="section">

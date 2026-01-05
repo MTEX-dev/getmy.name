@@ -14,7 +14,20 @@
         'github' => ['bi-github', fn($v) => str_starts_with($v, 'http') ? $v : 'https://github.com/' . ltrim($v, '@')],
         'linkedin' => ['bi-linkedin', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.linkedin.com/in/' . ltrim($v, '@')],
         'twitter' => ['bi-twitter-x', fn($v) => str_starts_with($v, 'http') ? $v : 'https://x.com/' . ltrim($v, '@')],
+        'bluesky' => ['bi-clouds-fill', fn($v) => str_starts_with($v, 'http') ? $v : 'https://bsky.app/profile/' . ltrim($v, '@')],
         'personal_website' => ['bi-globe2', fn($v) => $v],
+        'codepen' => ['bi-box-seam', fn($v) => str_starts_with($v, 'http') ? $v : 'https://codepen.io/' . ltrim($v, '@')],
+        'instagram' => ['bi-instagram', fn($v) => str_starts_with($v, 'http') ? $v : 'https://instagram.com/' . ltrim($v, '@')],
+        'youtube_url' => ['bi-youtube', fn($v) => $v],
+        'stackoverflow' => ['bi-stack-overflow', fn($v) => str_starts_with($v, 'http') ? $v : 'https://stackoverflow.com/users/' . ltrim($v, '@')],
+        'dev_to' => ['bi-code-square', fn($v) => str_starts_with($v, 'http') ? $v : 'https://dev.to/' . ltrim($v, '@')],
+        'hashnode' => ['bi-journal-code', fn($v) => str_starts_with($v, 'http') ? $v : 'https://hashnode.com/@' . ltrim($v, '@')],
+        'npm' => ['bi-box2-fill', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.npmjs.com/~' . ltrim($v, '@')],
+        'product_hunt' => ['bi-p-circle', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.producthunt.com/@' . ltrim($v, '@')],
+        'polywork' => ['bi-person-badge', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.polywork.com/' . ltrim($v, '@')],
+        'gitlab' => ['bi-gitlab', fn($v) => str_starts_with($v, 'http') ? $v : 'https://gitlab.com/' . ltrim($v, '@')],
+        'dribbble' => ['bi-dribbble', fn($v) => str_starts_with($v, 'http') ? $v : 'https://dribbble.com/' . ltrim($v, '@')],
+        'figma' => ['bi-figma', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.figma.com/@' . ltrim($v, '@')],
     ];
 
     $title = $get('name', 'Developer') . ' — Portfolio';
@@ -68,16 +81,6 @@
                             </div>
                         </div>
                     @endauth
-                    
-                    <div class="hidden md:flex items-center gap-4">
-                        @foreach($socialMap as $key => [$icon, $builder])
-                            @if($val = $get('socials.'.$key))
-                                <a href="{{ $builder($val) }}" target="_blank" class="text-slate-400 hover:text-emerald-400 transition-colors transform hover:scale-110">
-                                    <i class="bi {{ $icon }} text-lg"></i>
-                                </a>
-                            @endif
-                        @endforeach
-                    </div>
                 </div>
             </div>
         </header>
@@ -260,15 +263,30 @@
             </section>
         </main>
 
-        <footer class="border-t border-white/5 bg-slate-950 py-12">
-            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-600">
-                <p>&copy; {{ date('Y') }} {{ $get('name') }}. All rights reserved.</p>
-                <div class="flex items-center gap-6">
-                    @if($count = $get('api_request_count'))
-                        <span class="font-mono text-xs px-2 py-1 rounded bg-slate-900 text-slate-500">
-                            API::{{ number_format($count) }}
-                        </span>
-                    @endif
+        <footer class="border-t border-white/5 bg-slate-950 pt-16 pb-12">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col items-center justify-center mb-12">
+                    <h3 class="text-2xl font-bold text-white mb-8">Connect With Me</h3>
+                    <div class="flex flex-wrap justify-center gap-4 max-w-3xl">
+                        @foreach($socialMap as $key => [$icon, $builder])
+                            @if($val = $get('socials.'.$key))
+                                <a href="{{ $builder($val) }}" target="_blank" class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/20" title="{{ ucfirst(str_replace('_', ' ', $key)) }}">
+                                    <i class="bi {{ $icon }} text-xl"></i>
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-600 border-t border-white/5 pt-8">
+                    <p>&copy; {{ date('Y') }} {{ $get('name') }}. All rights reserved.</p>
+                    <div class="flex items-center gap-6">
+                        @if($count = $get('api_request_count'))
+                            <span class="font-mono text-xs px-2 py-1 rounded bg-slate-900 text-slate-500">
+                                API::{{ number_format($count) }}
+                            </span>
+                        @endif
+                    </div>
                 </div>
             </div>
         </footer>

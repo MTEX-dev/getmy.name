@@ -14,7 +14,20 @@
         'github' => ['icon' => 'bi-github', 'prefix' => 'https://github.com/'],
         'linkedin' => ['icon' => 'bi-linkedin', 'prefix' => 'https://linkedin.com/in/'],
         'twitter' => ['icon' => 'bi-twitter-x', 'prefix' => 'https://x.com/'],
+        'bluesky' => ['icon' => 'bi-cloud', 'prefix' => 'https://bsky.app/profile/'],
         'personal_website' => ['icon' => 'bi-globe2', 'prefix' => ''],
+        'codepen' => ['icon' => 'bi-code-slash', 'prefix' => 'https://codepen.io/'],
+        'instagram' => ['icon' => 'bi-instagram', 'prefix' => 'https://instagram.com/'],
+        'youtube_url' => ['icon' => 'bi-youtube', 'prefix' => ''],
+        'stackoverflow' => ['icon' => 'bi-stack-overflow', 'prefix' => 'https://stackoverflow.com/users/'],
+        'dev_to' => ['icon' => 'bi-terminal', 'prefix' => 'https://dev.to/'],
+        'hashnode' => ['icon' => 'bi-pencil-square', 'prefix' => 'https://hashnode.com/@'],
+        'npm' => ['icon' => 'bi-box-seam', 'prefix' => 'https://www.npmjs.com/~'],
+        'product_hunt' => ['icon' => 'bi-trophy', 'prefix' => 'https://www.producthunt.com/@'],
+        'polywork' => ['icon' => 'bi-briefcase', 'prefix' => 'https://www.polywork.com/'],
+        'gitlab' => ['icon' => 'bi-gitlab', 'prefix' => 'https://gitlab.com/'],
+        'dribbble' => ['icon' => 'bi-dribbble', 'prefix' => 'https://dribbble.com/'],
+        'figma' => ['icon' => 'bi-figma', 'prefix' => 'https://www.figma.com/@'],
     ];
 
     $title = $get('name') . ' // TERMINAL';
@@ -92,16 +105,19 @@
                     </div>
                 </div>
 
-                <div class="mt-auto pt-8 flex gap-4">
+                <div class="mt-auto pt-8 flex flex-wrap gap-4 pb-2">
                     @foreach($socials as $key => $meta)
                         @if($val = $get("socials.$key"))
-                            <a href="{{ str_starts_with($val, 'http') ? $val : $meta['prefix'] . ltrim($val, '@') }}" target="_blank" class="h-10 w-10 flex items-center justify-center border border-zinc-700 hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-400 transition text-lg group">
+                            <a 
+                                href="{{ str_starts_with($val, 'http') ? $val : $meta['prefix'] . ltrim($val, '@') }}" 
+                                target="_blank" 
+                                class="h-10 w-10 flex items-center justify-center border border-zinc-700 hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-400 transition text-lg group"
+                            >
                                 <i class="bi {{ $meta['icon'] }}"></i>
                             </a>
                         @endif
                     @endforeach
                 </div>
-            </div>
             
             <div class="px-8 py-4 border-t border-zinc-800 text-xs text-zinc-600 flex justify-between uppercase tracking-widest">
                 <span>SYS.READY</span>
