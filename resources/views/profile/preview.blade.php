@@ -9,6 +9,12 @@
 @section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <a href="{{ route('profile.preview') }}"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm
+                        {{ (!isset($template)) ? 'bg-getmyname-600 hover:bg-getmyname-700 focus:ring-getmyname-500 text-white ring-2 ring-getmyname-500' : 'text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-gray-500 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600' }}
+                        focus:outline-none focus:ring-2 focus:ring-offset-2">
+                    None
+                </a>
             @foreach($avaibleTemplates as $avaibleTemplate)
                 <a href="{{ route('profile.preview', ['template' => $avaibleTemplate]) }}"
                 class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm

@@ -11,7 +11,7 @@
             return $fallback;
         }
     };
-
+    
     $socialMap = [
         'github' => [
             'GitHub', 'bi-github', function ($v) { return str_starts_with($v, 'http') ? $v : 'https://github.com/' . ltrim($v, '@'); }
@@ -25,8 +25,47 @@
                 return str_starts_with($v, 'http') ? $v : 'https://x.com/' . $handle;
             }
         ],
+        'bluesky' => [
+            'Bluesky', 'bi-clouds', fn($v) => str_starts_with($v, 'http') ? $v : 'https://bsky.app/profile/' . ltrim($v, '@'),
+        ],
         'personal_website' => [
             'Website', 'bi-globe2', function ($v) { return $v; }
+        ],
+        'codepen' => [
+            'CodePen', 'bi-code-square', fn($v) => str_starts_with($v, 'http') ? $v : 'https://codepen.io/' . ltrim($v, '@'),
+        ],
+        'instagram' => [
+            'Instagram', 'bi-instagram', fn($v) => str_starts_with($v, 'http') ? $v : 'https://instagram.com/' . ltrim($v, '@'),
+        ],
+        'youtube_url' => [
+            'YouTube', 'bi-youtube', fn($v) => str_starts_with($v, 'http') ? $v : 'https://youtube.com/@' . ltrim($v, '@'),
+        ],
+        'stackoverflow' => [
+            'Stack Overflow', 'bi-stack-overflow', fn($v) => str_starts_with($v, 'http') ? $v : 'https://stackoverflow.com/users/' . $v,
+        ],
+        'npm' => [
+            'NPM', 'bi-box-seam', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.npmjs.com/~' . ltrim($v, '@'),
+        ],
+        'dev_to' => [
+            'Dev.to', 'bi-terminal', fn($v) => str_starts_with($v, 'http') ? $v : 'https://dev.to/' . ltrim($v, '@'),
+        ],
+        'hashnode' => [
+            'Hashnode', 'bi-journal-text', fn($v) => str_starts_with($v, 'http') ? $v : 'https://hashnode.com/@' . ltrim($v, '@'),
+        ],
+        'product_hunt' => [
+            'Product Hunt', 'bi-rocket-takeoff', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.producthunt.com/@' . ltrim($v, '@'),
+        ],
+        'polywork' => [
+            'Polywork', 'bi-grid-3x3-gap', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.polywork.com/' . ltrim($v, '@'),
+        ],
+        'gitlab' => [
+            'GitLab', 'bi-gitlab', fn($v) => str_starts_with($v, 'http') ? $v : 'https://gitlab.com/' . ltrim($v, '@'),
+        ],
+        'dribbble' => [
+            'Dribbble', 'bi-dribbble', fn($v) => str_starts_with($v, 'http') ? $v : 'https://dribbble.com/' . ltrim($v, '@'),
+        ],
+        'figma' => [
+            'Figma', 'bi-figma', fn($v) => str_starts_with($v, 'http') ? $v : 'https://www.figma.com/@' . ltrim($v, '@'),
         ],
     ];
 

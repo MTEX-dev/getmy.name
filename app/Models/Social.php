@@ -31,11 +31,21 @@ class Social extends Model
         'github',
         'linkedin',
         'twitter',
+        'bluesky',
         'personal_website',
         'codepen',
         'instagram',
         'youtube_url',
         //'modrinth',
+        'stackoverflow',
+        'dev_to',
+        'hashnode',
+        'npm',
+        'product_hunt',
+        'polywork',
+        'gitlab',
+        'dribbble',
+        'figma',
     ];
 
     public function user()
