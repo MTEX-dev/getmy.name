@@ -138,7 +138,7 @@ class ProfileController extends Controller
         return $user->profileData();
     }
 
-    public function getProfile(Request $request, string $username, string $template): View
+    public function getProfile(Request $request, string $username, string $template = null): View
     {
         $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
         $data = $this->getData($request, $username);
