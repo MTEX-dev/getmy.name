@@ -10,7 +10,7 @@ class LanguageController extends Controller
 {
     public function changeLanguage(string $locale)
     {
-        $availableLocales = array_values(Config::get('app.available_locales', []));
+        $availableLocales = array_keys(config('app.available_locales', []));
 
         if (in_array($locale, $availableLocales)) {
             Session::put('locale', $locale);

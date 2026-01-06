@@ -184,4 +184,6 @@ return [
     'projects' => 'Manage Projects',
     'experiences' => 'Your previous experiences',
     'activity.title' => 'Profile Activity',
+
+    'settings' => 'Settings',
 ];
