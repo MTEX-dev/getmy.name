@@ -24,7 +24,7 @@ class AvatarController extends Controller
 
         $request->user()->update(['avatar_path' => $path]);
 
-        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
+        return Redirect::route('profile.avatar')->with('status', 'avatar-updated');
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -36,6 +36,6 @@ class AvatarController extends Controller
             $user->update(['avatar_path' => null]);
         }
 
-        return Redirect::route('profile.edit')->with('status', 'avatar-removed');
+        return Redirect::route('profile.avatar')->with('status', 'avatar-removed');
     }
 }
