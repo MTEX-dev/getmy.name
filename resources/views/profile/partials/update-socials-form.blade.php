@@ -12,7 +12,7 @@
         @csrf
         @method('patch')
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <div>
                 <x-input-label for="github" :value="__('profile.github_username') . ' (' . __('profile.optional') . ')'" />
                 <x-text-input id="github" name="github" type="text" class="mt-1 block w-full" :value="old('github', $user->socials->github ?? '')" placeholder="{{ __('profile.github_placeholder') }}" />
@@ -38,16 +38,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-100 dark:border-gray-800 pt-6">
-            <div>
-                <div class="flex items-center gap-x-2">
-                    <x-input-label for="stackoverflow" :value="__('profile.stackoverflow_id') . ' (' . __('profile.optional') . ')'" />
-                    @include('components.badges.new')
-                </div>
-                <x-text-input id="stackoverflow" name="stackoverflow" type="text" class="mt-1 block w-full" :value="old('stackoverflow', $user->socials->stackoverflow ?? '')" placeholder="{{ __('profile.stackoverflow_placeholder') }}" />
-                <x-input-error class="mt-2" :messages="$errors->get('stackoverflow')" />
-            </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 border-t border-gray-100 dark:border-gray-800 pt-6">
             <div>
                 <div class="flex items-center gap-x-2">
                     <x-input-label for="gitlab" :value="__('profile.gitlab_username') . ' (' . __('profile.optional') . ')'" />
@@ -59,11 +50,29 @@
 
             <div>
                 <div class="flex items-center gap-x-2">
+                    <x-input-label for="stackoverflow" :value="__('profile.stackoverflow_id') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
+                <x-text-input id="stackoverflow" name="stackoverflow" type="text" class="mt-1 block w-full" :value="old('stackoverflow', $user->socials->stackoverflow ?? '')" placeholder="{{ __('profile.stackoverflow_placeholder') }}" />
+                <x-input-error class="mt-2" :messages="$errors->get('stackoverflow')" />
+            </div>
+
+            <div>
+                <div class="flex items-center gap-x-2">
                     <x-input-label for="npm" :value="__('profile.npm_username') . ' (' . __('profile.optional') . ')'" />
                     @include('components.badges.new')
                 </div>
                 <x-text-input id="npm" name="npm" type="text" class="mt-1 block w-full" :value="old('npm', $user->socials->npm ?? '')" placeholder="{{ __('profile.npm_placeholder') }}" />
                 <x-input-error class="mt-2" :messages="$errors->get('npm')" />
+            </div>
+
+            <div>
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="bluesky" :value="__('profile.bluesky_handle') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
+                <x-text-input id="bluesky" name="bluesky" type="text" class="mt-1 block w-full" :value="old('bluesky', $user->socials->bluesky ?? '')" placeholder="{{ __('profile.bluesky_placeholder') }}" />
+                <x-input-error class="mt-2" :messages="$errors->get('bluesky')" />
             </div>
 
             <div>
@@ -86,32 +95,33 @@
 
             <div>
                 <div class="flex items-center gap-x-2">
-                    <x-input-label for="bluesky" :value="__('profile.bluesky_handle') . ' (' . __('profile.optional') . ')'" />
+                    <x-input-label for="product_hunt" :value="__('profile.product_hunt_username') . ' (' . __('profile.optional') . ')'" />
                     @include('components.badges.new')
                 </div>
-                <x-text-input id="bluesky" name="bluesky" type="text" class="mt-1 block w-full" :value="old('bluesky', $user->socials->bluesky ?? '')" placeholder="{{ __('profile.bluesky_placeholder') }}" />
-                <x-input-error class="mt-2" :messages="$errors->get('bluesky')" />
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-100 dark:border-gray-800 pt-6">
-            <div>
-                <x-input-label for="product_hunt" :value="__('profile.product_hunt_username')" />
                 <x-text-input id="product_hunt" name="product_hunt" type="text" class="mt-1 block w-full" :value="old('product_hunt', $user->socials->product_hunt ?? '')" placeholder="{{ __('profile.product_hunt_placeholder') }}" />
             </div>
 
             <div>
-                <x-input-label for="polywork" :value="__('profile.polywork_username')" />
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="polywork" :value="__('profile.polywork_username') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <x-text-input id="polywork" name="polywork" type="text" class="mt-1 block w-full" :value="old('polywork', $user->socials->polywork ?? '')" placeholder="{{ __('profile.polywork_placeholder') }}" />
             </div>
 
             <div>
-                <x-input-label for="dribbble" :value="__('profile.dribbble_username')" />
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="dribbble" :value="__('profile.dribbble_username') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <x-text-input id="dribbble" name="dribbble" type="text" class="mt-1 block w-full" :value="old('dribbble', $user->socials->dribbble ?? '')" placeholder="{{ __('profile.dribbble_placeholder') }}" />
             </div>
 
             <div>
-                <x-input-label for="figma" :value="__('profile.figma_username')" />
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="figma" :value="__('profile.figma_username') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <x-text-input id="figma" name="figma" type="text" class="mt-1 block w-full" :value="old('figma', $user->socials->figma ?? '')" placeholder="{{ __('profile.figma_placeholder') }}" />
             </div>
 
@@ -119,21 +129,28 @@
                 <x-input-label for="modrinth" :value="__('profile.modrinth_username')" />
                 <x-text-input id="modrinth" name="modrinth" type="text" class="mt-1 block w-full" :value="old('modrinth', $user->socials->modrinth ?? '')" placeholder="{{ __('profile.modrinth_placeholder') }}" />
             </div-->
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-100 dark:border-gray-800 pt-6">
             <div>
-                <x-input-label for="codepen" :value="__('profile.codepen_username')" />
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="codepen" :value="__('profile.codepen_username') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <x-text-input id="codepen" name="codepen" type="text" class="mt-1 block w-full" :value="old('codepen', $user->socials->codepen ?? '')" placeholder="{{ __('profile.codepen_placeholder') }}" />
             </div>
 
             <div>
-                <x-input-label for="instagram" :value="__('profile.instagram_username')" />
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="instagram" :value="__('profile.instagram_username') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <x-text-input id="instagram" name="instagram" type="text" class="mt-1 block w-full" :value="old('instagram', $user->socials->instagram ?? '')" placeholder="{{ __('profile.instagram_placeholder') }}" />
             </div>
 
             <div>
-                <x-input-label for="youtube_url" :value="__('profile.youtube_url')" />
+                <div class="flex items-center gap-x-2">
+                    <x-input-label for="youtube_url" :value="__('profile.youtube_url') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <x-text-input id="youtube_url" name="youtube_url" type="url" class="mt-1 block w-full" :value="old('youtube_url', $user->socials->youtube_url ?? '')" placeholder="{{ __('profile.youtube_placeholder') }}" />
             </div>
         </div>
