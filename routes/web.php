@@ -49,8 +49,12 @@ Route::middleware('auth')->group(function () {
             Route::patch('/projects/{project}/features/{feature}', [ProjectController::class, 'updateFeature'])->name('projects.features.update');
             Route::delete('/projects/{project}/features/{feature}', [ProjectController::class, 'removeFeature'])->name('projects.features.remove');
             Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store');
+            Route::get('/experiences/{experience}/edit', [ExperienceController::class, 'edit'])->name('experiences.edit');
+            Route::patch('/experiences/{experience}', [ExperienceController::class, 'update'])->name('experiences.update');
             Route::delete('/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');
             Route::post('/education', [EducationController::class, 'store'])->name('education.store');
+            Route::get('/education/{education}/edit', [EducationController::class, 'edit'])->name('education.edit');
+            Route::patch('/education/{education}', [EducationController::class, 'update'])->name('education.update');
             Route::delete('/education/{education}', [EducationController::class, 'destroy'])->name('education.destroy');
             Route::get('/api-requests', [ApiRequestController::class, 'index'])->name('api-requests.index');
             Route::get('/api-requests-data', [ApiRequestController::class, 'getApiRequestData'])->name('api-requests.data');
