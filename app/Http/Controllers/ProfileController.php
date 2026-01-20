@@ -197,10 +197,12 @@ class ProfileController extends Controller
     public function activity(Request $request): View
     {
         $user = $request->user();
+        
         $activity = \Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)
+            ->where('subject_type', '!=', 'App\Models\ApiRequest') 
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
         return view('profile.activity', compact('activity'));
-    }
+}
 }

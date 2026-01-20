@@ -19,7 +19,8 @@ Route::get('/sitemap', [PageController::class, 'sitemap'])->name('sitemap');
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('profile')->name('profile.')->group(function () {
+    //Route::prefix('profile')->name('profile.')->group(function () {
+    Route::prefix('settings')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::get('/password', [ProfileController::class, 'password'])->name('password');
         Route::get('/avatar', [ProfileController::class, 'avatar'])->name('avatar');

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -16,10 +17,10 @@ class PageController extends Controller
         return view("pages.lander");
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        $user = auth()->user();
-        $days = 30;
+        $user = Auth::user();
+        $days = (int) $request->input('days', 30);
         
         $requestsOverTime = ApiRequest::where('user_id', $user->id)
             ->where('requested_at', '>=', Carbon::now()->subDays($days))
@@ -33,7 +34,7 @@ class PageController extends Controller
             ->selectRaw('request_url, COUNT(*) as count')
             ->groupBy('request_url')
             ->orderByDesc('count')
-            ->limit(10)
+            ->limit(5)
             ->get();
 
         $methodStats = ApiRequest::where('user_id', $user->id)

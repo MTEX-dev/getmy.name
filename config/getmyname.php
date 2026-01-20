@@ -20,6 +20,7 @@
         //'querystack',
         //'querynal',
         //'test',
+        'standard',
     ],
 
     'social_platforms' => [

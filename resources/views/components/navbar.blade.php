@@ -21,7 +21,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <div class="flex items-center space-x-4 mr-4">
                     <x-theme-toggle-single-button />
-                    <x-locale-switch />
+                    <!--x-locale-switch /-->
                 </div>
 
                 @auth
@@ -169,7 +169,7 @@
 
             <div class="px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-600 mt-4">
                 <x-theme-toggle-single-button />
-                <x-locale-switch />
+                <!--x-locale-switch /-->
             </div>
         </div>
     </div>
