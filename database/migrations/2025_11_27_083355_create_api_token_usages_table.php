@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('api_token_usages', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('token_id')->nullable();
+            $table->unsignedBigInteger('token_id')->nullable();
             $table->foreign('token_id')->references('id')->on('personal_access_tokens')->onDelete('set null');
-            $table->uuid('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreignUuid('user_id')->nullable()->constrained()->onDelete('set null');
             $table->string('url');
             $table->string('method');
             $table->string('ip_address')->nullable();
