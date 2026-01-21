@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('project_id')->constrained()->onDelete('cascade');
             $table->string('feature');
-            $table->primary(['project_id', 'feature']);
+            $table->unique(['project_id', 'feature']);
             $table->timestamps();
         });
     }
