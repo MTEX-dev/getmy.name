@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->string('github')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('twitter')->nullable();
