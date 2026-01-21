@@ -186,4 +186,6 @@ return [
     'activity.title' => 'Profile Activity',
 
     'settings' => 'Settings',
+
+    'upload_new_image' => 'Upload a new image'
 ];

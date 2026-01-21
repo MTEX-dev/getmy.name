@@ -1,9 +1,7 @@
 @extends('layouts.profile')
 
-@section('header')
-    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('API Tokens') }}
-    </h2>
+@section('header_content')
+    {{ __('API Tokens') }}
 @endsection
 
 @section('content')
@@ -17,10 +15,9 @@
 
                     <form method="POST" action="{{ route('profile.api-tokens.store') }}" class="mt-6 space-y-6">
                         @csrf
-
                         <div>
                             <x-input-label for="name" :value="__('Token Name')" />
-                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"  autofocus />
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
 
@@ -28,7 +25,6 @@
                             <h4 class="font-medium text-gray-900 dark:text-gray-100">
                                 {{ __('Permissions') }}
                             </h4>
-
                             <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 @foreach ($availableAbilities as $ability)
                                     <label class="flex items-center">
@@ -59,21 +55,17 @@
                                     <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                         {{ $token->name }}
                                     </div>
-
                                     <div class="text-sm text-gray-500">
                                         @if ($token->last_used_at)
                                             {{ __('Last used') }} {{ $token->last_used_at->diffForHumans() }}
                                         @endif
                                     </div>
                                 </div>
-
                                 <div class="flex items-center">
                                     <form method="POST" action="{{ route('profile.api-tokens.destroy', $token->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <x-danger-button>
-                                            {{ __('Delete') }}
-                                        </x-danger-button>
+                                        <x-danger-button>{{ __('Delete') }}</x-danger-button>
                                     </form>
                                 </div>
                             </div>
