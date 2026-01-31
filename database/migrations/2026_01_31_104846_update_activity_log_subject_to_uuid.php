@@ -12,7 +12,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table(config('activitylog.table_name'), function (Blueprint $table) {
-            $table->dropMorphs('subject');
+            $table->dropIndex(['subject_type', 'subject_id']);
+            
+            $table->dropColumn(['subject_type', 'subject_id']);
         });
         
         Schema::table(config('activitylog.table_name'), function (Blueprint $table) {
@@ -25,8 +27,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('uuid', function (Blueprint $table) {
-            //
+        Schema::table(config('activitylog.table_name'), function (Blueprint $table) {
+            $table->dropUuidMorphs('subject');
+        });
+        
+        Schema::table(config('activitylog.table_name'), function (Blueprint $table) {
+            $table->nullableMorphs('subject');
         });
     }
 };
