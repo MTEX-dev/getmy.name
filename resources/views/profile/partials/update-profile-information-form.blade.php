@@ -41,13 +41,10 @@
                 <x-input-error class="mt-2" :messages="$errors->get('title')" />
             </div>
 
-            <!-- Pronouns -->
             <div class="lg:col-span-1">
                 <x-input-label for="pronouns" :value="__('profile.pronouns') . ' (' . __('profile.optional') . ')'" />
-                <div x-data="customSelect({ 
-                    initialValue: '{{ old('pronouns', $user->pronouns) }}', 
-                    presetOptions: ['they/them', 'she/her', 'he/him']
-                })" x-init="init()">
+                
+                <div x-data="customSelect({ initialValue: @js(old('pronouns', $user->pronouns)),  presetOptions: ['they/them', 'she/her', 'he/him'] })">
                     <select id="pronouns" name="pronouns" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-model="selectedValue">
                         <option value="">{{ __('profile.pronouns_none') }}</option>
                         <template x-for="opt in presetOptions" :key="opt">
@@ -55,30 +52,38 @@
                         </template>
                         <option value="Custom">{{ __('profile.pronouns_custom_option') }}</option>
                     </select>
-                    <x-text-input x-ref="manualInput" x-show="isCustom" id="pronouns_manual" name="pronouns_manual" type="text" class="mt-2 block w-full" placeholder="{{ __('profile.pronouns_custom') }}" x-model="manualValue" />
+                    
+                    <div x-show="isCustom" style="display: none;">
+                        <x-text-input x-ref="manualInput" id="pronouns_manual" name="pronouns_manual" type="text" class="mt-2 block w-full" placeholder="{{ __('profile.pronouns_custom') }}" x-model="manualValue" />
+                    </div>
                 </div>
                 <x-input-error class="mt-2" :messages="$errors->get('pronouns')" />
+                <x-input-error class="mt-2" :messages="$errors->get('pronouns_manual')" />
             </div>
 
-            <!-- Location -->
             <div class="lg:col-span-1">
                 <x-input-label for="location" :value="__('profile.location') . ' (' . __('profile.optional') . ')'" />
+                
                 <div x-data="customSelect({ 
-                    initialValue: '{{ old('location', $user->location) }}', 
+                    initialValue: @js(old('location', $user->location)), 
                     presetOptions: ['New York', 'London', 'Paris', 'Tokyo', 'Berlin', 'Rome', 'Madrid', 'Sydney', 'Dubai', 'Singapore', 'Germany'] 
-                })" x-init="init()">
+                })">
                     <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-model="selectedValue">
+                        <option value="">{{ __('profile.location_none') ?? 'Select Location' }}</option>
                         <template x-for="loc in presetOptions" :key="loc">
                             <option :value="loc" x-text="loc"></option>
                         </template>
                         <option value="Custom">{{ __('profile.location_manual') }}</option>
                     </select>
-                    <x-text-input x-ref="manualInput" x-show="isCustom" id="location_manual" name="location_manual" type="text" class="mt-2 block w-full" x-model="manualValue" />
+
+                    <div x-show="isCustom" style="display: none;">
+                        <x-text-input x-ref="manualInput" id="location_manual" name="location_manual" type="text" class="mt-2 block w-full" x-model="manualValue" />
+                    </div>
                 </div>
                 <x-input-error class="mt-2" :messages="$errors->get('location')" />
+                <x-input-error class="mt-2" :messages="$errors->get('location_manual')" />
             </div>
 
-            <!-- Bio -->
             <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
                 <x-input-label for="bio" :value="__('profile.bio') . ' (' . __('profile.optional') . ')'" />
                 <x-textarea-input id="bio" name="bio" class="mt-1 block w-full" :value="old('bio', $user->bio)" autocomplete="bio" />
@@ -107,23 +112,32 @@
             
             init() {
                 const startVal = config.initialValue;
-                
+                let targetSelectValue = '';
+
                 if (!startVal) {
-                    this.selectedValue = '';
+                    targetSelectValue = '';
                     this.isCustom = false;
-                } else if (this.presetOptions.includes(startVal)) {
-                    this.selectedValue = startVal;
+                } 
+                else if (this.presetOptions.includes(startVal)) {
+                    targetSelectValue = startVal;
                     this.isCustom = false;
-                } else {
-                    this.selectedValue = 'Custom';
+                } 
+                else {
+                    targetSelectValue = 'Custom';
                     this.manualValue = startVal;
                     this.isCustom = true;
                 }
 
+                this.$nextTick(() => {
+                    this.selectedValue = targetSelectValue;
+                });
+
                 this.$watch('selectedValue', (value) => {
                     this.isCustom = value === 'Custom';
                     if (this.isCustom) {
-                        this.$nextTick(() => { this.$refs.manualInput.focus(); });
+                        this.$nextTick(() => { 
+                            if(this.$refs.manualInput) this.$refs.manualInput.focus(); 
+                        });
                     }
                 });
             }

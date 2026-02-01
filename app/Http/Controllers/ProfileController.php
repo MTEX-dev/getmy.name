@@ -52,7 +52,7 @@ class ProfileController extends Controller
 
         foreach ($customFields as $field) {
             $manualKey = $field . '_manual';
-            
+
             if (isset($validatedData[$field]) && $validatedData[$field] === 'Custom') {
                 $validatedData[$field] = $validatedData[$manualKey] ?? null;
             }

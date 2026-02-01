@@ -8,11 +8,6 @@ use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -20,12 +15,13 @@ class ProfileUpdateRequest extends FormRequest
             'username' => ['nullable', 'string', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             'title' => ['nullable', 'string', 'max:255'],
             'bio' => ['nullable', 'string', 'max:1000'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            
             'location' => ['nullable', 'string', 'max:255'],
             'location_manual' => ['nullable', 'required_if:location,Custom', 'string', 'max:255'],
+            
             'pronouns' => ['nullable', 'string', 'max:255'],
             'pronouns_manual' => ['nullable', 'required_if:pronouns,Custom', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id),
-            ],
         ];
     }
 }
