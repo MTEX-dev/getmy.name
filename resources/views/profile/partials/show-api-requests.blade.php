@@ -65,11 +65,11 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-<script>
+<<script>
     function apiStatsHandler() {
         return {
             currentRange: '30d',
-            loading: false,
+            loading: true,
             chart: null,
             ranges: [
                 { id: '1h', label: '1H' },
@@ -79,20 +79,20 @@
                 { id: '90d', label: '90D' },
                 { id: 'lifetime', label: 'ALL' },
             ],
+            
             init() {
-                this.initChart();
-                this.fetchData();
-                
-                if (window.Echo) {
-                    window.Echo.private(`user.${@json(auth()->id())}`)
-                        .listen('ApiRequestProcessed', (e) => {
-                            this.fetchData();
-                        });
-                }
+                this.$nextTick(() => {
+                    this.initChart();
+                    this.fetchData();
+                });
             },
+
             initChart() {
+                const canvas = document.getElementById('apiRequestsChart');
+                if (!canvas) return;
+
                 const isDarkMode = document.documentElement.classList.contains('dark');
-                const ctx = document.getElementById('apiRequestsChart').getContext('2d');
+                const ctx = canvas.getContext('2d');
                 const brandColor = '#22c55e';
                 
                 const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -101,15 +101,19 @@
 
                 this.chart = new Chart(ctx, {
                     type: 'line',
-                    data: { labels: [], datasets: [{ 
-                        data: [], 
-                        borderColor: brandColor, 
-                        backgroundColor: gradient,
-                        fill: true, 
-                        tension: 0.4,
-                        borderWidth: 3,
-                        pointRadius: 2
-                    }]},
+                    data: { 
+                        labels: [], 
+                        datasets: [{ 
+                            data: [], 
+                            borderColor: brandColor, 
+                            backgroundColor: gradient,
+                            fill: true, 
+                            tension: 0.4,
+                            borderWidth: 3,
+                            pointRadius: 2,
+                            pointHitRadius: 10
+                        }]
+                    },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
@@ -123,27 +127,40 @@
                             y: { 
                                 beginAtZero: true,
                                 grid: { color: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' },
-                                ticks: { color: isDarkMode ? '#9ca3af' : '#6b7280' } 
+                                ticks: { color: isDarkMode ? '#9ca3af' : '#6b7280', precision: 0 } 
                             }
                         }
                     }
                 });
             },
+
             setRange(rangeId) {
+                if (this.loading) return;
                 this.currentRange = rangeId;
                 this.fetchData();
             },
-            fetchData() {
+
+            async fetchData() {
                 this.loading = true;
-                fetch(`{{ route('profile.api-requests.data') }}?range=${this.currentRange}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        this.chart.options.scales.x.time.unit = data.unit;
+                try {
+                    const response = await fetch(`{{ route('profile.api-requests.data') }}?range=${this.currentRange}`);
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    
+                    const data = await response.json();
+
+                    if (this.chart) {
+                        this.chart.options.scales.x.time.unit = data.unit || 'day';
+                        
                         this.chart.data.labels = data.labels;
                         this.chart.data.datasets[0].data = data.counts;
+                        
                         this.chart.update();
-                        this.loading = false;
-                    });
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch chart data:", error);
+                } finally {
+                    this.loading = false;
+                }
             }
         }
     }
