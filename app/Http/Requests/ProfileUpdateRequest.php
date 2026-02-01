@@ -21,9 +21,9 @@ class ProfileUpdateRequest extends FormRequest
             'title' => ['nullable', 'string', 'max:255'],
             'bio' => ['nullable', 'string', 'max:1000'],
             'location' => ['nullable', 'string', 'max:255'],
-            'location_manual' => ['nullable', 'string', 'max:255'],
+            'location_manual' => ['nullable', 'required_if:location,Custom', 'string', 'max:255'],
             'pronouns' => ['nullable', 'string', 'max:255'],
-            'pronouns_manual' => ['nullable', 'string', 'max:255'],
+            'pronouns_manual' => ['nullable', 'required_if:pronouns,Custom', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id),
             ],
         ];
