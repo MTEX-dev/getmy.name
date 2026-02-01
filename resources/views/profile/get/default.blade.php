@@ -228,7 +228,15 @@
                         </div>
                         <div>
                             <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">{{ $get('name') }}</h1>
-                            <p class="mt-1 text-lg text-primary-600 dark:text-primary-400 font-medium">{{ $get('title') }}</p>
+                            <p class="mt-1 text-lg text-primary-600 dark:text-primary-400 font-medium">
+                                {{ $get('title') }}
+                                @if($get('username') || $get('pronouns'))
+                                    <span class="ml-1 text-gray-400 dark:text-gray-500 font-normal">
+                                        &middot; 
+                                        {{ $get('username') }}{{ $get('username') && $get('pronouns') ? ' · ' : '' }}{{ $get('pronouns') }}
+                                    </span>
+                                @endif
+                            </p>
                             <p class="mt-4 max-w-3xl text-gray-600 dark:text-gray-300">{{ $get('bio') }}</p>
                             <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
                                 @if($get('location'))
