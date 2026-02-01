@@ -36,7 +36,13 @@
                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
             </div>
 
-            <div class="lg:col-span-2">
+            <div>
+                <x-input-label for="pronouns" :value="__('profile.pronouns') . ' (' . __('profile.optional') . ')'" />
+                <x-text-input id="pronouns" name="pronouns" type="text" class="mt-1 block w-full" :value="old('pronouns', $user->pronouns)" placeholder="e.g. they/them" />
+                <x-input-error class="mt-2" :messages="$errors->get('pronouns')" />
+            </div>
+
+            <div>
                 <x-input-label for="title" :value="__('profile.title') . ' (' . __('profile.optional') . ')'" />
                 <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title', $user->title)" autocomplete="title" />
                 <x-input-error class="mt-2" :messages="$errors->get('title')" />
@@ -92,49 +98,3 @@
         </div>
     </form>
 </section>
-
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('locationSelect', () => ({
-            locationValue: '{{ old('location', $user->location) }}',
-            isManual: false,
-            locations: [
-                'New York',
-                'London',
-                'Paris',
-                'Tokyo',
-                'Berlin',
-                'Rome',
-                'Madrid',
-                'Sydney',
-                'Dubai',
-                'Singapore',
-                'Germany'
-            ],
-            init() {
-                this.$watch('locationValue', (value) => {
-                    this.isManual = value === 'Type Manually';
-                    if (!this.isManual && this.$refs.manualInput) {
-                        this.$refs.manualInput.value = '';
-                    }
-                });
-
-                if (this.locationValue && this.locations.includes(this.locationValue)) {
-                    this.isManual = false;
-                } else if (this.locationValue && this.locationValue !== 'Type Manually') {
-                    this.isManual = true;
-                    if (!this.locations.includes(this.locationValue)) {
-                        this.locations.push(this.locationValue);
-                    }
-                    this.$nextTick(() => {
-                        this.$refs.manualInput.value = this.locationValue;
-                        this.locationValue = 'Type Manually';
-                    });
-                } else {
-                    this.locationValue = 'Type Manually';
-                    this.isManual = true;
-                }
-            }
-        }));
-    });
-</script>

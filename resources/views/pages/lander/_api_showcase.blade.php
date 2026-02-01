@@ -45,6 +45,7 @@
   "location": "Berlin, Germany",
   "avatar_url": "http://getmy-name.test/storage/avatars/avatar-hash.png",
   "email": "jane@example.com",
+  "pronouns": "she/her",
   "about_me": "I am a passionate Laravel developer with over 10 years of experience...",
   "skills": ["PHP", "JavaScript", "Laravel", "Vue.js", "Docker"],
   "projects": [
