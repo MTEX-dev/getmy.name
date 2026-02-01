@@ -65,12 +65,13 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-<<script>
+<script>
     function apiStatsHandler() {
+        let chartInstance = null;
+
         return {
             currentRange: '30d',
             loading: true,
-            chart: null,
             ranges: [
                 { id: '1h', label: '1H' },
                 { id: '24h', label: '24H' },
@@ -99,11 +100,12 @@
                 gradient.addColorStop(0, 'rgba(34, 197, 94, 0.15)');
                 gradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
 
-                this.chart = new Chart(ctx, {
+                chartInstance = new Chart(ctx, {
                     type: 'line',
                     data: { 
                         labels: [], 
                         datasets: [{ 
+                            label: 'Requests',
                             data: [], 
                             borderColor: brandColor, 
                             backgroundColor: gradient,
@@ -111,7 +113,6 @@
                             tension: 0.4,
                             borderWidth: 3,
                             pointRadius: 2,
-                            pointHitRadius: 10
                         }]
                     },
                     options: {
@@ -127,7 +128,10 @@
                             y: { 
                                 beginAtZero: true,
                                 grid: { color: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' },
-                                ticks: { color: isDarkMode ? '#9ca3af' : '#6b7280', precision: 0 } 
+                                ticks: { 
+                                    color: isDarkMode ? '#9ca3af' : '#6b7280',
+                                    precision: 0 
+                                } 
                             }
                         }
                     }
@@ -144,20 +148,16 @@
                 this.loading = true;
                 try {
                     const response = await fetch(`{{ route('profile.api-requests.data') }}?range=${this.currentRange}`);
-                    if (!response.ok) throw new Error("Network response was not ok");
-                    
                     const data = await response.json();
 
-                    if (this.chart) {
-                        this.chart.options.scales.x.time.unit = data.unit || 'day';
-                        
-                        this.chart.data.labels = data.labels;
-                        this.chart.data.datasets[0].data = data.counts;
-                        
-                        this.chart.update();
+                    if (chartInstance) {
+                        chartInstance.options.scales.x.time.unit = data.unit;
+                        chartInstance.data.labels = data.labels;
+                        chartInstance.data.datasets[0].data = data.counts;
+                        chartInstance.update();
                     }
                 } catch (error) {
-                    console.error("Failed to fetch chart data:", error);
+                    console.error("Fetch Error:", error);
                 } finally {
                     this.loading = false;
                 }
