@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\ApiRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 
 class ApiRequestController extends Controller
 {
@@ -26,31 +25,43 @@ class ApiRequestController extends Controller
         $user = Auth::user();
         $range = $request->get('range', '30d');
         
-        $endDate = Carbon::now();
+        $now = Carbon::now();
         $unit = 'day';
 
         switch ($range) {
             case '1h':
-                $startDate = Carbon::now()->subHour();
+                $startDate = $now->copy()->subHour();
                 $unit = 'minute';
+                $format = 'Y-m-d H:i:00';
+                $step = 'addMinute';
                 break;
             case '24h':
-                $startDate = Carbon::now()->subDay();
+                $startDate = $now->copy()->subDay();
                 $unit = 'hour';
+                $format = 'Y-m-d H:00:00';
+                $step = 'addHour';
                 break;
             case '7d':
-                $startDate = Carbon::now()->subDays(6);
+                $startDate = $now->copy()->subDays(6)->startOfDay();
+                $format = 'Y-m-d';
+                $step = 'addDay';
                 break;
             case '90d':
-                $startDate = Carbon::now()->subDays(89);
+                $startDate = $now->copy()->subDays(89)->startOfDay();
+                $format = 'Y-m-d';
+                $step = 'addDay';
                 break;
             case 'lifetime':
                 $firstReq = ApiRequest::where('user_id', $user->id)->oldest()->first();
-                $startDate = $firstReq ? $firstReq->created_at : Carbon::now()->subDays(30);
+                $startDate = $firstReq ? $firstReq->created_at->startOfDay() : $now->copy()->subDays(30)->startOfDay();
+                $format = 'Y-m-d';
+                $step = 'addDay';
                 break;
             case '30d':
             default:
-                $startDate = Carbon::now()->subDays(29);
+                $startDate = $now->copy()->subDays(29)->startOfDay();
+                $format = 'Y-m-d';
+                $step = 'addDay';
                 break;
         }
 
@@ -58,20 +69,35 @@ class ApiRequestController extends Controller
             ->where('created_at', '>=', $startDate);
 
         if ($unit === 'minute') {
-            $data = $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00') as timeframe, COUNT(*) as count")
+            $dbData = $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00') as timeframe, COUNT(*) as count")
                 ->groupBy('timeframe')->pluck('count', 'timeframe');
         } elseif ($unit === 'hour') {
-            $data = $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') as timeframe, COUNT(*) as count")
+            $dbData = $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') as timeframe, COUNT(*) as count")
                 ->groupBy('timeframe')->pluck('count', 'timeframe');
         } else {
-            $data = $query->selectRaw("DATE(created_at) as timeframe, COUNT(*) as count")
+            $dbData = $query->selectRaw("DATE(created_at) as timeframe, COUNT(*) as count")
                 ->groupBy('timeframe')->pluck('count', 'timeframe');
         }
 
+        $labels = [];
+        $counts = [];
+        $current = $startDate->copy();
+
+        while ($current <= $now) {
+            $key = $current->format($unit === 'day' ? 'Y-m-d' : $format);
+            $labels[] = $key;
+            $counts[] = $dbData->get($key, 0);
+            $current->$step();
+        }
+
         return response()->json([
-            'labels' => $data->keys(),
-            'counts' => $data->values(),
-            'unit' => $unit
+            'labels' => $labels,
+            'counts' => $counts,
+            'unit' => $unit,
+            'stats' => [
+                'total' => ApiRequest::where('user_id', $user->id)->count(),
+                'today' => ApiRequest::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count(),
+            ]
         ]);
     }
 }
