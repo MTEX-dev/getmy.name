@@ -41,9 +41,11 @@
                                                     @php
                                                         $icon = match($item->description) {
                                                             'created' => 'M12 4v16m8-8H4',
-                                                            'updated' => 'M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z',
+                                                            'updated' => 'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99',
                                                             'deleted' => 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16',
-                                                            default => 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                                                            //default => 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+                                                            default => 'M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5',
+                                                            
                                                         };
                                                     @endphp
                                                     <svg class="h-5 w-5 text-getmyname-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

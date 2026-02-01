@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable// implements MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;
@@ -44,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'avatar_path',
         'template',
+        'pronouns',
     ];
 
     protected $hidden = [
@@ -118,6 +119,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'location' => $this->location,
             'avatar_url' => $this->getAvatarUrl(),
             'email' => $this->email,
+            'pronouns' => $this->pronouns,
             'about_me' => $this->about_me,
             'skills' => $this->skills->pluck('name')->toArray(),
             'projects' => $this->projects->map(function ($project) {

@@ -48,11 +48,16 @@ class ProfileController extends Controller
     {
         $validatedData = $request->validated();
 
-        if (isset($validatedData['location_manual'])) {
-            $validatedData['location'] = $validatedData['location_manual'];
-            unset($validatedData['location_manual']);
-        } elseif (isset($validatedData['location']) && $validatedData['location'] === 'Type Manually') {
-            $validatedData['location'] = null;
+        $customFields = ['location', 'pronouns'];
+
+        foreach ($customFields as $field) {
+            $manualKey = $field . '_manual';
+
+            if (isset($validatedData[$field]) && $validatedData[$field] === 'Custom') {
+                $validatedData[$field] = $validatedData[$manualKey] ?? null;
+            }
+            
+            unset($validatedData[$manualKey]);
         }
 
         $request->user()->fill($validatedData);

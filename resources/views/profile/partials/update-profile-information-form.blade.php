@@ -3,7 +3,6 @@
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('profile.profile_title') }}
         </h2>
-
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __('profile.profile_subtitle') }}
         </p>
@@ -42,18 +41,49 @@
                 <x-input-error class="mt-2" :messages="$errors->get('title')" />
             </div>
 
-            <div class="lg:col-span-2">
+            <div class="lg:col-span-1">
+                    <div class="flex items-center gap-x-2">
+                    <x-input-label for="pronouns" :value="__('profile.pronouns') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
+                <div x-data="customSelect({ initialValue: @js(old('pronouns', $user->pronouns)),  presetOptions: ['they/them', 'she/her', 'he/him'] })">
+                    <select id="pronouns" name="pronouns" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-model="selectedValue">
+                        <option value="">{{ __('profile.pronouns_none') }}</option>
+                        <template x-for="opt in presetOptions" :key="opt">
+                            <option :value="opt" x-text="opt"></option>
+                        </template>
+                        <option value="Custom">{{ __('profile.pronouns_custom_option') }}</option>
+                    </select>
+                    
+                    <div x-show="isCustom" style="display: none;">
+                        <x-text-input x-ref="manualInput" id="pronouns_manual" name="pronouns_manual" type="text" class="mt-2 block w-full" placeholder="{{ __('profile.pronouns_custom') }}" x-model="manualValue" />
+                    </div>
+                </div>
+                <x-input-error class="mt-2" :messages="$errors->get('pronouns')" />
+                <x-input-error class="mt-2" :messages="$errors->get('pronouns_manual')" />
+            </div>
+
+            <div class="lg:col-span-1">
                 <x-input-label for="location" :value="__('profile.location') . ' (' . __('profile.optional') . ')'" />
-                <div x-data="locationSelect()" x-init="init()">
-                    <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-model="locationValue">
-                        <template x-for="loc in locations" :key="loc">
+                
+                <div x-data="customSelect({ 
+                    initialValue: @js(old('location', $user->location)), 
+                    presetOptions: ['New York', 'London', 'Paris', 'Tokyo', 'Berlin', 'Rome', 'Madrid', 'Sydney', 'Dubai', 'Singapore', 'Germany'] 
+                })">
+                    <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-model="selectedValue">
+                        <option value="">{{ __('profile.location_none') ?? 'Select Location' }}</option>
+                        <template x-for="loc in presetOptions" :key="loc">
                             <option :value="loc" x-text="loc"></option>
                         </template>
-                        <option value="Type Manually">{{ __('profile.location_manual') }}</option>
+                        <option value="Custom">{{ __('profile.location_manual') }}</option>
                     </select>
-                    <x-text-input x-ref="manualInput" x-show="isManual" id="location_manual" name="location_manual" type="text" class="mt-2 block w-full" x-bind:value="locationValue === 'Type Manually' ? '' : locationValue" x-on:input="locationValue = $event.target.value" />
+
+                    <div x-show="isCustom" style="display: none;">
+                        <x-text-input x-ref="manualInput" id="location_manual" name="location_manual" type="text" class="mt-2 block w-full" x-model="manualValue" />
+                    </div>
                 </div>
                 <x-input-error class="mt-2" :messages="$errors->get('location')" />
+                <x-input-error class="mt-2" :messages="$errors->get('location_manual')" />
             </div>
 
             <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
@@ -63,27 +93,8 @@
             </div>
         </div>
 
-        @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-            <div>
-                <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                    {{ __('profile.email_unverified') }}
-
-                    <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-getmyname-500 dark:focus:ring-offset-gray-800">
-                        {{ __('profile.resend_verification') }}
-                    </button>
-                </p>
-
-                @if (session('status') === 'verification-link-sent')
-                    <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                        {{ __('profile.verification_sent') }}
-                    </p>
-                @endif
-            </div>
-        @endif
-
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('profile.save') }}</x-primary-button>
-
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 dark:text-gray-400">
                     {{ __('profile.saved') }}
@@ -95,45 +106,42 @@
 
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('locationSelect', () => ({
-            locationValue: '{{ old('location', $user->location) }}',
-            isManual: false,
-            locations: [
-                'New York',
-                'London',
-                'Paris',
-                'Tokyo',
-                'Berlin',
-                'Rome',
-                'Madrid',
-                'Sydney',
-                'Dubai',
-                'Singapore',
-                'Germany'
-            ],
+        Alpine.data('customSelect', (config) => ({
+            selectedValue: '',
+            manualValue: '',
+            isCustom: false,
+            presetOptions: config.presetOptions || [],
+            
             init() {
-                this.$watch('locationValue', (value) => {
-                    this.isManual = value === 'Type Manually';
-                    if (!this.isManual && this.$refs.manualInput) {
-                        this.$refs.manualInput.value = '';
-                    }
+                const startVal = config.initialValue;
+                let targetSelectValue = '';
+
+                if (!startVal) {
+                    targetSelectValue = '';
+                    this.isCustom = false;
+                } 
+                else if (this.presetOptions.includes(startVal)) {
+                    targetSelectValue = startVal;
+                    this.isCustom = false;
+                } 
+                else {
+                    targetSelectValue = 'Custom';
+                    this.manualValue = startVal;
+                    this.isCustom = true;
+                }
+
+                this.$nextTick(() => {
+                    this.selectedValue = targetSelectValue;
                 });
 
-                if (this.locationValue && this.locations.includes(this.locationValue)) {
-                    this.isManual = false;
-                } else if (this.locationValue && this.locationValue !== 'Type Manually') {
-                    this.isManual = true;
-                    if (!this.locations.includes(this.locationValue)) {
-                        this.locations.push(this.locationValue);
+                this.$watch('selectedValue', (value) => {
+                    this.isCustom = value === 'Custom';
+                    if (this.isCustom) {
+                        this.$nextTick(() => { 
+                            if(this.$refs.manualInput) this.$refs.manualInput.focus(); 
+                        });
                     }
-                    this.$nextTick(() => {
-                        this.$refs.manualInput.value = this.locationValue;
-                        this.locationValue = 'Type Manually';
-                    });
-                } else {
-                    this.locationValue = 'Type Manually';
-                    this.isManual = true;
-                }
+                });
             }
         }));
     });
