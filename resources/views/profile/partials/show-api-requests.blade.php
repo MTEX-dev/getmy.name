@@ -6,7 +6,6 @@
 
 @section('content_inner')
     <section>
-        <!-- Header -->
         <header>
             <div class="flex items-center gap-3">
                 <div class="text-getmyname-600 dark:text-getmyname-400">
@@ -25,67 +24,54 @@
             </div>
         </header>
 
-        <!-- Summary Cards -->
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Total Requests -->
-            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
-                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    {{ __('profile.api_requests.total_lifetime') ?? 'Lifetime Requests' }}
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+                <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+                    {{ __('profile.api_requests.total_lifetime') ?? 'Lifetime Total' }}
                 </p>
-                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <p class="mt-2 text-3xl font-black text-gray-900 dark:text-gray-100">
                     {{ number_format($stats['total']) }}
                 </p>
             </div>
 
-            <!-- Last 30 Days -->
-            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
-                <div class="flex items-center justify-between">
-                    <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                        {{ __('profile.api_requests.last_30_days') ?? 'Last 30 Days' }}
-                    </p>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                        Active
-                    </span>
-                </div>
-                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <div class="p-5 rounded-2xl border border-getmyname-100 dark:border-getmyname-900/30 bg-getmyname-50/30 dark:bg-getmyname-900/10 shadow-sm">
+                <p class="text-xs font-bold text-getmyname-700 dark:text-getmyname-400 uppercase tracking-widest">
+                    {{ __('profile.api_requests.last_30_days') ?? 'Last 30 Days' }}
+                </p>
+                <p class="mt-2 text-3xl font-black text-getmyname-600 dark:text-getmyname-500">
                     {{ number_format($stats['month']) }}
                 </p>
             </div>
 
-            <!-- Today -->
-            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
-                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    {{ __('profile.api_requests.today') ?? 'Requests Today' }}
+            <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+                <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+                    {{ __('profile.api_requests.today') ?? 'Today' }}
                 </p>
-                <div class="flex items-baseline gap-2">
-                    <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <div class="flex items-center gap-2 mt-2">
+                    <p class="text-3xl font-black text-gray-900 dark:text-gray-100">
                         {{ number_format($stats['today']) }}
                     </p>
                     @if($stats['today'] > 0)
-                        <span class="text-xs text-getmyname-600 dark:text-getmyname-400 animate-pulse">
-                            ● Live
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-getmyname-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-getmyname-500"></span>
                         </span>
                     @endif
                 </div>
             </div>
         </div>
 
-        <!-- Chart Container -->
-        <div class="mt-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-base font-medium text-gray-900 dark:text-gray-100">
-                    {{ __('profile.api_requests.traffic_overview') ?? 'Traffic Overview' }}
-                </h3>
-                <!-- Simple Time Range Indicator -->
-                <div class="flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1 text-xs font-medium">
-                    <button class="px-3 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm rounded-md">30 Days</button>
-                    <button class="px-3 py-1 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 cursor-not-allowed opacity-50" disabled>7 Days</button>
-                    <button class="px-3 py-1 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 cursor-not-allowed opacity-50" disabled>24 Hours</button>
+        <div class="mt-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <h3 class="font-bold text-gray-900 dark:text-gray-100">{{ __('profile.api_requests.usage_history') ?? 'Usage History' }}</h3>
+                <div class="text-xs text-gray-500 dark:text-gray-400 font-medium bg-gray-50 dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-100 dark:border-gray-700">
+                    Showing last 30 days
                 </div>
             </div>
-
-            <div class="relative h-80 w-full">
-                <canvas id="apiRequestsChart"></canvas>
+            <div class="p-6">
+                <div class="relative h-80 w-full">
+                    <canvas id="apiRequestsChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -97,19 +83,19 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const isDarkMode = document.documentElement.classList.contains('dark');
+            
+            const brandColor = '#22c55e'; 
             const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
             const textColor = isDarkMode ? '#9ca3af' : '#6b7280';
-            
-            const primaryColor = '#4f46e5'; 
 
             fetch('{{ route('profile.api-requests.data') }}')
-                .then((response) => response.json())
-                .then((data) => {
+                .then(res => res.json())
+                .then(data => {
                     const ctx = document.getElementById('apiRequestsChart').getContext('2d');
                     
-                    let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradient.addColorStop(0, 'rgba(79, 70, 229, 0.2)');
-                    gradient.addColorStop(1, 'rgba(79, 70, 229, 0.0)');
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                    gradient.addColorStop(0, 'rgba(34, 197, 94, 0.15)');
+                    gradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
 
                     new Chart(ctx, {
                         type: 'line',
@@ -118,84 +104,58 @@
                             datasets: [{
                                 label: 'Requests',
                                 data: data.counts,
-                                backgroundColor: gradient,
-                                borderColor: primaryColor,
-                                borderWidth: 2,
-                                pointBackgroundColor: '#ffffff',
-                                pointBorderColor: primaryColor,
-                                pointBorderWidth: 2,
-                                pointRadius: 3,
-                                pointHoverRadius: 5,
                                 fill: true,
-                                tension: 0.4,
-                            }],
+                                backgroundColor: gradient,
+                                borderColor: brandColor,
+                                borderWidth: 3,
+                                pointRadius: 0,
+                                pointHoverRadius: 6,
+                                pointHoverBackgroundColor: brandColor,
+                                pointHoverBorderColor: '#fff',
+                                pointHoverBorderWidth: 2,
+                                tension: 0.4
+                            }]
                         },
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
-                            interaction: {
-                                intersect: false,
-                                mode: 'index',
-                            },
+                            interaction: { intersect: false, mode: 'index' },
                             scales: {
                                 x: {
                                     type: 'time',
-                                    time: {
-                                        unit: 'day',
-                                        displayFormats: { day: 'MMM d' },
-                                    },
-                                    grid: {
-                                        display: false,
-                                    },
-                                    ticks: {
-                                        color: textColor,
-                                        font: { size: 11 }
-                                    },
-                                    border: { display: false }
+                                    time: { unit: 'day', displayFormats: { day: 'MMM d' } },
+                                    grid: { display: false },
+                                    ticks: { color: textColor, font: { size: 11, weight: '500' } }
                                 },
                                 y: {
                                     beginAtZero: true,
-                                    grid: {
-                                        color: gridColor,
-                                        borderDash: [5, 5],
-                                    },
-                                    ticks: {
-                                        precision: 0,
-                                        color: textColor,
-                                        font: { size: 11 }
-                                    },
-                                    border: { display: false }
-                                },
+                                    grid: { color: gridColor, borderDash: [5, 5] },
+                                    ticks: { precision: 0, color: textColor, font: { size: 11 } }
+                                }
                             },
                             plugins: {
                                 legend: { display: false },
                                 tooltip: {
-                                    backgroundColor: isDarkMode ? '#1f2937' : '#ffffff',
+                                    padding: 12,
+                                    backgroundColor: isDarkMode ? '#111827' : '#ffffff',
                                     titleColor: isDarkMode ? '#f3f4f6' : '#111827',
-                                    bodyColor: isDarkMode ? '#d1d5db' : '#4b5563',
+                                    titleFont: { size: 13, weight: 'bold' },
+                                    bodyColor: isDarkMode ? '#9ca3af' : '#4b5563',
                                     borderColor: isDarkMode ? '#374151' : '#e5e7eb',
                                     borderWidth: 1,
-                                    padding: 10,
                                     displayColors: false,
                                     callbacks: {
-                                        title: function (context) {
-                                            const date = new Date(context[0].parsed.x);
-                                            return date.toLocaleDateString(undefined, {
-                                                weekday: 'short',
-                                                month: 'short', 
-                                                day: 'numeric'
-                                            });
+                                        title: (context) => {
+                                            const d = new Date(context[0].parsed.x);
+                                            return d.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
                                         },
-                                        label: function (context) {
-                                            return `${context.raw} Requests`;
-                                        }
+                                        label: (context) => `Requests: ${context.raw}`
                                     }
                                 }
-                            },
-                        },
+                            }
+                        }
                     });
-                })
-                .catch((error) => console.error('Error fetching API request data:', error));
+                });
         });
     </script>
 @endpush
