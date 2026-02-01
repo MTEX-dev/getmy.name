@@ -42,8 +42,10 @@
             </div>
 
             <div class="lg:col-span-1">
-                <x-input-label for="pronouns" :value="__('profile.pronouns') . ' (' . __('profile.optional') . ')'" />
-                
+                    <div class="flex items-center gap-x-2">
+                    <x-input-label for="pronouns" :value="__('profile.pronouns') . ' (' . __('profile.optional') . ')'" />
+                    @include('components.badges.new')
+                </div>
                 <div x-data="customSelect({ initialValue: @js(old('pronouns', $user->pronouns)),  presetOptions: ['they/them', 'she/her', 'he/him'] })">
                     <select id="pronouns" name="pronouns" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-getmyname-500 dark:focus:border-getmyname-600 focus:ring-getmyname-500 dark:focus:ring-getmyname-600 rounded-md shadow-sm" x-model="selectedValue">
                         <option value="">{{ __('profile.pronouns_none') }}</option>
