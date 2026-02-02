@@ -12,10 +12,12 @@ Alzeyer Str. 97
 67592 Flörsheim-Dalsheim
 Germany (Rheinland-Pfalz)
 
-Email: f.ternis@xpsystems.eu
+Email: [MTEXdotDev@xpsystems.eu](mailto:MTEXdotDev@xpsystems.eu)
 
 Website: [getmy.name](https://getmy.name)
 Provided by: [mtex.dev](https://mtex.dev)
+
+For further legal information, please visit our [External Imprint](https://legal.mtex.dev/imprint).
         ',
     ],
     'privacy' => [
@@ -24,13 +26,14 @@ Provided by: [mtex.dev](https://mtex.dev)
         'content' => '
 **Datenschutzerklärung**
 
-We are committed to protecting your privacy on getmy.name.
+We are committed to protecting your privacy on getmy.name. Detailed privacy information can also be found at [legal.mtex.dev/privacy](https://legal.mtex.dev/privacy).
 
 **Cookies:**
-We only use necessary cookies essential for the website\'s functionality. We do not use tracking or advertisement cookies.
+We only use necessary cookies essential for the website\'s functionality, such as those required for Authentication and security purposes. We do not use tracking or advertisement cookies.
 
-*Optional Cookies:*
-*   `theme-switch`: This cookie stores your preferred theme setting (e.g., dark or light mode) to enhance your browsing experience.
+**Local Storage:**
+We use `localStorage` to enhance your browsing experience. This is stored locally on your device and is not sent to our servers:
+*   `theme-switch`: This stores your preferred theme setting (e.g., dark or light mode).
 
 **Personal Information and Portfolio API:**
 By registering at getmy.name, you accept that your personal information entered on the site will be publicly available via the portfolio-API. This is a core feature of the service, allowing your portfolio data to be accessed programmatically.
@@ -45,7 +48,7 @@ We store the data you provide to offer our portfolio service. We do not sell or 
         'content' => '
 **Allgemeine Geschäftsbedingungen (AGB)**
 
-Welcome to getmy.name. This is a free service provided by [mtex.dev](https://mtex.dev). By using this website, you agree to comply with and be bound by the following terms and conditions.
+Welcome to getmy.name. This is a free service provided by [mtex.dev](https://mtex.dev). By using this website, you agree to comply with and be bound by the following terms and conditions. Full legal documentation is available at [legal.mtex.dev](https://legal.mtex.dev).
 
 **1. Acceptance of Terms**
 By accessing and using this website, you accept and agree to be bound by these terms.
