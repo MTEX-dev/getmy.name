@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('about-me', ApiAboutMeController::class)->except(['index', 'show']);
 
         Route::get('stats/requests/user', [ApiRequestsController::class, 'getAuthUserStats']);
-        Route::get('stats/requests/user({username}', [ApiRequestsController::class, 'getUserStats']);
+        Route::get('stats/requests/user/{username}', [ApiRequestsController::class, 'getUserStats']);
         Route::get('stats/requests/platform', [ApiRequestsController::class, 'getPlatformStats']);
     });
 
