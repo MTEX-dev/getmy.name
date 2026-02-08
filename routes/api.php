@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\EducationController as ApiEducationController;
 use App\Http\Controllers\Api\SocialsController as ApiSocialsController;
 use App\Http\Controllers\Api\AboutMeController as ApiAboutMeController;
 use App\Http\Controllers\Api\AvatarController as ApiAvatarController;
-
+use App\Http\Controllers\Api\ApiRequestsController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -27,6 +27,10 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('education', ApiEducationController::class);
         Route::apiResource('socials', ApiSocialsController::class)->except(['index', 'show']);
         Route::apiResource('about-me', ApiAboutMeController::class)->except(['index', 'show']);
+
+        Route::get('stats/requests/user', [ApiRequestsController::class, 'getAuthUserStats']);
+        Route::get('stats/requests/user/{username}', [ApiRequestsController::class, 'getUserStats']);
+        Route::get('stats/requests/platform', [ApiRequestsController::class, 'getPlatformStats']);
     });
 
     Route::get('/profile/{username}', [ApiProfileController::class, 'show']);
