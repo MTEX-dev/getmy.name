@@ -28,10 +28,10 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('socials', ApiSocialsController::class)->except(['index', 'show']);
         Route::apiResource('about-me', ApiAboutMeController::class)->except(['index', 'show']);
 
-        Route::get('stats/requests/user', [ApiRequestsController::class, 'getAuthUserStats']);
-        Route::get('stats/requests/user/{username}', [ApiRequestsController::class, 'getUserStats']);
-        Route::get('stats/requests/platform', [ApiRequestsController::class, 'getPlatformStats']);
     });
+    Route::get('stats/requests/user', [ApiRequestsController::class, 'getAuthUserStats']);
+    Route::get('stats/requests/user/{username}', [ApiRequestsController::class, 'getUserStats']);
+    Route::get('stats/requests/platform', [ApiRequestsController::class, 'getPlatformStats']);
 
     Route::get('/profile/{username}', [ApiProfileController::class, 'show']);
     Route::get('/profile/{username}/skills', [ApiSkillController::class, 'index']);
