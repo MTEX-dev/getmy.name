@@ -5,6 +5,7 @@ use App\Http\Controllers\Profile\{AvatarController, ProjectController, SkillCont
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ApiDocumentationController;
 
@@ -22,7 +23,7 @@ Route::middleware('auth')->group(function () {
     //Route::middleware('verified')->prefix('stats')->name('stats.')->group(function () {
     Route::prefix('stats')->name('stats.')->group(function () {
         Route::get('/api-requests/{from?}/{to?}', [StatsController::class, 'apiRequests'])->name('api-requests');
-        Route::get('/api-requests-data', [StatsController::class, 'getApiRequestData'])->name('api-requests.data');
+        Route::get('/api-requests-data', [StatsController::class, 'getApiRequestData'])->name('data');
     });
 
     Route::prefix('settings')->name('profile.')->group(function () {

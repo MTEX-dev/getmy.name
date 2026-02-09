@@ -80,9 +80,8 @@ class StatsController extends Controller
             'minute' => $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00') as timeframe, COUNT(*) as count"),
             'hour' => $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') as timeframe, COUNT(*) as count"),
             default => $query->selectRaw("DATE(created_at) as timeframe, COUNT(*) as count"),
-        }
-        ->groupBy('timeframe')
-        ->pluck('count', 'timeframe');
+        };
+        $dbData->groupBy('timeframe')->pluck('count', 'timeframe');
 
         $labels = [];
         $counts = [];
