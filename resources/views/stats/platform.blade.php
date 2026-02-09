@@ -10,7 +10,9 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <section x-data="apiStatsHandler()">
-            <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+            
+            <!-- Controls and Header -->
+            <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm mb-6">
                 <div class="flex items-center gap-3">
                     <div class="text-getmyname-600 dark:text-getmyname-400">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +37,8 @@
                 </div>
             </header>
 
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm">
                     <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Lifetime Requests (Global)</p>
                     <p class="mt-2 text-3xl font-black text-gray-900 dark:text-gray-100" x-text="stats.total"></p>
@@ -52,7 +55,8 @@
                 </div>
             </div>
 
-            <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-sm relative">
+            <!-- Chart Container -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-sm relative">
                 <div x-show="loading" class="absolute inset-0 bg-white/50 dark:bg-gray-900/50 backdrop-blur-[1px] z-10 flex items-center justify-center rounded-2xl">
                     <svg class="animate-spin h-8 w-8 text-getmyname-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </div>
@@ -90,6 +94,13 @@
             ],
             
             init() {
+                // Parse URL parameter for range
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlRange = urlParams.get('range');
+                if (urlRange && this.ranges.some(r => r.id === urlRange)) {
+                    this.currentRange = urlRange;
+                }
+
                 this.$nextTick(() => {
                     this.initChart();
                     this.fetchData(true);
@@ -100,9 +111,11 @@
             setupAutoRefresh() {
                 if (refreshInterval) clearInterval(refreshInterval);
                 const range = this.ranges.find(r => r.id === this.currentRange);
-                refreshInterval = setInterval(() => {
-                    this.fetchData(false);
-                }, range.refresh);
+                if (range && range.refresh) {
+                    refreshInterval = setInterval(() => {
+                        this.fetchData(false);
+                    }, range.refresh);
+                }
             },
 
             initChart() {
@@ -112,7 +125,7 @@
                 const isDarkMode = document.documentElement.classList.contains('dark') || 
                                    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
                 const ctx = canvas.getContext('2d');
-                const brandColor = '#22c55e';
+                const brandColor = '#22c55e'; // getmyname-500
                 
                 const gradient = ctx.createLinearGradient(0, 0, 0, 300);
                 gradient.addColorStop(0, 'rgba(34, 197, 94, 0.15)');
@@ -170,6 +183,12 @@
             setRange(rangeId) {
                 if (this.loading) return;
                 this.currentRange = rangeId;
+                
+                // Update URL Parameter without reloading
+                const url = new URL(window.location);
+                url.searchParams.set('range', rangeId);
+                window.history.pushState({}, '', url);
+
                 this.fetchData(true);
                 this.setupAutoRefresh();
             },
@@ -177,7 +196,7 @@
             async fetchData(showLoader = false) {
                 if (showLoader) this.loading = true;
                 try {
-                    // Pointing to the NEW Platform route
+                    // This sends the currentRange (derived from URL on init, or click) to the controller
                     const response = await fetch(`{{ route('stats.platform.data') }}?range=${this.currentRange}`);
                     const data = await response.json();
 
