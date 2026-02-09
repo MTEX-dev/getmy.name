@@ -39,6 +39,10 @@ return [
         'active_users' => 'Active Users',
         'api_calls_made' => 'API Calls made',
         'days_online' => 'Days Online',
+        'days_in_dev' => 'Days in Development',
+        'projects_added' => 'Projects added',
+        'skills_added' => 'Skills added',
+        'avg_response_time' => 'Average Response Time',
         'years_experience' => 'Years of Experience (mtex.dev)',
     ],
 

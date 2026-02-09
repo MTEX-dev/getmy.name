@@ -14,7 +14,16 @@ class PageController extends Controller
 {
     public function lander()
     {
-        return view("pages.lander");
+        $stats_data = [
+            'userCount' => User::count(),
+            'apiCalls' => ApiRequest::count(),
+            'daysOnline' => abs(round(now()->diffInDays('2026-01-31'))),
+            'daysInDev' => abs(round(now()->diffInDays('2025-08-08'))),
+            'projectCount' => max(0, \App\Models\Project::count() - 1),
+            'skillCount' => max(0, \App\Models\Skill::count() - 1),
+        ];
+        return view("pages.lander", compact('stats_data'));
+        
     }
 
     public function dashboard(Request $request)
