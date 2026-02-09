@@ -4,10 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Profile\{AvatarController, ProjectController, SkillController, SocialsController, ExperienceController, EducationController, ApiRequestController, AboutMeController, ApiTokenController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
-use App\Http\Controllers\StatsController;
-use App\Http\Controllers\StatsController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ApiDocumentationController;
+use App\Http\Controllers\StatsController;
 
 Route::get('/', [PageController::class, 'lander'])->name('lander');
 Route::get('/language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change-language');
