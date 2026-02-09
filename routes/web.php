@@ -14,8 +14,9 @@ Route::get('/sitemap', [PageController::class, 'sitemap'])->name('sitemap');
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/stats/platform', [StatsController::class, 'index'])->name('stats.platform');
-Route::get('/stats/platform-data', [StatsController::class, 'getApiRequestData'])->name('stats.platform.data');
+Route::get('/stats/{metric}', [StatsController::class, 'index'])->name('stats.platform');
+Route::get('/stats/data/{metric}', [StatsController::class, 'getData'])->name('stats.data');
+Route::get('/stats/data/{metric}', [StatsController::class, 'getData'])->name('stats.platform.data');
 
 Route::middleware('auth')->group(function () {
     //Route::prefix('profile')->name('profile.')->group(function () {

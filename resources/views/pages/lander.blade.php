@@ -9,7 +9,7 @@ $startAtFooter = true;
         @include('pages.lander._hero')
         @include('pages.lander._features')
         @include('pages.lander._api_showcase')
-        @include('pages.lander._stats')
+        @include('pages.lander._stats', $stats_data)
         @include('pages.lander._cta_banner')
     </main>
 @endsection
