@@ -146,17 +146,27 @@
 
             async fetchData(showLoader = false) {
                 if (showLoader) this.loading = true;
-                const endpoint = this.isPublic ? "{{ route('stats.public.data') }}" : "{{ route('stats.data') }}";
+                
+                const endpoint = this.isPublic 
+                    ? "{{ route('stats.public.data') }}" 
+                    : "{{ route('stats.data') }}"; // Points to stats.data now
+                
                 const url = `${endpoint}?range=${this.currentRange}&global=${this.isPublic}`;
                 
                 try {
                     const response = await fetch(url);
+                    if (!response.ok) throw new Error('Network response was not ok');
                     const data = await response.json();
+                    
                     this.stats = data.stats;
-                    chartInstance.options.scales.x.time.unit = data.unit;
-                    chartInstance.data.labels = data.labels;
-                    chartInstance.data.datasets[0].data = data.counts;
-                    chartInstance.update();
+                    if (chartInstance) {
+                        chartInstance.options.scales.x.time.unit = data.unit;
+                        chartInstance.data.labels = data.labels;
+                        chartInstance.data.datasets[0].data = data.counts;
+                        chartInstance.update();
+                    }
+                } catch (error) {
+                    console.error("Fetch Error:", error);
                 } finally {
                     this.loading = false;
                 }
