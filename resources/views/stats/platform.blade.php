@@ -2,57 +2,49 @@
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ $stats['isPublic'] ? 'Platform Statistics' : __('profile.api_requests.title') }}
+        Platform Statistics
     </h2>
 @endsection
 
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        {{-- Pass simple string 'true' or 'false' to avoid JS syntax errors --}}
-        <section x-data="apiStatsHandler('{{ $stats['isPublic'] ? 'true' : 'false' }}')" class="space-y-6">
-            
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <div class="text-getmyname-600 dark:text-getmyname-400">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                {{ $stats['isPublic'] ? 'Global API Activity' : __('profile.api_requests.stats') }}
-                            </h2>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">
-                                {{ $stats['isPublic'] ? 'Platform-wide usage metrics' : __('profile.api_requests.subtitle') }}
-                            </p>
-                        </div>
+        <section x-data="apiStatsHandler()">
+            <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="text-getmyname-600 dark:text-getmyname-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
                     </div>
-
-                    <div class="inline-flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl">
-                        <template x-for="range in ranges">
-                            <button 
-                                @click="setRange(range.id)"
-                                :class="currentRange === range.id ? 'bg-white dark:bg-gray-700 shadow-sm text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'"
-                                class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all"
-                                x-text="range.label"
-                            ></button>
-                        </template>
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Platform API Requests</h2>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Global usage statistics across the entire platform</p>
                     </div>
-                </header>
-            </div>
+                </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-2xl shadow-sm">
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Lifetime Requests</p>
+                <div class="inline-flex p-1 bg-gray-100 dark:bg-gray-700 rounded-xl">
+                    <template x-for="range in ranges">
+                        <button 
+                            @click="setRange(range.id)"
+                            :class="currentRange === range.id ? 'bg-white dark:bg-gray-600 shadow-sm text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'"
+                            class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all"
+                            x-text="range.label"
+                        ></button>
+                    </template>
+                </div>
+            </header>
+
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Lifetime Requests (Global)</p>
                     <p class="mt-2 text-3xl font-black text-gray-900 dark:text-gray-100" x-text="stats.total"></p>
                 </div>
-                <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-2xl shadow-sm">
-                    <p class="text-xs font-bold text-getmyname-500 uppercase tracking-widest">Today</p>
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm">
+                    <p class="text-xs font-bold text-getmyname-500 uppercase tracking-widest">Today (Global)</p>
                     <div class="flex items-center gap-3 mt-2">
                         <p class="text-3xl font-black text-gray-900 dark:text-gray-100" x-text="stats.today"></p>
-                        <span class="flex h-3 w-3 relative">
+                        <span class="flex h-3 w-3">
                             <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-getmyname-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-getmyname-500"></span>
                         </span>
@@ -60,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm relative">
+            <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-sm relative">
                 <div x-show="loading" class="absolute inset-0 bg-white/50 dark:bg-gray-900/50 backdrop-blur-[1px] z-10 flex items-center justify-center rounded-2xl">
                     <svg class="animate-spin h-8 w-8 text-getmyname-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </div>
@@ -77,16 +69,13 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 <script>
-    function apiStatsHandler(isPublicString) {
-        // Convert 'true'/'false' string to boolean
-        const isPublic = isPublicString === 'true';
+    function apiStatsHandler() {
+        let chartInstance = null;
+        let refreshInterval = null;
 
         return {
-            isPublic: isPublic,
             currentRange: '30d',
             loading: true,
-            chartInstance: null,
-            refreshInterval: null,
             stats: {
                 total: {{ $stats['total'] }},
                 today: {{ $stats['today'] }}
@@ -109,13 +98,11 @@
             },
 
             setupAutoRefresh() {
-                if (this.refreshInterval) clearInterval(this.refreshInterval);
+                if (refreshInterval) clearInterval(refreshInterval);
                 const range = this.ranges.find(r => r.id === this.currentRange);
-                if (range && range.refresh) {
-                    this.refreshInterval = setInterval(() => {
-                        this.fetchData(false);
-                    }, range.refresh);
-                }
+                refreshInterval = setInterval(() => {
+                    this.fetchData(false);
+                }, range.refresh);
             },
 
             initChart() {
@@ -125,13 +112,13 @@
                 const isDarkMode = document.documentElement.classList.contains('dark') || 
                                    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
                 const ctx = canvas.getContext('2d');
-                const brandColor = '#22c55e'; // getmyname-500
+                const brandColor = '#22c55e';
                 
                 const gradient = ctx.createLinearGradient(0, 0, 0, 300);
                 gradient.addColorStop(0, 'rgba(34, 197, 94, 0.15)');
                 gradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
 
-                this.chartInstance = new Chart(ctx, {
+                chartInstance = new Chart(ctx, {
                     type: 'line',
                     data: { 
                         labels: [], 
@@ -189,31 +176,19 @@
 
             async fetchData(showLoader = false) {
                 if (showLoader) this.loading = true;
-
-                // Select route based on public flag
-                let url;
-                if (this.isPublic) {
-                    url = "{{ route('stats.public.data') }}";
-                } else {
-                    url = "{{ route('stats.api-requests.data') }}";
-                }
-
-                // Add params
-                const queryUrl = `${url}?range=${this.currentRange}&global=${this.isPublic ? 'true' : 'false'}`;
-
                 try {
-                    const response = await fetch(queryUrl);
-                    if (!response.ok) throw new Error('Network response was not ok');
+                    // Pointing to the NEW Platform route
+                    const response = await fetch(`{{ route('stats.platform.data') }}?range=${this.currentRange}`);
                     const data = await response.json();
 
                     this.stats.total = data.stats.total;
                     this.stats.today = data.stats.today;
 
-                    if (this.chartInstance) {
-                        this.chartInstance.options.scales.x.time.unit = data.unit;
-                        this.chartInstance.data.labels = data.labels;
-                        this.chartInstance.data.datasets[0].data = data.counts;
-                        this.chartInstance.update('none');
+                    if (chartInstance) {
+                        chartInstance.options.scales.x.time.unit = data.unit;
+                        chartInstance.data.labels = data.labels;
+                        chartInstance.data.datasets[0].data = data.counts;
+                        chartInstance.update('none');
                     }
                 } catch (error) {
                     console.error("Fetch Error:", error);
