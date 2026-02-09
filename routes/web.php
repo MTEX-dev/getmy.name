@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     //Route::middleware('verified')->prefix('stats')->name('stats.')->group(function () {
     Route::prefix('stats')->name('stats.')->group(function () {
         Route::get('/api-requests/{from?}/{to?}', [StatsController::class, 'apiRequests'])->name('api-requests');
-        Route::get('/api-requests-data', [StatsController::class, 'getApiRequestData'])->name('data');
+        Route::get('/api-requests-data', [StatsController::class, 'getApiRequestData'])->name('api-requests.data');
     });
 
     Route::prefix('settings')->name('profile.')->group(function () {
@@ -63,7 +63,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/education/{education}/edit', [EducationController::class, 'edit'])->name('education.edit');
             Route::patch('/education/{education}', [EducationController::class, 'update'])->name('education.update');
             Route::delete('/education/{education}', [EducationController::class, 'destroy'])->name('education.destroy');
-            
+            Route::get('/api-requests', [ApiRequestController::class, 'index'])->name('api-requests.index');
+            Route::get('/api-requests-data', [ApiRequestController::class, 'getApiRequestData'])->name('api-requests.data');
             Route::get('/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
             Route::post('/api-tokens', [ApiTokenController::class, 'store'])->name('api-tokens.store');
             Route::delete('/api-tokens/{tokenId}', [ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
