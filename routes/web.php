@@ -13,6 +13,9 @@ Route::get('/language/{locale}', [LanguageController::class, 'changeLanguage'])-
 Route::get('/sitemap', [PageController::class, 'sitemap'])->name('sitemap');
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/stats/platform/{from?}/{to?}', [StatsController::class, 'apiRequests'])->name('stats.public');
+Route::get('/stats/platform-data', [StatsController::class, 'getApiRequestData'])->name('stats.public.data');
+
 Route::middleware('auth')->group(function () {
     //Route::prefix('profile')->name('profile.')->group(function () {
 
