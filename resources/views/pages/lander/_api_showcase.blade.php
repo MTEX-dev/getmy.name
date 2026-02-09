@@ -43,7 +43,7 @@
   "title": "Senior Laravel Developer",
   "bio": "Experienced developer focused on building scalable web applications.",
   "location": "Berlin, Germany",
-  "avatar_url": "http://getmy-name.test/storage/avatars/avatar-hash.png",
+  "avatar_url": "http://getmy.name/storage/avatars/avatar-hash.png",
   "email": "jane@example.com",
   "pronouns": "she/her",
   "about_me": "I am a passionate Laravel developer with over 10 years of experience...",
@@ -55,7 +55,7 @@
       "name": "E-commerce Platform",
       "description": "Built a scalable e-commerce solution...",
       "url": "https://example.com/ecommerce",
-      "image_path": "http://getmy-name.test/storage/projects/project-1.png"
+      "image_path": "http://getmy.name/storage/projects/project-1.png"
     }
   ],
   "experiences": [
