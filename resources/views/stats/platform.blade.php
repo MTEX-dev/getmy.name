@@ -12,30 +12,45 @@
         <section x-data="apiStatsHandler()">
             
             <!-- Controls and Header -->
-            <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm mb-6">
-                <div class="flex items-center gap-3">
-                    <div class="text-getmyname-600 dark:text-getmyname-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
+                <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="text-getmyname-600 dark:text-getmyname-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Platform API Requests</h2>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Global usage statistics across the entire platform</p>
+                        </div>
                     </div>
-                    <div>
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Platform API Requests</h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Global usage statistics across the entire platform</p>
-                    </div>
-                </div>
 
-                <div class="inline-flex p-1 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <template x-for="range in ranges">
-                        <button 
-                            @click="setRange(range.id)"
-                            :class="currentRange === range.id ? 'bg-white dark:bg-gray-600 shadow-sm text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'"
-                            class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all"
-                            x-text="range.label"
-                        ></button>
-                    </template>
-                </div>
-            </header>
+                    <div class="flex flex-col sm:flex-row gap-4 items-end sm:items-center">
+                        <!-- Custom Date Inputs (Only visible when range is 'custom') -->
+                        <div x-show="currentRange === 'custom'" x-transition class="flex flex-col sm:flex-row gap-2">
+                            <input type="datetime-local" x-model="customFrom" class="px-3 py-1.5 text-xs font-bold border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm">
+                            <span class="text-gray-400 self-center hidden sm:block">-</span>
+                            <input type="datetime-local" x-model="customTo" class="px-3 py-1.5 text-xs font-bold border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm">
+                            <button @click="fetchData(true)" class="px-3 py-1.5 text-xs font-bold bg-getmyname-500 text-white rounded-lg hover:bg-getmyname-600 transition-colors">
+                                Go
+                            </button>
+                        </div>
+
+                        <!-- Range Buttons -->
+                        <div class="inline-flex p-1 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-x-auto max-w-full">
+                            <template x-for="range in ranges">
+                                <button 
+                                    @click="setRange(range.id)"
+                                    :class="currentRange === range.id ? 'bg-white dark:bg-gray-600 shadow-sm text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'"
+                                    class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap"
+                                    x-text="range.label"
+                                ></button>
+                            </template>
+                        </div>
+                    </div>
+                </header>
+            </div>
 
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
@@ -47,7 +62,7 @@
                     <p class="text-xs font-bold text-getmyname-500 uppercase tracking-widest">Today (Global)</p>
                     <div class="flex items-center gap-3 mt-2">
                         <p class="text-3xl font-black text-gray-900 dark:text-gray-100" x-text="stats.today"></p>
-                        <span class="flex h-3 w-3">
+                        <span class="flex h-3 w-3 relative">
                             <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-getmyname-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-getmyname-500"></span>
                         </span>
@@ -79,6 +94,8 @@
 
         return {
             currentRange: '30d',
+            customFrom: '',
+            customTo: '',
             loading: true,
             stats: {
                 total: {{ $stats['total'] }},
@@ -91,14 +108,31 @@
                 { id: '30d', label: '30D', refresh: 3600000 },
                 { id: '90d', label: '90D', refresh: 3600000 },
                 { id: 'lifetime', label: 'ALL', refresh: 3600000 },
+                { id: 'custom', label: 'Custom', refresh: null },
             ],
             
             init() {
-                // Parse URL parameter for range
+                // Initialize URL params
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlRange = urlParams.get('range');
-                if (urlRange && this.ranges.some(r => r.id === urlRange)) {
+                const from = urlParams.get('from');
+                const to = urlParams.get('to');
+
+                if (urlRange) {
                     this.currentRange = urlRange;
+                    if (this.currentRange === 'custom' && from && to) {
+                        this.customFrom = from;
+                        this.customTo = to;
+                    }
+                }
+                
+                // Set default custom dates if empty
+                if (!this.customFrom) {
+                    const now = new Date();
+                    const yesterday = new Date(now);
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    this.customTo = now.toISOString().slice(0, 16);
+                    this.customFrom = yesterday.toISOString().slice(0, 16);
                 }
 
                 this.$nextTick(() => {
@@ -111,7 +145,7 @@
             setupAutoRefresh() {
                 if (refreshInterval) clearInterval(refreshInterval);
                 const range = this.ranges.find(r => r.id === this.currentRange);
-                if (range && range.refresh) {
+                if (range && range.refresh && this.currentRange !== 'custom') {
                     refreshInterval = setInterval(() => {
                         this.fetchData(false);
                     }, range.refresh);
@@ -125,7 +159,7 @@
                 const isDarkMode = document.documentElement.classList.contains('dark') || 
                                    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
                 const ctx = canvas.getContext('2d');
-                const brandColor = '#22c55e'; // getmyname-500
+                const brandColor = '#22c55e';
                 
                 const gradient = ctx.createLinearGradient(0, 0, 0, 300);
                 gradient.addColorStop(0, 'rgba(34, 197, 94, 0.15)');
@@ -181,23 +215,45 @@
             },
 
             setRange(rangeId) {
+                // If switching TO custom, don't fetch immediately, wait for user input
+                if (rangeId === 'custom' && this.currentRange !== 'custom') {
+                    this.currentRange = rangeId;
+                    return; 
+                }
+
                 if (this.loading) return;
                 this.currentRange = rangeId;
                 
-                // Update URL Parameter without reloading
-                const url = new URL(window.location);
-                url.searchParams.set('range', rangeId);
-                window.history.pushState({}, '', url);
-
+                this.updateUrl();
                 this.fetchData(true);
                 this.setupAutoRefresh();
             },
 
+            updateUrl() {
+                const url = new URL(window.location);
+                url.searchParams.set('range', this.currentRange);
+                if (this.currentRange === 'custom') {
+                    url.searchParams.set('from', this.customFrom);
+                    url.searchParams.set('to', this.customTo);
+                } else {
+                    url.searchParams.delete('from');
+                    url.searchParams.delete('to');
+                }
+                window.history.pushState({}, '', url);
+            },
+
             async fetchData(showLoader = false) {
                 if (showLoader) this.loading = true;
+
+                // Build Query
+                let query = `?range=${this.currentRange}`;
+                if (this.currentRange === 'custom') {
+                    query += `&from=${this.customFrom}&to=${this.customTo}`;
+                    this.updateUrl(); // Ensure URL reflects custom dates on Fetch
+                }
+
                 try {
-                    // This sends the currentRange (derived from URL on init, or click) to the controller
-                    const response = await fetch(`{{ route('stats.platform.data') }}?range=${this.currentRange}`);
+                    const response = await fetch(`{{ route('stats.platform.data') }}${query}`);
                     const data = await response.json();
 
                     this.stats.total = data.stats.total;
