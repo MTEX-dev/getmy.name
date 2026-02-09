@@ -1,17 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Profile\AvatarController;
-use App\Http\Controllers\Profile\ProjectController;
-use App\Http\Controllers\Profile\SkillController;
-use App\Http\Controllers\Profile\SocialsController;
-use App\Http\Controllers\Profile\ExperienceController;
-use App\Http\Controllers\Profile\EducationController;
-use App\Http\Controllers\Profile\ApiRequestController;
-use App\Http\Controllers\Profile\AboutMeController;
+use App\Http\Controllers\Profile\{AvatarController, ProjectController, SkillController, SocialsController, ExperienceController, EducationController, ApiRequestController, AboutMeController, ApiTokenController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Base\PageController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ApiDocumentationController;
 
 Route::get('/', [PageController::class, 'lander'])->name('lander');
 Route::get('/language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change-language');
@@ -20,6 +15,13 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['aut
 
 Route::middleware('auth')->group(function () {
     //Route::prefix('profile')->name('profile.')->group(function () {
+
+    //Route::middleware('verified')->prefix('stats')->name('stats.')->group(function () {
+    Route::prefix('stats')->name('stats.')->group(function () {
+        Route::get('/api-requests/{from?}/{to?}', [StatsController::class, 'apiRequests'])->name('api-requests');
+        Route::get('/api-requests-data', [StatsController::class, 'getApiRequestData'])->name('api-requests.data');
+    });
+
     Route::prefix('settings')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::get('/password', [ProfileController::class, 'password'])->name('password');
@@ -27,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/design', [ProfileController::class, 'design'])->name('design');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::patch('/template', [ProfileController::class, 'updateTemplate'])->name('template.update');
+
         Route::middleware('verified')->group(function () {
             Route::get('/skills', [ProfileController::class, 'editSkills'])->name('skills');
             Route::get('/projects', [ProfileController::class, 'editProjects'])->name('projects');
@@ -57,13 +60,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/education/{education}/edit', [EducationController::class, 'edit'])->name('education.edit');
             Route::patch('/education/{education}', [EducationController::class, 'update'])->name('education.update');
             Route::delete('/education/{education}', [EducationController::class, 'destroy'])->name('education.destroy');
-            Route::get('/api-requests', [ApiRequestController::class, 'index'])->name('api-requests.index');
-            Route::get('/api-requests-data', [ApiRequestController::class, 'getApiRequestData'])->name('api-requests.data');
-            Route::get('/api-tokens', [\App\Http\Controllers\Profile\ApiTokenController::class, 'index'])->name('api-tokens.index');
-            Route::post('/api-tokens', [\App\Http\Controllers\Profile\ApiTokenController::class, 'store'])->name('api-tokens.store');
-            Route::delete('/api-tokens/{tokenId}', [\App\Http\Controllers\Profile\ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
+            
+            Route::get('/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
+            Route::post('/api-tokens', [ApiTokenController::class, 'store'])->name('api-tokens.store');
+            Route::delete('/api-tokens/{tokenId}', [ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
             Route::get('/activity', [ProfileController::class, 'activity'])->name('activity');
         });
+
         Route::patch('/avatar', [AvatarController::class, 'update'])->name('avatar.update');
         Route::delete('/avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
@@ -75,6 +78,6 @@ Route::get('/get/{username}/data', [ProfileController::class, 'getData'])->name(
 Route::get('/get/{username}/{template?}', [ProfileController::class, 'getProfile'])->name('profile.get');
 
 Route::get('/legal/{section}', [PageController::class, 'legal'])->name('legal');
-Route::get('/api-docs', [\App\Http\Controllers\ApiDocumentationController::class, 'index'])->name('api-docs');
+Route::get('/api-docs', [ApiDocumentationController::class, 'index'])->name('api-docs');
 
 require __DIR__ . '/auth.php';
