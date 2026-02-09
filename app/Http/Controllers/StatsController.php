@@ -152,6 +152,8 @@ class StatsController extends Controller
                 'total' => $model::count(),
                 'today' => $model::whereDate('created_at', Carbon::today())->count(),
             ]
-        ]);
+        ])
+        ->header('Access-Control-Allow-Origin', 'https://mtex.dev')
+        ->header('Access-Control-Allow-Methods', 'GET');
     }
 }
