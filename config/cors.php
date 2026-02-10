@@ -35,7 +35,7 @@ return [
 
     'paths' => ['api/*', 'stats/data/*', 'sanctum/csrf-cookie'],
     'allowed_methods' => ['*'],
-    'allowed_origins' => ['https://mtex.dev'],
+    'allowed_origins' => ['*'],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
