@@ -45,8 +45,8 @@ Route::middleware('auth')->group(function () {
             Route::patch('/socials', [SocialsController::class, 'update'])->name('socials.update');
             Route::patch('/about-me', [AboutMeController::class, 'update'])->name('about-me.update');
             Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
-            Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
-            Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+            Route::patch('/skills/{skill}', [SkillController::class, 'update'])->name('skills.update'); // Add this
+            Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
             Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
             Route::patch('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
             Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
