@@ -1,167 +1,166 @@
-<div
-    class="fixed top-24 right-5 z-50 w-[450px] space-y-4"
-    id="toast-container"
-></div>
+<div class="pointer-events-none fixed inset-x-0 top-0 z-[100] flex flex-col items-center gap-3 p-4 sm:bottom-auto sm:left-auto sm:right-0 sm:top-16 sm:w-full sm:max-w-md" id="toast-container"></div>
 
 <style>
-    [x-transition:enter] {
-        transition-property: transform, opacity;
-        transition-duration: 300ms;
-        transition-timing-function: ease-out;
+  @keyframes toast-progress {
+    from {
+      width: 100%;
     }
-
-    [x-transition:leave] {
-        transition-property: transform, opacity;
-        transition-duration: 300ms;
-        transition-timing-function: ease-in;
+    to {
+      width: 0%;
     }
+  }
 
-    [x-transition:enter].slide-in {
+  .toast-progress-bar {
+    animation: toast-progress linear forwards;
+  }
+
+  .toast-in {
+    animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .toast-out {
+    animation: toast-slide-out 0.3s ease-in forwards;
+  }
+
+  @keyframes toast-slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes toast-slide-out {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    @keyframes toast-slide-in {
+      from {
+        transform: translateY(-20px);
         opacity: 0;
-        transform: translateX(100%);
-    }
-
-    [x-transition:enter-start].slide-in {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-
-    [x-transition:enter-end].slide-in {
+      }
+      to {
+        transform: translateY(0);
         opacity: 1;
-        transform: translateX(0);
+      }
     }
-
-    [x-transition:leave].slide-out {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    [x-transition:leave-start].slide-out {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    [x-transition:leave-end].slide-out {
-        opacity: 0;
-        transform: translateX(100%);
-    }
+  }
 </style>
 
 <script>
-    window.showToast = function (type, message, duration = null) {
-        const container = document.getElementById('toast-container');
-        if (!container) {
-            console.error('Toast container not found');
-            return;
-        }
+  window.showToast = function (type, message, duration = null) {
+    const container = document.getElementById("toast-container");
+    if (!container) return;
 
-        const toastConfig = {
-            success: {
-                bgColor: 'bg-green-100 dark:bg-green-700',
-                textColor: 'text-green-600 dark:text-green-200',
-                icon: '<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>',
-                duration: 5000,
-            },
-            error: {
-                bgColor: 'bg-red-100 dark:bg-red-700',
-                textColor: 'text-red-600 dark:text-red-200',
-                icon: '<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>',
-                duration: 10000,
-            },
-            warning: {
-                bgColor: 'bg-orange-100 dark:bg-orange-700',
-                textColor: 'text-orange-600 dark:text-orange-200',
-                icon: '<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>',
-                duration: 5000,
-            },
-            info: {
-                bgColor: 'bg-blue-100 dark:bg-blue-700',
-                textColor: 'text-blue-600 dark:text-blue-200',
-                icon: '<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>',
-                duration: 5000,
-            },
-        };
-
-        const config = toastConfig[type] || toastConfig.info;
-        const toastDuration = duration !== null ? duration : config.duration;
-        const toastId = 'toast-dynamic-' + Date.now();
-
-        const toast = document.createElement('div');
-        toast.id = toastId;
-        toast.className =
-            'flex w-full items-center rounded-lg border border-gray-200 bg-white p-4 pe-5 text-gray-700 shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 transition-all duration-300 ease-in-out transform hover:scale-105';
-        toast.setAttribute('role', 'alert');
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-
-        toast.innerHTML = `
-            <div class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${config.bgColor} ${config.textColor}">
-                <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    ${config.icon}
-                </svg>
-            </div>
-            <div class="ms-3 text-sm font-normal">${message}</div>
-            <button type="button" class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-label="Close">
-                <span class="sr-only">Close</span>
-                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-            </button>
-        `;
-
-        container.prepend(toast);
-
-        setTimeout(() => {
-            toast.style.transition = 'all 300ms ease-out';
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(0)';
-        }, 10);
-
-        const timeoutId = setTimeout(() => {
-            removeToast(toast);
-        }, toastDuration);
-
-        const closeBtn = toast.querySelector('button');
-        closeBtn.addEventListener('click', () => {
-            clearTimeout(timeoutId);
-            removeToast(toast);
-        });
-
-        function removeToast(toastEl) {
-            toastEl.style.transition = 'all 300ms ease-in';
-            toastEl.style.opacity = '0';
-            toastEl.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                if (toastEl.parentNode) {
-                    toastEl.parentNode.removeChild(toastEl);
-                }
-            }, 300);
-        }
+    const toastConfig = {
+      success: {
+        bg: "bg-emerald-50/90 dark:bg-emerald-950/90",
+        border: "border-emerald-200 dark:border-emerald-800",
+        text: "text-emerald-800 dark:text-emerald-200",
+        accent: "bg-emerald-500",
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />',
+        duration: 5000,
+      },
+      error: {
+        bg: "bg-rose-50/90 dark:bg-rose-950/90",
+        border: "border-rose-200 dark:border-rose-800",
+        text: "text-rose-800 dark:text-rose-200",
+        accent: "bg-rose-500",
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />',
+        duration: 8000,
+      },
+      warning: {
+        bg: "bg-amber-50/90 dark:bg-amber-950/90",
+        border: "border-amber-200 dark:border-amber-800",
+        text: "text-amber-800 dark:text-amber-200",
+        accent: "bg-amber-500",
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />',
+        duration: 6000,
+      },
+      info: {
+        bg: "bg-blue-50/90 dark:bg-blue-950/90",
+        border: "border-blue-200 dark:border-blue-800",
+        text: "text-blue-800 dark:text-blue-200",
+        accent: "bg-blue-500",
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12v-.008Z" />',
+        duration: 5000,
+      },
     };
 
-    document.addEventListener('DOMContentLoaded', function () {
-        @if (!isset($exception))
-            @if (session('success'))
-                window.showToast('success', "{{ session('success') }}");
-            @endif
+    const config = toastConfig[type] || toastConfig.info;
+    const toastDuration = duration !== null ? duration : config.duration;
 
-            @if (session('error'))
-                window.showToast('error', "{{ session('error') }}");
-            @endif
+    const toast = document.createElement("div");
+    toast.className = `pointer-events-auto relative w-full overflow-hidden rounded-xl border ${config.border} ${config.bg} ${config.text} backdrop-blur-md shadow-2xl toast-in`;
+    toast.setAttribute("role", "alert");
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    window.showToast('error', "{{ $error }}", 10000);
-                @endforeach
-            @endif
+    toast.innerHTML = `
+      <div class="flex items-start p-4">
+        <div class="flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+            ${config.icon}
+          </svg>
+        </div>
+        <div class="ml-3 pr-8 flex-1">
+          <p class="text-sm font-medium leading-5">${message}</p>
+        </div>
+        <button type="button" class="absolute right-2 top-2 inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors hover:bg-black/5 dark:hover:bg-white/10">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <!-- Progress Bar -->
+      <div class="absolute bottom-0 left-0 h-[3px] w-full bg-black/5 dark:bg-white/10">
+        <div class="toast-progress-bar h-full ${config.accent}" style="animation-duration: ${toastDuration}ms"></div>
+      </div>
+    `;
 
-            @if (session('warning'))
-                window.showToast('warning', "{{ session('warning') }}");
-            @endif
+    container.prepend(toast);
 
-            @if (session('info'))
-                window.showToast('info', "{{ session('info') }}");
-            @endif
-        @endif
-    });
+    const remove = () => {
+      toast.classList.replace("toast-in", "toast-out");
+      toast.addEventListener("animationend", () => toast.remove());
+    };
+
+    const timeoutId = setTimeout(remove, toastDuration);
+
+    toast.querySelector("button").onclick = () => {
+      clearTimeout(timeoutId);
+      remove();
+    };
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    @if (!isset($exception))
+      @if (session('success'))
+        window.showToast('success', "{{ session('success') }}");
+      @endif
+      @if (session('error'))
+        window.showToast('error', "{{ session('error') }}");
+      @endif
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          window.showToast('error', "{{ $error }}");
+        @endforeach
+      @endif
+      @if (session('warning'))
+        window.showToast('warning', "{{ session('warning') }}");
+      @endif
+      @if (session('info'))
+        window.showToast('info', "{{ session('info') }}");
+      @endif
+    @endif
+  });
 </script>
