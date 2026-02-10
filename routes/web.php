@@ -80,7 +80,11 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::get('/@{username}/data', [ProfileController::class, 'getData'])->name('user.get.data');
+Route::get('/@{username}/json', [ProfileController::class, 'getData'])->name('user.get.json');
+Route::get('/@{username}/{template?}', [ProfileController::class, 'getProfile'])->name('user.get');
 Route::get('/get/{username}/data', [ProfileController::class, 'getData'])->name('profile.get.data');
+Route::get('/get/{username}/json', [ProfileController::class, 'getData'])->name('profile.get.json');
 Route::get('/get/{username}/{template?}', [ProfileController::class, 'getProfile'])->name('profile.get');
 
 Route::get('/legal/{section}', [PageController::class, 'legal'])->name('legal');
