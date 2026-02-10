@@ -29,7 +29,7 @@
         class="w-10 aspect-square flex items-center justify-center
                rounded-xl cursor-pointer
                text-gray-500 dark:text-gray-400
-               hover:bg-gray-200 dark:hover:bg-gray-700
+               hover:bg-gray-200/30 dark:hover:bg-gray-700/30
                hover:text-gray-700 dark:hover:text-gray-300
                transition duration-200 ease-in-out focus:outline-none">
         <template x-if="theme === 'system'">
