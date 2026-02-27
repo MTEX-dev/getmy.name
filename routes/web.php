@@ -83,10 +83,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/@{username}/data', [ProfileController::class, 'getData'])->name('user.get.data');
 Route::get('/@{username}/json', [ProfileController::class, 'getData'])->name('user.get.json');
 Route::get('/@{username}/pfp', [ProfileController::class, 'getPfp'])->name('user.get.pfp');
+Route::get('/@{username}/avatar', [ProfileController::class, 'getPfp'])->name('user.get.avatar');
 Route::get('/@{username}/{template?}', [ProfileController::class, 'getProfile'])->name('user.get');
 Route::get('/get/{username}/data', [ProfileController::class, 'getData'])->name('profile.get.data');
 Route::get('/get/{username}/json', [ProfileController::class, 'getData'])->name('profile.get.json');
-Route::get('/get/{username}/pfp', [ProfileController::class, 'getData'])->name('profile.get.pfp');
+Route::get('/get/{username}/pfp', [ProfileController::class, 'getPfp'])->name('profile.get.pfp');
+Route::get('/get/{username}/avatar', [ProfileController::class, 'getPfp'])->name('profile.get.avatar');
 Route::get('/get/{username}/{template?}', [ProfileController::class, 'getProfile'])->name('profile.get');
 Route::get('/{username}.png', [ProfileController::class, 'getPfp'])->name('profile.pfp');
 
