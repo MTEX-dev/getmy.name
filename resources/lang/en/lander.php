@@ -52,4 +52,29 @@ return [
         'signup_btn' => 'Sign up now',
         'learn_mtex_btn' => 'Learn about mtex.dev',
     ],
+    
+    'whats_new' => [
+        'badge' => 'New Features',
+        'title' => 'What\'s New',
+        'subtitle' => 'We\'ve added powerful new features to make your profile even more customizable and accessible.',
+        'socials_title' => 'Extended Social Links',
+        'socials_description' => 'Connect all your platforms — from CodePen to Figma, we\'ve got you covered with 12+ new integrations.',
+        'pronouns_title' => 'Custom Pronouns',
+        'pronouns_description' => 'Select from preset pronouns or define your own. Express your identity your way on your profile.',
+        'routes_title' => 'Clean Profile Routes',
+        'routes_description' => 'Beautiful, memorable URLs for your profile, JSON export, and avatar image.',
+    ],
+
+    'routes' => [
+        'section_title' => 'Clean URLs',
+        'title' => 'Beautiful Profile Routes',
+        'description' => 'Share your profile with clean, memorable URLs that are easy to remember and type.',
+        'profile_title' => 'Profile Page',
+        'profile_desc' => 'Your public profile at @username',
+        'json_title' => 'JSON Export',
+        'json_desc' => 'Get your profile data as JSON',
+        'pfp_title' => 'Avatar Image',
+        'pfp_desc' => 'Direct link to your profile picture',
+        'example_label' => 'Example',
+    ],
 ];

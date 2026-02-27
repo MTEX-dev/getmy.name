@@ -209,5 +209,18 @@ class ProfileController extends Controller
             ->paginate(20);
 
         return view('profile.activity', compact('activity'));
-}
+    }
+
+    public function getPfp(Request $request, string $username)
+    {
+        $user = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->firstOrFail();
+
+        if ($user->avatar_path && Storage::disk('public')->exists($user->avatar_path)) {
+            return response()->file(Storage::disk('public')->path($user->avatar_path));
+        } else {
+            //return response()->file(public_path('images/default-avatar.png'));
+            //return response()->file(public_path('images/random-AI-cube.png'));
+            return response()->file(public_path('images/Gemini_Generated_Image_safk1csafk1csafk.png'));
+        }
+    }
 }
